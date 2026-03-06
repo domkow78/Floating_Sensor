@@ -1,0 +1,99 @@
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker pi
+'' logout and login
+docker login
+docker info
+
+docker network create wsnet
+
+######## MOSQUITTO ############
+
+sudo systemctl stop mosquitto
+sudo systemctl disable mosquitto
+# docker run -it --network wsnet -p 1883:1883 --name mosquitto eclipse-mosquitto mosquitto -c /mosquitto-no-auth.conf 
+#zcat ./mosquitto.export.tar.gzip | docker import - mosquitto_ws
+docker run -it --restart=unless-stopped --network wsnet -p 1883:1883 --name mosquitto eclipse-mosquitto mosquitto -c /mosquitto-no-auth.conf 
+#docker container start mosquitto
+#docker export mosquitto | gzip > mosquitto.export.tar.gzip
+
+########### INFLUX ######################
+# stop influx service on host
+sudo systemctl stop influxdb.service
+# prevent influx service on host from running on startup
+sudo systemctl disable influxdb.service
+# zcat ./influx.export.tar.gzip | docker import - influx_ws
+# docker export influx| gzip > influx.export.tar.gzip
+#docker run -it --restart=unless-stopped --network wsnet -p 8086:8086 arm32v7/influxdb
+# get image from the net, always fresh
+docker run -it --restart=unless-stopped --network wsnet -p 8086:8086 -v influx_data:/var/lib/influxdb --name influx arm32v7/influxdb
+# keep data backed up, this is a job for admin, i.e. pj
+docker cp influx:/var/lib/influxdb - |gzip > influxdata.tar.gzip
+# get influx data from backup to container; get this gzip from project folder as a good start
+zcat influxdata.tar.gzip | docker cp - influx:/var/lib/
+# !!! to avoid naming collision with other things, now influx uses a "influxdbWS" database; adjust nodered and grafana accordingly
+
+########## NODERED ####################
+sudo systemctl stop nodered
+sudo systemctl disable nodered
+#zcat ./nodered.export.tar.gzip | docker import - nodered_ws
+#docker run -it --restart=unless-stopped -p 1880:1880 -v node_red_data:/data --name mynodered nodered/node-red  	# ni chu.. nie można się połączyć z przeglądarki
+# docker run -it --restart=unless-stopped -p 80:1880 -v node_red_data:/data --name mynodered nodered/node-red  		# już można
+docker run -it --restart=unless-stopped -p 80:1880 --add-host=host:$(ip -4 addr show wlan0 | grep -Po 'inet \K[\d.]+') --network=wsnet --device=/dev/i2c-1 --user=root -v node_red_data:/data --name nodered nodered/node-red
+#docker export nodered | gzip > nodered.export.tar.gzip
+docker cp nodered:/data/ - |gzip > nodereddata.gzip
+zcat nodereddata.gzip | docker cp - nodered:/
+#tar -zcvf nodereddata.tar.gzip nodereddata
+# to enable access to cpuinfo_cur_freq
+# -v /sys/devices/system/cpu/cpufreq/policy0/:/host/
+# or it seems unnecessary: it is there already in container, copied from host! so just access this without sudo and should be fine 
+#how to get ip of the host:
+# ip -4 addr show wlan0 | grep -Po 'inet \K[\d.]+'
+#-e "DOCKER_HOST=$()"
+#--add-host=docker:$()
+
+# to access nodered editor page
+http://10.248.139.227/admin
+# to access nodered ui page
+http://10.248.139.227/ui
+# to download specific file (if not by button on nodered ui)
+http://10.248.139.227/somefile.csv
+# to download any csv file
+http://10.248.139.227
+
+
+########### OTA ##################
+docker run -it --restart=unless-stopped  -e PORT=8070 -e TLS_KEY=/cert/ca_key.pem -e TLS_CERT=/cert/ca_cert.pem -v /home/pi/smartsensor/server_certs:/cert -v /home/pi/smartsensor/build:/web -p 8070:8070 --name ota halverneus/static-file-server
+# or 
+# openssl s_server -WWW -key ../server_certs/ca_key.pem -cert ../server_certs/ca_cert.pem -port 8070 &
+# in both cases the followin should download full file	
+# curl -k https://10.248.139.227:8070/SmartSensorESP.bin -o abinaryfile.bin
+# put the binary file in /home/pi/smartsensor/build
+
+
+######### GRAFANA ################
+systemctl stop grafana-server
+systemctl disable grafana-server
+zcat ./grafana.export.tar.gzip | docker import - grafana_ws
+#docker run -it --restart=unless-stopped --network wsnet -p 3000:3000 --name grafana grafana/grafana-oss
+docker run -it --restart=unless-stopped --network wsnet -p 443:3000 --name grafana grafana_ws
+docker export grafana | gzip > grafana.export.tar.gzip
+I moved (in docker /etc/grafana/grafana.ini) root_url to be at https://localhost/grafana. Use this:
+http://10.248.139.227:443/grafana/
+
+
+
+use Ctrl-p-q to detach only when stated with -it
+
+docker export nodered | gzip > nodered.export.tar.gzip
+docker container ls -a
+docker volume ls
+docker volume inspect node_red_data
+docker container start mynodered
+docker container exec -ti --user=root mynodered /bin/bash
+
+apk add mosquitto
+
+ sudo apt-get install tree
+

@@ -1,0 +1,3 @@
+Layer Pairs Export File for PCB: E:\SmartSensorAltium\SmartSensorMainPhase.PcbDoc
+LayersSetName=Top_Bot_Thru_Holes|DrillFile=smartsensormainphase-roundholes.txt|LayerPairs=gtl,gbl
+LayersSetName=Top_Bot_Slot_Holes|DrillFile=smartsensormainphase-slotholes.txt|LayerPairs=gtl,gbl

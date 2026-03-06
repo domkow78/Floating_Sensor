@@ -1,0 +1,140 @@
+[
+    {
+        "id": "9df7ed49.52153",
+        "type": "tab",
+        "label": "rpiInfluxdb",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "40409db8.57a774",
+        "type": "influxdb out",
+        "z": "9df7ed49.52153",
+        "influxdb": "fa09da69.747488",
+        "name": "",
+        "measurement": "test",
+        "precision": "ms",
+        "retentionPolicy": "",
+        "database": "",
+        "retentionPolicyV18Flux": "",
+        "org": "",
+        "bucket": "",
+        "x": 580,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "66f2fc8e.fa2c84",
+        "type": "function",
+        "z": "9df7ed49.52153",
+        "name": "",
+        "func": "msg.payload = {\n    testID : 12,\n    sensorID : 'sensorID1',\n    temperature : Math.random()*10+20,\n    pressure : Math.random()*100+1000,\n    humidity : Math.random()*100,\n    acmm : Math.random()*255,\n    battery : Math.random()*100,\n    state : 'fine',\n    time : Date.now()\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 100,
+        "wires": [
+            [
+                "40409db8.57a774",
+                "f9a8330c.48484"
+            ]
+        ]
+    },
+    {
+        "id": "197a0880.7779f8",
+        "type": "inject",
+        "z": "9df7ed49.52153",
+        "name": "",
+        "props": [
+            {
+                "p": "payload",
+                "v": "",
+                "vt": "date"
+            },
+            {
+                "p": "topic",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 100,
+        "wires": [
+            [
+                "66f2fc8e.fa2c84"
+            ]
+        ]
+    },
+    {
+        "id": "f9a8330c.48484",
+        "type": "debug",
+        "z": "9df7ed49.52153",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 530,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "cd3e065c.0b5ce8",
+        "type": "link in",
+        "z": "9df7ed49.52153",
+        "name": "measurementsIn",
+        "links": [
+            "b9e7dc64.15bae"
+        ],
+        "x": 155,
+        "y": 180,
+        "wires": [
+            [
+                "f9a8330c.48484",
+                "40409db8.57a774"
+            ]
+        ]
+    },
+    {
+        "id": "fa09da69.747488",
+        "type": "influxdb",
+        "hostname": "influx",
+        "port": "8086",
+        "protocol": "http",
+        "database": "influxdbWS",
+        "name": "",
+        "usetls": false,
+        "tls": "6182fe0d.9872d",
+        "influxdbVersion": "1.x",
+        "url": "",
+        "rejectUnauthorized": false,
+        "credentials": {}
+    },
+    {
+        "id": "6182fe0d.9872d",
+        "type": "tls-config",
+        "d": true,
+        "name": "aws",
+        "cert": "/share/4470a31022-certificate.pem.crt",
+        "key": "/share/4470a31022-private.pem.key",
+        "ca": "/share/AmazonRootCA1.pem",
+        "certname": "4470a31022-certificate.pem.crt",
+        "keyname": "4470a31022-private.pem.key",
+        "caname": "VeriSign-Class 3-Public-Primary-Certification-Authority-G5.pem",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    }
+]

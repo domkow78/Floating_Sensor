@@ -1,0 +1,46 @@
+{
+    "name": "SimpleCLI", 
+    "repository": {
+        "url": "https://github.com/spacehuhn/SimpleCLI.git", 
+        "type": "git"
+    }, 
+    "platforms": [
+        "atmelavr", 
+        "atmelmegaavr", 
+        "atmelsam", 
+        "espressif32", 
+        "espressif8266", 
+        "gd32v", 
+        "infineonxmc", 
+        "intel_arc32", 
+        "kendryte210", 
+        "microchippic32", 
+        "nordicnrf51", 
+        "nordicnrf52", 
+        "ststm32", 
+        "ststm8", 
+        "teensy", 
+        "timsp430"
+    ], 
+    "frameworks": [
+        "arduino"
+    ], 
+    "version": "1.0.9", 
+    "authors": [
+        {
+            "maintainer": false, 
+            "name": "Stefan Kremser, Spacehuhn", 
+            "url": "https://spacehuhn.com", 
+            "email": "arduinolib@spacehuhn.com"
+        }
+    ], 
+    "keywords": [
+        "interface", 
+        "line", 
+        "parser", 
+        "command", 
+        "cli"
+    ], 
+    "id": 5606, 
+    "description": "Add a command line interface to your project the easy way"
+}

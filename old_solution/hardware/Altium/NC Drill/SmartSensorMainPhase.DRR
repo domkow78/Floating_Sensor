@@ -1,0 +1,21 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: SmartSensorMainPhase.PcbDoc   2022-07-11  16:38:17
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : SmartSensorMainPhase-RoundHoles.TXT
+ASCII SlotHoles File : SmartSensorMainPhase-SlotHoles.TXT
+EIA File   : SmartSensorMainPhase.DRL
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        0.7mm (27.559mil)        Round          64               322.60 mm (12.70 Inch)
+T2        0.7mm (27.559mil)        Slot           2                7217.55 mm (284.16 Inch)
+T3        0.9mm (35.433mil)        Round          21               147.63 mm (5.81 Inch)
+T4        1.016mm (40mil)          Round          1                0.00 mm (0.00 Inch)
+T5        1.3mm (51.181mil)        Round          2                6.40 mm (0.25 Inch)
+T6        1.6mm (62.992mil)        Round          1                0.00 mm (0.00 Inch)
+---------------------------------------------------------------------------
+Totals                                            91               7694.18 mm (302.92 Inch)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

@@ -1,0 +1,128 @@
+*************************************************************
+FileName = Shield.GBR
+AutoAperture = True
+*************************************************************
+Generating : Top Layer
+      File : Shield.GTL
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+*************************************************************
+
+*************************************************************
+Generating : Mid-Layer 1
+      File : Shield.G1
+
+    Adding Layer      : Mid-Layer 1
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : Shield.GBL
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+*************************************************************
+
+*************************************************************
+Generating : Top Solder
+      File : Shield.GTS
+
+    Adding Layer      : Top Solder
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D13
+    D14
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : Shield.GBS
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D13
+    D14
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 1
+      File : Shield.GM1
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D10
+*************************************************************
+
+*************************************************************
+Generating : Keep-Out Layer
+      File : Shield.GKO
+
+    Adding Layer      : Keep-Out Layer
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Drill Drawing
+      File : Shield.GD1
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Drawing
+
+
+Used DCodes :
+    D10
+    D15
+*************************************************************
+
+*************************************************************
+Generating : Drill Guide
+      File : Shield.GG1
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Guide
+
+
+Used DCodes :
+    D10
+*************************************************************
+

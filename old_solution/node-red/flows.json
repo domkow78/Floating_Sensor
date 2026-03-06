@@ -1,0 +1,5299 @@
+[
+    {
+        "id": "7931090b.954948",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "54f0d5c5135cb5fd",
+        "type": "tab",
+        "label": "rpiBme280",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "20388b4d.513684",
+        "type": "tab",
+        "label": "rpiMain",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7d036575.d8fbdc",
+        "type": "tab",
+        "label": "rpiInfluxdb",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3c53f8715736575f",
+        "type": "tab",
+        "label": "cpuMonitor",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9451765d69dda348",
+        "type": "tab",
+        "label": "heat",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c3eacee5.bca3e",
+        "type": "tab",
+        "label": "Download",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "35bb09d7.4dcc16",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "dbSmartSensor",
+        "name": "",
+        "usetls": false,
+        "tls": "9c35ebd8.1a0018",
+        "influxdbVersion": "1.x"
+    },
+    {
+        "id": "9c35ebd8.1a0018",
+        "type": "tls-config",
+        "d": true,
+        "name": "aws",
+        "cert": "/share/4470a31022-certificate.pem.crt",
+        "key": "/share/4470a31022-private.pem.key",
+        "ca": "/share/AmazonRootCA1.pem",
+        "certname": "4470a31022-certificate.pem.crt",
+        "keyname": "4470a31022-private.pem.key",
+        "caname": "VeriSign-Class 3-Public-Primary-Certification-Authority-G5.pem",
+        "servername": "",
+        "verifyservercert": true
+    },
+    {
+        "id": "6d399e92.c76b",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Wireless sensor",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 42,
+                "sy": 42,
+                "gx": 4,
+                "gy": 4,
+                "cx": 4,
+                "cy": 4,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "b45051da.e8073",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a2f53da8.9db8d",
+        "type": "ui_group",
+        "name": "Sensor Settings",
+        "tab": "f78a8745.2c0858",
+        "order": 1,
+        "disp": true,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "34efbe45.60c2d2",
+        "type": "ui_group",
+        "name": "Charts",
+        "tab": "f78a8745.2c0858",
+        "order": 2,
+        "disp": true,
+        "width": "22",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b5358a46.a94fc8",
+        "type": "sqlitedb",
+        "db": "/data/dbSmartSensor",
+        "mode": "RWC"
+    },
+    {
+        "id": "e02eeec4.09051",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "ce6a7bb3.cdc938",
+        "order": 1,
+        "disp": false,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f78a8745.2c0858",
+        "type": "ui_tab",
+        "name": "SmartSensor Online",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ce6a7bb3.cdc938",
+        "type": "ui_tab",
+        "name": "SmartSensor Offline",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6823957822053fee",
+        "type": "influxdb",
+        "hostname": "influx",
+        "port": "8086",
+        "protocol": "http",
+        "database": "influxdbWS",
+        "name": "",
+        "usetls": false,
+        "tls": "71c4f8434e10961d",
+        "influxdbVersion": "1.x",
+        "url": "",
+        "rejectUnauthorized": false
+    },
+    {
+        "id": "71c4f8434e10961d",
+        "type": "tls-config",
+        "d": true,
+        "name": "aws",
+        "cert": "/share/4470a31022-certificate.pem.crt",
+        "key": "/share/4470a31022-private.pem.key",
+        "ca": "/share/AmazonRootCA1.pem",
+        "certname": "4470a31022-certificate.pem.crt",
+        "keyname": "4470a31022-private.pem.key",
+        "caname": "VeriSign-Class 3-Public-Primary-Certification-Authority-G5.pem",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "2e442781.0c5608",
+        "type": "ui_group",
+        "name": "heatmap",
+        "tab": "f78a8745.2c0858",
+        "order": 3,
+        "disp": true,
+        "width": "30",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "472bf18cb9131a31",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "a2f53da8.9db8d",
+        "order": 36,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "2293f8d9b783377b",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "a2f53da8.9db8d",
+        "order": 37,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d673f6786445a639",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "a2f53da8.9db8d",
+        "order": 39,
+        "width": 5,
+        "height": 1
+    },
+    {
+        "id": "ab75e3a88c31646b",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "a2f53da8.9db8d",
+        "order": 40,
+        "width": 5,
+        "height": 1
+    },
+    {
+        "id": "4f8ecc03d7d3b051",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "a2f53da8.9db8d",
+        "order": 41,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "e49dcd0d646d0b5b",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "a2f53da8.9db8d",
+        "order": 43,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "c51bb4930387e462",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 7,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "a50d3b4085df8238",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 9,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "1e69aff9dd14fd0f",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 11,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "72b3fd58dd0990d0",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 12,
+        "width": 22,
+        "height": 1
+    },
+    {
+        "id": "44e648b64309cbdd",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 14,
+        "width": 22,
+        "height": 1
+    },
+    {
+        "id": "e389e8cd8ddc4bae",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 15,
+        "width": 22,
+        "height": 1
+    },
+    {
+        "id": "e82df5e54f567844",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 16,
+        "width": 22,
+        "height": 1
+    },
+    {
+        "id": "5b51ea5289a64155",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 18,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "b8c73140691e1c31",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 19,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "64185dc4c86ca5d1",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 20,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "b2592eeb84f41773",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 21,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "6cf4ad220a551c2d",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 22,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "294007e7a4884763",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 23,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "ac5ccd5beb687260",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 24,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "26e353af10df5a16",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 25,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "44fd8163a5587678",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 26,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "bdfb4a155655736c",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 27,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "461e32b3ccacae1a",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 28,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "25270033f173b8f5",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 29,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "cb61c52a137559c6",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 30,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "34c532b23d7ec599",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 32,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "0f9a2f9ede7d73b6",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 33,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "6727738d63388509",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 34,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "5f85d0df21f18499",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 35,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "180358f0196318f1",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 36,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "da9f8db93b8cde60",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 37,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "09037c854cb8d393",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 38,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "52170cfa72fda702",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 39,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "d963168332856401",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 40,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "1d40d3267c94eb8c",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 41,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "0e63756df9b02a31",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 42,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "781a6031699ac2ce",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 43,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "e49c3d051d79f392",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 44,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "aa6fab5168fa2617",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 45,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "0b3c68bfb381b04b",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 46,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "0bb1b903925f14ff",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 47,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "85fc0e68063f098a",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 48,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "1e6f636e4b624693",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 49,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "f1f9e225953bcbc9",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 50,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "c8411728a7e99148",
+        "type": "ui_spacer",
+        "z": "20388b4d.513684",
+        "name": "spacer",
+        "group": "34efbe45.60c2d2",
+        "order": 51,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "c808d0e6.90c9c",
+        "type": "mqtt out",
+        "z": "7931090b.954948",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b45051da.e8073",
+        "x": 610,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "2933bfcc.b508c",
+        "type": "inject",
+        "z": "7931090b.954948",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "moisture",
+        "payload": "123",
+        "payloadType": "num",
+        "x": 380,
+        "y": 240,
+        "wires": [
+            [
+                "c808d0e6.90c9c"
+            ]
+        ]
+    },
+    {
+        "id": "52afefba.045da",
+        "type": "inject",
+        "z": "7931090b.954948",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "kill_dbus",
+        "payload": "",
+        "payloadType": "num",
+        "x": 380,
+        "y": 300,
+        "wires": [
+            [
+                "c808d0e6.90c9c"
+            ]
+        ]
+    },
+    {
+        "id": "d8d1182.a6c6868",
+        "type": "inject",
+        "z": "7931090b.954948",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "fake_start",
+        "payload": "",
+        "payloadType": "num",
+        "x": 380,
+        "y": 360,
+        "wires": [
+            [
+                "c808d0e6.90c9c"
+            ]
+        ]
+    },
+    {
+        "id": "6f40e6ea.f8976",
+        "type": "inject",
+        "z": "7931090b.954948",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "log_dbus",
+        "payload": "",
+        "payloadType": "num",
+        "x": 380,
+        "y": 420,
+        "wires": [
+            [
+                "c808d0e6.90c9c"
+            ]
+        ]
+    },
+    {
+        "id": "3c14ba22302a3457",
+        "type": "Bme280",
+        "z": "54f0d5c5135cb5fd",
+        "name": "",
+        "bus": "1",
+        "address": "0x76",
+        "topic": "bme280",
+        "extra": false,
+        "x": 440,
+        "y": 220,
+        "wires": [
+            [
+                "192c73857dea8f1c"
+            ]
+        ]
+    },
+    {
+        "id": "7373a2c098902f8c",
+        "type": "debug",
+        "z": "54f0d5c5135cb5fd",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "192c73857dea8f1c",
+        "type": "function",
+        "z": "54f0d5c5135cb5fd",
+        "name": "",
+        "func": "global.set('ambientPressure',parseInt(msg.payload.pressure_hPa*100));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 220,
+        "wires": [
+            [
+                "7373a2c098902f8c",
+                "1b74655b44f7a789"
+            ]
+        ]
+    },
+    {
+        "id": "49fabbc6a4b20c4d",
+        "type": "function",
+        "z": "54f0d5c5135cb5fd",
+        "name": "",
+        "func": "if (msg.status.fill == \"red\") {\n    global.set('ambientPressure',parseInt(101300));\n    msg.payload = 'normal ambient pressure';\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 320,
+        "wires": [
+            [
+                "7373a2c098902f8c"
+            ]
+        ]
+    },
+    {
+        "id": "aa2523383e2f6dfc",
+        "type": "status",
+        "z": "54f0d5c5135cb5fd",
+        "name": "",
+        "scope": [
+            "3c14ba22302a3457"
+        ],
+        "x": 460,
+        "y": 320,
+        "wires": [
+            [
+                "49fabbc6a4b20c4d"
+            ]
+        ]
+    },
+    {
+        "id": "e456d6ae9206f1d9",
+        "type": "catch",
+        "z": "54f0d5c5135cb5fd",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [
+                "7373a2c098902f8c"
+            ]
+        ]
+    },
+    {
+        "id": "1b74655b44f7a789",
+        "type": "delay",
+        "z": "54f0d5c5135cb5fd",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "60",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 800,
+        "y": 160,
+        "wires": [
+            [
+                "3c14ba22302a3457"
+            ]
+        ]
+    },
+    {
+        "id": "ac5314881ba3a052",
+        "type": "link in",
+        "z": "54f0d5c5135cb5fd",
+        "name": "",
+        "links": [
+            "1b6c682b2c6f7b06"
+        ],
+        "x": 275,
+        "y": 220,
+        "wires": [
+            [
+                "3c14ba22302a3457"
+            ]
+        ]
+    },
+    {
+        "id": "308a65da.206daa",
+        "type": "mqtt in",
+        "z": "20388b4d.513684",
+        "name": "+/registerMe",
+        "topic": "ws/rpi1/+/registerMe",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b45051da.e8073",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "e3a091e6.414db"
+            ]
+        ]
+    },
+    {
+        "id": "e3a091e6.414db",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "registerNewEsp",
+        "func": "var t = msg.topic.split(\"/\");\nvar src = t[2];\nnode.log(\"sensor \"+src+\" wants to register.\");\nvar regs = flow.get(\"registeredEsps\");\nif (Array.isArray(regs) && (regs.length > 0)){\n    if (regs.includes(src))\n        node.log(\"sensor \"+src+\" is already registered. skipping.\");\n    else {\n        regs.push(src);\n        node.log(\"sensor \" + src + \" registered just now.\");\n    }\n} else\n    regs = [src];\n\nregs = regs.filter(Boolean); //ha!\nflow.set(\"registeredEsps\",regs);\n\nmsg.payload = regs;\n\n//prepare options for combo, stupid like hell\noptions = [];\nfor (i = 0, len = regs.length; i < len; i++) {\n    //damned dynamic field name creation\n    options.push({[regs[i]]:regs[i]});\n}\nmsg.options = options;\nmsg.payload = []; \n/*also, combo will set selection to this incoming payload,\nbut if You clear it, it will not, thanks */\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 120,
+        "wires": [
+            [
+                "6b07edd8.0520d4",
+                "d248f03c.68a11"
+            ]
+        ]
+    },
+    {
+        "id": "c9092034.7e722",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "sensorID1/registerMe",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ws/rpi1/sensorID1/registerMe",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 160,
+        "y": 220,
+        "wires": [
+            [
+                "e3a091e6.414db"
+            ]
+        ]
+    },
+    {
+        "id": "ad84670e.ae0308",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "unregisterAllSensors",
+        "func": "flow.set(\"registeredEsps\",[]);\nnode.log(\"Unregistered all sensors.\")\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 640,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "497c525c.98d1bc",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ws/unregisterAll",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 370,
+        "y": 1320,
+        "wires": [
+            [
+                "ad84670e.ae0308"
+            ]
+        ]
+    },
+    {
+        "id": "f957ff9e.ca4be",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "setSelectedEsp",
+        "func": "//use this, when receiving from a list\n//var t = msg.payload.title;\n\n//use this, when receiving from a dropdown\nvar esp= msg.payload;\n\nflow.set(\"selectedEsp\",esp);\nnode.log(\"Sensor \" + esp + \" selected just now\");\n\n// for notification widget\nmsg.payload = esp;\nmsg.topic = \"New sensor has been selected!\";\n\n// for sqlite widget\nmsg.params = {\n    $sensorID:esp\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 120,
+        "wires": [
+            [
+                "6d94b3d7.a53bdc",
+                "35a95f8f.9541b",
+                "929fb98c.4e6548",
+                "535ed848.658688",
+                "2c4d6130.fde64e"
+            ]
+        ]
+    },
+    {
+        "id": "6d94b3d7.a53bdc",
+        "type": "ui_text",
+        "z": "20388b4d.513684",
+        "group": "34efbe45.60c2d2",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "selected sensor",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 900,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "a87e53d.7f3e2b",
+        "type": "ui_numeric",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "acmmFreq: ",
+        "tooltip": "ACMM bridge switching frequency, usually about 400Hz, but consider staying away from n*50Hz",
+        "group": "a2f53da8.9db8d",
+        "order": 20,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "acmmFreq",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "300",
+        "max": "500",
+        "step": "5",
+        "x": 870,
+        "y": 260,
+        "wires": [
+            [
+                "c78199f0.cfd168"
+            ]
+        ]
+    },
+    {
+        "id": "354dcaa5.8811b6",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 26,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Send params",
+        "tooltip": "Sends parameters to selected sensor and stores them in database",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 170,
+        "y": 1160,
+        "wires": [
+            [
+                "960429a9.d3a298"
+            ]
+        ]
+    },
+    {
+        "id": "c78199f0.cfd168",
+        "type": "change",
+        "z": "20388b4d.513684",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "acmmFreq",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1110,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "35a95f8f.9541b",
+        "type": "sqlite",
+        "z": "20388b4d.513684",
+        "mydb": "b5358a46.a94fc8",
+        "sqlquery": "prepared",
+        "sql": "\nINSERT or ignore INTO tblSensorParams(sensorID, sensorName) values ($sensorID, $sensorID);\n",
+        "name": "insert sensor params",
+        "x": 240,
+        "y": 340,
+        "wires": [
+            [
+                "91acdcef.616e9"
+            ]
+        ]
+    },
+    {
+        "id": "52851142.08d73",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "extractDbFields",
+        "func": "//node.log(\"\");\nvar msg1 = { payload: msg.payload[0].acmmFreq };\nvar msg2 = { payload: msg.payload[0].acmmAggOver };\nvar msg3 = { payload: msg.payload[0].measFreq };\nvar msg4 = { payload: msg.payload[0].sendInterval };\nvar msg5 = { payload: msg.payload[0].sleepOnStill };\nvar msg6 = { payload: msg.payload[0].iir};\n\n\nnode.log(\"Received such sensor params:\\nacmmFreq: \"+JSON.stringify(msg1)+\"\\nparam1:\"+JSON.stringify(msg2));\nreturn [msg1,msg2,msg3,msg4,msg5,msg6];",
+        "outputs": 6,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 340,
+        "wires": [
+            [
+                "a87e53d.7f3e2b"
+            ],
+            [
+                "a1e7178d.f4ee68"
+            ],
+            [
+                "fc299919.acafe8"
+            ],
+            [
+                "3bd133d1.28cefc"
+            ],
+            [
+                "5cb4bcb4.da7ff4"
+            ],
+            [
+                "f117c5f084a95034"
+            ]
+        ]
+    },
+    {
+        "id": "a1e7178d.f4ee68",
+        "type": "ui_numeric",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "acmmAggOv",
+        "tooltip": "guess Yourself",
+        "group": "a2f53da8.9db8d",
+        "order": 21,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "acmmAggOver",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "256",
+        "step": 1,
+        "x": 870,
+        "y": 300,
+        "wires": [
+            [
+                "e357cc20.880f1"
+            ]
+        ]
+    },
+    {
+        "id": "e357cc20.880f1",
+        "type": "change",
+        "z": "20388b4d.513684",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "acmmAggOver",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1130,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "960429a9.d3a298",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "fSendParamsUpdateSQL",
+        "func": "var acmmFreq = flow.get(\"acmmFreq\");\nvar acmmAggOver = flow.get(\"acmmAggOver\");\nvar measFreq = flow.get(\"measFreq\");\nvar sleepOnStill = flow.get(\"sleepOnStill\");\nvar sendInterval = flow.get(\"sendInterval\");\nvar iir = flow.get(\"iir\");\n\nvar sensorId = flow.get(\"selectedEsp\");\n\nvar espProps;\nespProps = flow.get(\"espProps\");\nif (typeof(espProps) !== \"object\"){\n    espProps = {};\n}\nif (!espProps.hasOwnProperty(sensorId))\n    espProps[sensorId] = {};\n\n//node.log(\"sensor \" + t + \" selected now\");\n/*msg.payload = \"INSERT OR REPLACE INTO\"+\n    \"tblSensorParam(acmmFreq,param1)\" +\n    \"VALUES(\"+acmmFreq+\",\"+param1+\");\";\n*/\n\nespProps[sensorId].acmmFreq = acmmFreq;\nespProps[sensorId].acmmAggOver = acmmAggOver;\nespProps[sensorId].measFreq = measFreq;\nespProps[sensorId].sleepOnStill = sleepOnStill;\nespProps[sensorId].sendInterval = sendInterval;\nespProps[sensorId].iir = iir;\n\nflow.set(\"espProps\",espProps);\n\nmsg.params = {\n    $sensorID:sensorId,\n    $acmmFreq: acmmFreq,\n    $acmmAggOver: acmmAggOver,\n    $measFreq: measFreq,\n    $sleepOnStill: sleepOnStill,\n    $sendInterval: sendInterval,\n    $iir: iir,\n}\n\nvar msg1 = { \n    topic: \"ws/\"+sensorId+\"/rpi1/setAcmm\",\n    payload: {\n        freq: acmmFreq,\n        aggOver: acmmAggOver\n    }\n};\nvar msg2 = { \n    topic: \"ws/\"+sensorId+\"/rpi1/measFreq\",\n    payload: {\n        freq: measFreq\n    }\n};\n\nvar msg3 = { \n    topic: \"ws/\"+sensorId+\"/rpi1/sleepOnStill\",\n    payload: {\n        timeout: sleepOnStill\n    }\n};\n\nvar msg4 = { \n    topic: \"ws/\"+sensorId+\"/rpi1/sendInterval\",\n    payload: {\n        sendInterval: sendInterval\n    }\n};\n\nvar msg5 = { \n    topic: \"ws/\"+sensorId+\"/rpi1/setIir\",\n    payload: {\n        value: iir\n    }\n};\n\nreturn [msg,msg1,msg2,msg3,msg4,msg5];\n",
+        "outputs": 7,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1160,
+        "wires": [
+            [
+                "c8147b7a.c73478"
+            ],
+            [
+                "ab197fea.66ea8"
+            ],
+            [
+                "ab197fea.66ea8"
+            ],
+            [
+                "ab197fea.66ea8"
+            ],
+            [
+                "ab197fea.66ea8"
+            ],
+            [
+                "ab197fea.66ea8"
+            ],
+            [
+                "ab197fea.66ea8"
+            ]
+        ]
+    },
+    {
+        "id": "c8147b7a.c73478",
+        "type": "sqlite",
+        "z": "20388b4d.513684",
+        "mydb": "b5358a46.a94fc8",
+        "sqlquery": "prepared",
+        "sql": "INSERT OR REPLACE INTO tblSensorParams\n(sensorID,sensorName,acmmFreq,acmmAggOver,measFreq,sleepOnStill,sendInterval,iir)\nVALUES\n($sensorID,\"someName\",$acmmFreq,$acmmAggOver,$measFreq,$sleepOnStill,$sendInterval,$iir);",
+        "name": "udate tblSensorParams",
+        "x": 630,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ab197fea.66ea8",
+        "type": "mqtt out",
+        "z": "20388b4d.513684",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "b45051da.e8073",
+        "x": 570,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "a5eb738e.26a1f",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "sql2chart",
+        "func": "//var data = [[{\"x\":1537348236000,\"y\":2493},{\"x\":1537348326000,\"y\":2493}]];\n//\nvar series =[\"acmm\",\"temperature\",\"pressure\",\"humidity\",\"impedance\"];\nvar labels = [\"Labels\"];\nvar ac = [];\nvar te = [];\nvar pr = [];\nvar hu = [];\nvar imp = [];\n\nvar i, len;\n\nfor (i = 1, len = msg.payload.length; i < len; i++) {\n    let ts = Date.parse(msg.payload[i].timestamp) + 2*60*60;\n    ac.push({\"x\": ts, \"y\":Number(msg.payload[i].acmm)});\n    te.push({\"x\": ts, \"y\":Number(msg.payload[i].temperature)});\n    pr.push({\"x\": ts, \"y\":Number(msg.payload[i].pressure)});\n    hu.push({\"x\": ts, \"y\":Number(msg.payload[i].humidity)});\n    imp.push({\"x\": ts, \"y\":Number(msg.payload[i].impedance)});\n}\n\nvar data = [ac,te,pr,hu,imp];\n\nmsg.payload = [{series, data, labels}];\n//clear the chart\nnode.send({payload:[]});\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 600,
+        "wires": [
+            [
+                "c71cbcc4.dbc72"
+            ]
+        ]
+    },
+    {
+        "id": "a6ec1d.a92763e",
+        "type": "sqlite",
+        "z": "20388b4d.513684",
+        "mydb": "b5358a46.a94fc8",
+        "sqlquery": "prepared",
+        "sql": "select * from tblMeasurements as M\ninner join tblTests as T on M.testId=T.id\nwhere T.name==$testName",
+        "name": "sql",
+        "x": 730,
+        "y": 600,
+        "wires": [
+            [
+                "a5eb738e.26a1f"
+            ]
+        ]
+    },
+    {
+        "id": "c71cbcc4.dbc72",
+        "type": "ui_chart",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "e02eeec4.09051",
+        "order": 1,
+        "width": "16",
+        "height": "13",
+        "label": "offline chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "500",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "x": 1010,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6729bf41.bfef2",
+        "type": "debug",
+        "z": "20388b4d.513684",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "msg.payload",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "88e3f852.2473a8",
+        "type": "mqtt in",
+        "z": "20388b4d.513684",
+        "name": "",
+        "topic": "ws/rpi1/+/measurement",
+        "qos": "2",
+        "datatype": "buffer",
+        "broker": "b45051da.e8073",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 100,
+        "y": 1880,
+        "wires": [
+            [
+                "73656ff64b5dc2d0"
+            ]
+        ]
+    },
+    {
+        "id": "25021d96.6b5862",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "meas2sql",
+        "func": "var t = msg.topic.split(\"/\");\nvar sensorId = t[2];\n//objects in payload are flattened in MQTT down to Jsons,\n//so I need to re-create the object\nvar payload = JSON.parse(msg.payload);\nvar testId;\nvar espProps;\nespProps = flow.get(\"espProps\");\nif (espProps !== null && typeof(espProps) === \"object\" && espProps.hasOwnProperty(sensorId)){\n    testId = espProps[sensorId].testId;        \n}\n\nif (espProps !== null && typeof(espProps)===\"object\"){\n    espProps[sensorId].lastAcmm = payload.acmm;  \n    espProps[sensorId].lastImp = payload.imp;  \n}\n\nconst maxLag = 30*60*1000; // in ms\n\nvar isoTimeStr;\nlet junkEspTime = false;\n\ntimeRpi = new Date(Date.now());\ntry{\n    timeEsp = new Date(payload.ts);\n    isoTimeStr = timeEsp.toISOString();\n}catch(error){\n    junkEspTime = true;\n}\n\nif (junkEspTime || (Math.abs(timeEsp.getTime() - timeRpi.getTime()) > maxLag)){\n    isoTimeStr = timeRpi.toISOString();\n}\n\nlet relPressure = parseInt(payload.p - global.get('ambientPressure'));\n\n// for SQL input\nmsg.params = {\n    $sensorID:sensorId,\n    $testID:testId,\n    $timestamp:isoTimeStr,\n    $acmm:  payload.acmm,\n    $temperature:  payload.t,\n    $pressure:  relPressure,\n    $humidity:  payload.h,\n    $impedance:  payload.imp,\n    $ph:  payload.ph,\n    $phf:  payload.phf\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1880,
+        "wires": [
+            [
+                "c61ea26.24ac86",
+                "db0c9178.f74ee"
+            ]
+        ]
+    },
+    {
+        "id": "1450f974.4e4397",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "meas2chart",
+        "func": "var t = msg.topic.split(\"/\");\nvar sensorID = t[2];\n\nif (flow.get(\"selectedEsp\")!=sensorID)\n    return;\n    \n\n//var ts = Date.now();\n//objects in payload are flattened in MQTT down to Jsons,\n//so I need to re-create the object\nvar payload = JSON.parse(msg.payload);\n\nconst maxLag = 30*60*1000; // in ms\n\ntimeEsp = new Date(payload.ts);\ntimeRpi = new Date(Date.now());\nif (Math.abs(timeEsp.getTime() - timeRpi.getTime()) > maxLag){\n    ts = Date.now();\n} else {\n    ts = payload.ts;\n}\n\n//ts = new Date(ts).toString();\nlet relPressure = parseInt(payload.p - global.get('ambientPressure'));\n\n//for chart input\nnode.send({\n    topic:\"acmm\", \n    payload: {x:ts, y:payload.acmm/10}\n});\nnode.send({\n    topic:\"temperature\", \n    hidden: true,\n    payload: {x:ts, y:payload.t}\n});\nnode.send({\n    topic:\"humidity\", \n    payload: {x:ts, y:payload.h}\n});\nnode.send({\n    topic:\"pressure\", \n    payload: {x:ts, y:relPressure}\n});\nnode.send({\n    topic:\"impedance\", \n    payload: {x:ts, y:payload.imp/10}\n});\nnode.send({\n    topic:\"impi\", \n    payload: {x:ts, y:payload.impi/10}\n});\nnode.send({\n    topic:\"impc\", \n    payload: {x:ts, y:payload.impc/10}\n});\n    \nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 1920,
+        "wires": [
+            [
+                "3dfb07e2.bf2538"
+            ]
+        ]
+    },
+    {
+        "id": "564c16ce.e788e8",
+        "type": "mqtt out",
+        "z": "20388b4d.513684",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "b45051da.e8073",
+        "x": 470,
+        "y": 2380,
+        "wires": []
+    },
+    {
+        "id": "cdf9851f.fc9de8",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "startMeas",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/startMeas\";\n\nvar espProps;\nespProps = flow.get(\"espProps\");\nif (typeof(espProps) !== \"object\"){\n    espProps = {};\n}\nif (!espProps.hasOwnProperty(sensorId))\n    espProps[sensorId] = {};\n\nespProps[sensorId].unfinished = true;\nflow.set(\"espProps\",espProps);\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 2340,
+        "wires": [
+            [
+                "564c16ce.e788e8",
+                "1b6c682b2c6f7b06"
+            ]
+        ]
+    },
+    {
+        "id": "445fc1c0.8fdf4",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "stopMeas",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/stopMeas\";\n\nvar espProps;\nespProps = flow.get(\"espProps\");\nif (typeof(espProps) !== \"object\"){\n    espProps = {};\n}\nif (!espProps.hasOwnProperty(sensorId))\n    espProps[sensorId] = {};\n\nespProps[sensorId].unfinished = false;\nflow.set(\"espProps\",espProps);\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 2380,
+        "wires": [
+            [
+                "564c16ce.e788e8"
+            ]
+        ]
+    },
+    {
+        "id": "fd1b34e9.7d4dd8",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 2300,
+        "wires": [
+            [
+                "cdf9851f.fc9de8"
+            ]
+        ]
+    },
+    {
+        "id": "e3e256b5.6a1c98",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 2380,
+        "wires": [
+            [
+                "445fc1c0.8fdf4"
+            ]
+        ]
+    },
+    {
+        "id": "c61ea26.24ac86",
+        "type": "sqlite",
+        "z": "20388b4d.513684",
+        "mydb": "b5358a46.a94fc8",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO tblMeasurements\n(sensorID,acmm,temperature,pressure,humidity,impedance,ph,phf,testID,timestamp)\nVALUES\n($sensorID,$acmm,$temperature,$pressure,$humidity,$impedance,$ph,$phf,$testID,$timestamp);\n",
+        "name": "sql",
+        "x": 690,
+        "y": 1880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "95689af6.413aa8",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "34efbe45.60c2d2",
+        "order": 10,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "label": "Clear online chart",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 870,
+        "y": 1940,
+        "wires": [
+            [
+                "e3f386af.b62878",
+                "5295713.523679",
+                "742982d6.9f71fc",
+                "1ef088e2.8164c7",
+                "6c879e0d.50bb",
+                "5b67b040.5747c",
+                "deb220d570a97b7f",
+                "e9085ee1797b0421"
+            ]
+        ]
+    },
+    {
+        "id": "67bc65fe.02f6ac",
+        "type": "link out",
+        "z": "20388b4d.513684",
+        "name": "measurementsOut",
+        "links": [
+            "c264a4a3.7b7738"
+        ],
+        "x": 615,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "e703dc2b.c7b0c",
+        "type": "comment",
+        "z": "20388b4d.513684",
+        "name": "############  Sensor registration #############",
+        "info": "",
+        "x": 250,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "6b07edd8.0520d4",
+        "type": "ui_dropdown",
+        "z": "20388b4d.513684",
+        "name": "selectSensor",
+        "label": "",
+        "tooltip": "",
+        "place": "Select sensor",
+        "group": "a2f53da8.9db8d",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [],
+        "payload": "",
+        "topic": "",
+        "x": 510,
+        "y": 120,
+        "wires": [
+            [
+                "f957ff9e.ca4be",
+                "d248f03c.68a11"
+            ]
+        ]
+    },
+    {
+        "id": "3c68fd61.9cac02",
+        "type": "ui_dropdown",
+        "z": "20388b4d.513684",
+        "name": "select test",
+        "label": "",
+        "tooltip": "to display in offline chart",
+        "place": "select test",
+        "group": "e02eeec4.09051",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [],
+        "payload": "",
+        "topic": "",
+        "x": 480,
+        "y": 600,
+        "wires": [
+            [
+                "6e9f8181.6284e"
+            ]
+        ]
+    },
+    {
+        "id": "929fb98c.4e6548",
+        "type": "sqlite",
+        "z": "20388b4d.513684",
+        "mydb": "b5358a46.a94fc8",
+        "sqlquery": "prepared",
+        "sql": "select distinct T.name, T.id from tblMeasurements as M\ninner join tblTests as T on T.id = M.testID\nwhere sensorID=$sensorID;",
+        "name": "tests for sensorID",
+        "x": 190,
+        "y": 600,
+        "wires": [
+            [
+                "a2ca62bd.f17ef"
+            ]
+        ]
+    },
+    {
+        "id": "6e9f8181.6284e",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "\n// for sqlite widget\nmsg.params = {\n    $testName:msg.payload\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 600,
+        "wires": [
+            [
+                "a6ec1d.a92763e"
+            ]
+        ]
+    },
+    {
+        "id": "a2ca62bd.f17ef",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "@",
+        "func": "\n//prepare options for combo, stupid like hell\nmsg.options = [];\nfor (i = 0, len = msg.payload.length; i < len; i++) {\n    //damned dynamic field name creation\n    msg.options.push(msg.payload[i].name);\n}\n\nmsg.payload = []; \n/*also, combo will set selection to this incoming payload,\nbut if You clear it, it will not, thanks */\nmsg.topic = \"options for combo\";\nmsg.params = [];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 600,
+        "wires": [
+            [
+                "3c68fd61.9cac02"
+            ]
+        ]
+    },
+    {
+        "id": "d248f03c.68a11",
+        "type": "debug",
+        "z": "20388b4d.513684",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 680,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "535ed848.658688",
+        "type": "ui_toast",
+        "z": "20388b4d.513684",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 900,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "230b0d45.17c032",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Gen. test name",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "newTestName/description",
+        "payloadType": "str",
+        "topic": "",
+        "x": 160,
+        "y": 900,
+        "wires": [
+            [
+                "a9ee6180.4f1c9"
+            ]
+        ]
+    },
+    {
+        "id": "8bc7d3f7.98b5d",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "var t = msg.payload.split(\"/\");\nvar testName = t[0];\nif (testName==\"Cancel\"){\n    return;\n}\nvar testDescription = \"\";\nif (t.length>1){\n    testDescription = t[1];\n}\n\n// for SQL input\nreturn {\n    params: {\n        $testName: testName,\n        $testDescription: testDescription\n    },\n    topic: \"sql parameters\"\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 900,
+        "wires": [
+            [
+                "a2485615.677168"
+            ]
+        ]
+    },
+    {
+        "id": "a2485615.677168",
+        "type": "sqlite",
+        "z": "20388b4d.513684",
+        "mydb": "b5358a46.a94fc8",
+        "sqlquery": "prepared",
+        "sql": "insert into tblTests(name,description)\nvalues($testName,$testDescription);\n",
+        "name": "sqlInsert",
+        "x": 940,
+        "y": 900,
+        "wires": [
+            [
+                "3e673e1c.46bb52"
+            ]
+        ]
+    },
+    {
+        "id": "7a96baa6.b7c094",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "var testName = msg.payload[0].name;\nvar testId = msg.payload[0].id;\nvar testDescription = msg.payload[0].description;\n\nvar esp = flow.get(\"selectedEsp\");\n\nflow.set('selectedTestName', testName);\nflow.set('selectedTestId', testId);\nflow.set('selectedTestDesc', testDescription);\n\nvar espProps;\nespProps = flow.get(\"espProps\");\n//might happen that the object does not exist or is surprising type, then create it\nif (!(typeof(espProps) === \"object\" && espProps !== null)){\n    espProps = {};\n}\nif (!espProps.hasOwnProperty(esp))\n    espProps[esp] = {};\n//espProps[esp] = [testId, testName, testDescription];\nespProps[esp].testId = testId;\nespProps[esp].testName = testName;\nespProps[esp].testDescription = testDescription;\n\nflow.set(\"espProps\", espProps);\n\nreturn {topic: 'testSelected', payload: msg.payload[0].name};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 900,
+        "wires": [
+            [
+                "b84813c.bf464f"
+            ]
+        ]
+    },
+    {
+        "id": "3e673e1c.46bb52",
+        "type": "sqlite",
+        "z": "20388b4d.513684",
+        "mydb": "b5358a46.a94fc8",
+        "sqlquery": "fixed",
+        "sql": "SELECT * from tblTests order by id desc limit 1\n",
+        "name": "sql",
+        "x": 1070,
+        "y": 900,
+        "wires": [
+            [
+                "7a96baa6.b7c094"
+            ]
+        ]
+    },
+    {
+        "id": "c10433b0.71d43",
+        "type": "catch",
+        "z": "20388b4d.513684",
+        "name": "",
+        "scope": [
+            "a2485615.677168"
+        ],
+        "uncaught": false,
+        "x": 1010,
+        "y": 1120,
+        "wires": [
+            [
+                "1c1113f1.ba926c"
+            ]
+        ]
+    },
+    {
+        "id": "257e03b5.15652c",
+        "type": "ui_toast",
+        "z": "20388b4d.513684",
+        "position": "top right",
+        "displayTime": "12",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "raw": true,
+        "topic": "error",
+        "name": "error",
+        "x": 1270,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "1c1113f1.ba926c",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "\nreturn {topic: 'error',\n    payload: \"test name already exists!\"\n};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1150,
+        "y": 1120,
+        "wires": [
+            [
+                "257e03b5.15652c"
+            ]
+        ]
+    },
+    {
+        "id": "def033cf.5f8e4",
+        "type": "catch",
+        "z": "20388b4d.513684",
+        "d": true,
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 260,
+        "y": 2560,
+        "wires": [
+            [
+                "7d262906.197fb8"
+            ]
+        ]
+    },
+    {
+        "id": "211d37c8.d7d038",
+        "type": "ui_toast",
+        "z": "20388b4d.513684",
+        "position": "top right",
+        "displayTime": "12",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "raw": true,
+        "topic": "error",
+        "name": "error",
+        "x": 510,
+        "y": 2560,
+        "wires": []
+    },
+    {
+        "id": "7d262906.197fb8",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "\nreturn {topic: 'error',\n    payload: msg.error.message +\"\\n\"+\n        msg.error.source.id+\n        msg.error.source.type+\n        msg.error.source.name\n};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 2560,
+        "wires": [
+            [
+                "211d37c8.d7d038"
+            ]
+        ]
+    },
+    {
+        "id": "9d9ae183.a607a",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 17,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Start meas.",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 2340,
+        "wires": [
+            [
+                "cdf9851f.fc9de8"
+            ]
+        ]
+    },
+    {
+        "id": "a2ac1884.7e94d8",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 18,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Stop meas.",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "str",
+        "topic": "",
+        "x": 150,
+        "y": 2420,
+        "wires": [
+            [
+                "445fc1c0.8fdf4"
+            ]
+        ]
+    },
+    {
+        "id": "e66739b2.bd56c8",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Send Regist. Call",
+        "tooltip": "broadcast for all sensors to wake up from light sleep and introduce themselves",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "str",
+        "topic": "ws/all/rpi1/registerCall",
+        "topicType": "str",
+        "x": 370,
+        "y": 1400,
+        "wires": [
+            [
+                "87170188.30eed"
+            ]
+        ]
+    },
+    {
+        "id": "87170188.30eed",
+        "type": "mqtt out",
+        "z": "20388b4d.513684",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "b45051da.e8073",
+        "x": 590,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "41bede42.5beef",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Unregister All",
+        "tooltip": "forget all sensors (not deleted from database)",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 360,
+        "y": 1360,
+        "wires": [
+            [
+                "ad84670e.ae0308"
+            ]
+        ]
+    },
+    {
+        "id": "314313f0.a41bbc",
+        "type": "debug",
+        "z": "20388b4d.513684",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 310,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "fc299919.acafe8",
+        "type": "ui_numeric",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "measPeriod",
+        "tooltip": "sensors (except for acmm) measurement period, in [s]",
+        "group": "a2f53da8.9db8d",
+        "order": 19,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "measPeriod",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "60",
+        "step": 1,
+        "x": 870,
+        "y": 340,
+        "wires": [
+            [
+                "36cec3f8.11904c"
+            ]
+        ]
+    },
+    {
+        "id": "36cec3f8.11904c",
+        "type": "change",
+        "z": "20388b4d.513684",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "measFreq",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1110,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "836bc093.96924",
+        "type": "ui_switch",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "Log to Grafana",
+        "tooltip": "log data also to Grafana or not; see localhost:3000; global to all sensors",
+        "group": "a2f53da8.9db8d",
+        "order": 9,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "logToGrafana",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 360,
+        "y": 1580,
+        "wires": [
+            [
+                "f73a1485.476008"
+            ]
+        ]
+    },
+    {
+        "id": "f73a1485.476008",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "flow.set(\"logToGrafana\",msg.payload);\n",
+        "outputs": 0,
+        "noerr": 0,
+        "x": 510,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "56375e45.77292",
+        "type": "ui_switch",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "Log to CSV",
+        "tooltip": "log data also to CSV file; file name equals current test name; global to all sensors",
+        "group": "a2f53da8.9db8d",
+        "order": 7,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "logToCsv",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 350,
+        "y": 1620,
+        "wires": [
+            [
+                "983d9872.c8c6a8"
+            ]
+        ]
+    },
+    {
+        "id": "983d9872.c8c6a8",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "flow.set(\"logToCsv\",msg.payload);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 1620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4e04a500.ce037c",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "meas2graf",
+        "func": "if (flow.get(\"logToGrafana\")){\n    var t = msg.topic.split(\"/\");\n    var sensorId = t[2];\n    //objects in payload are flattened in MQTT down to Jsons,\n    //so I need to re-create the object\n    var payload = JSON.parse(msg.payload);\n    \n    var testId;\n    var espProps;\n    espProps = flow.get(\"espProps\");\n    if (typeof(espProps) === \"object\" && espProps !== null && espProps.hasOwnProperty(sensorId)){\n        //we have an obj linking sensor to test, use it\n        testId = espProps[sensorId].testId;        \n    }\n    payload.testID = testId;\n    payload.sensorID = sensorId;\n    if (payload.hasOwnProperty('ts')){\n        payload.time = payload.ts;\n        delete payload['ts'];\n    }\n\n    const maxLag = 30*60*1000; // in ms\n    \n    timeEsp = new Date(payload.time);\n    timeRpi = new Date(Date.now());\n    if (Math.abs(timeEsp.getTime() - timeRpi.getTime()) > maxLag){\n        payload.time = Date.now();\n    }\n\n    let relPressure = parseInt(payload.p - global.get('ambientPressure'));\n    payload.p = relPressure;\n\n\n    return {topic: \"forInflux\",\n            payload: payload};\n}else\n    return;\n    ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 1840,
+        "wires": [
+            [
+                "67bc65fe.02f6ac"
+            ]
+        ]
+    },
+    {
+        "id": "8ce9bbe.e6cce48",
+        "type": "csv",
+        "z": "20388b4d.513684",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "timestamp, timestampLocal, sensorID, testName, t, p, h, acmm, imp, ph, phf",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": false,
+        "include_null_values": false,
+        "x": 650,
+        "y": 1800,
+        "wires": [
+            [
+                "a30331cb.ef54f"
+            ]
+        ]
+    },
+    {
+        "id": "a30331cb.ef54f",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "if (flow.get(\"logToCsv\")){\n    return {payload: msg.payload, \n            filename: global.get('csvFileName')};\n}else\n    return;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 1800,
+        "wires": [
+            [
+                "8bfdd640.d45618"
+            ]
+        ]
+    },
+    {
+        "id": "8bfdd640.d45618",
+        "type": "file",
+        "z": "20388b4d.513684",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 920,
+        "y": 1800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9def396a.85a638",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "meas2CSV",
+        "func": "if (flow.get(\"logToCsv\")){\n    var t = msg.topic.split(\"/\");\n    var sensorId = t[2];\n    var pl = JSON.parse(msg.payload);\n    \n    var testId;\n    var testName;\n    var espProps;\n    espProps = flow.get(\"espProps\");\n    if (typeof(espProps) === \"object\" && espProps !== null && espProps.hasOwnProperty(sensorId)){\n        //we have an obj linking sensor to test, use it\n        testId = espProps[sensorId].testId;        \n        testName = espProps[sensorId].testName;        \n    }else{\n        testName = \"smartSensorDefaultTestName\";\n    }\n    \n    // global.set('csvFileName', \"wsdata/\" + testName + \".csv\");\n    global.set('csvFileName', \"/data/csv/\" + testName + \".csv\");\n    \n    const maxLag = 30*60*1000; // in ms\n    timeEsp = new Date(pl.ts);\n    timeRpi = new Date(Date.now());\n    if (Math.abs(timeEsp.getTime() - timeRpi.getTime()) > maxLag){\n        ts = Date.now();\n    } else {\n        ts = pl.ts;\n    }\n    \n    let relPressure = parseInt(pl.p - global.get('ambientPressure'));\n    pl.p = relPressure;\n\n    pl.timestamp = ts;\n    pl.timestampLocal = tsl = Date(ts).toString();\n    pl.sensorID = sensorId;\n    pl.testName = testName;\n    return {topic:\"forCSV\",payload:pl};\n    \n}else\n    return;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 1800,
+        "wires": [
+            [
+                "8ce9bbe.e6cce48",
+                "62487740.274dc8"
+            ]
+        ]
+    },
+    {
+        "id": "a9ee6180.4f1c9",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "var esp = flow.get('selectedEsp');\n\nvar testName = \"\";\n\nif (testName === \"\"){\n    //invent a new test name\n    let today = new Date();\n    testName = `${today.getFullYear()}_${today.getMonth()+1}_${today.getDate()}__${today.getHours()}_${today.getMinutes()}_${today.getSeconds()}_${esp}`;\n}\n\n\n// for SQL input\nreturn {\n    payload: testName + '/description',\n    params: {\n        $testName: testName,\n        $testDescription: \"description\"\n    },\n    topic: \"text for ui_edit and sql params\"\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 900,
+        "wires": [
+            [
+                "3f8fce17.dd8882",
+                "8bc7d3f7.98b5d"
+            ]
+        ]
+    },
+    {
+        "id": "3f8fce17.dd8882",
+        "type": "ui_text_input",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "Current test name [Enter to post]",
+        "tooltip": "",
+        "group": "a2f53da8.9db8d",
+        "order": 5,
+        "width": 7,
+        "height": 2,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 550,
+        "y": 880,
+        "wires": [
+            [
+                "8bc7d3f7.98b5d"
+            ]
+        ]
+    },
+    {
+        "id": "b84813c.bf464f",
+        "type": "ui_toast",
+        "z": "20388b4d.513684",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 1240,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "63e426b0.7b02d8",
+        "type": "sqlite",
+        "z": "20388b4d.513684",
+        "mydb": "b5358a46.a94fc8",
+        "sqlquery": "fixed",
+        "sql": "select distinct S.sensorID from tblMeasurements M\ninner join tblTests T on M.testID=T.id\ninner join tblSensorParams S on M.sensorID=S.sensorID;",
+        "name": "sensors with meas",
+        "x": 190,
+        "y": 660,
+        "wires": [
+            [
+                "3c6eaea8.e00b72"
+            ]
+        ]
+    },
+    {
+        "id": "3c6eaea8.e00b72",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "..",
+        "func": "//prepare options for combo, stupid like hell\nmsg.options = [];\nfor (i = 0, len = msg.payload.length; i < len; i++) {\n    //damned dynamic field name creation\n    msg.options.push(msg.payload[i].sensorID);\n}\n\nmsg.payload = []; \n/*also, combo will set selection to this incoming payload,\nbut if You clear it, it will not, thanks */\nmsg.topic = \"options for combo\";\nmsg.params = [];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 660,
+        "wires": [
+            [
+                "aae90feb.1c673"
+            ]
+        ]
+    },
+    {
+        "id": "aae90feb.1c673",
+        "type": "ui_dropdown",
+        "z": "20388b4d.513684",
+        "name": "select sensor off",
+        "label": "",
+        "tooltip": "to display in offline chart",
+        "place": "select sensor",
+        "group": "e02eeec4.09051",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [],
+        "payload": "",
+        "topic": "",
+        "x": 580,
+        "y": 660,
+        "wires": [
+            [
+                "96949400.9067b8"
+            ]
+        ]
+    },
+    {
+        "id": "96949400.9067b8",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "..",
+        "func": "var p = {\n    $sensorID:msg.payload\n}\nreturn {params: p};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 660,
+        "wires": [
+            [
+                "929fb98c.4e6548"
+            ]
+        ]
+    },
+    {
+        "id": "b20d7d1d.2fe45",
+        "type": "ui_ui_control",
+        "z": "20388b4d.513684",
+        "name": "",
+        "events": "all",
+        "x": 140,
+        "y": 720,
+        "wires": [
+            [
+                "63e426b0.7b02d8"
+            ]
+        ]
+    },
+    {
+        "id": "bf5c0d37.cc908",
+        "type": "comment",
+        "z": "20388b4d.513684",
+        "name": "########## Measurements ############",
+        "info": "",
+        "x": 230,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "5bc912ad.d4feec",
+        "type": "comment",
+        "z": "20388b4d.513684",
+        "name": "########## Logging ############",
+        "info": "",
+        "x": 200,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "d7cbac66.e5b79",
+        "type": "comment",
+        "z": "20388b4d.513684",
+        "name": "########## Error general ############",
+        "info": "",
+        "x": 200,
+        "y": 2500,
+        "wires": []
+    },
+    {
+        "id": "5295713.523679",
+        "type": "ui_gauge",
+        "z": "20388b4d.513684",
+        "name": "gaugeAcmm",
+        "group": "34efbe45.60c2d2",
+        "order": 4,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "ACMM",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1600",
+        "colors": [
+            "#2d0a3d",
+            "#2d0a3d",
+            "#2d0a3d"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 710,
+        "y": 2080,
+        "wires": []
+    },
+    {
+        "id": "1a091792.bd0208",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "meas2gauge",
+        "func": "var t = msg.topic.split(\"/\");\nvar src = t[2];\nif (flow.get(\"selectedEsp\")!=src)\n    return;\n    \n\n//objects in payload are flattened in MQTT down to Jsons,\n//so I need to re-create the object\nvar payload = JSON.parse(msg.payload);\n\n//var msg1 = { payload: msg.payload[0].acmmFreq };\nlet relPressure = parseInt(payload.p - global.get('ambientPressure'));\n\nvar msg1 = {topic:\"acmm\",       payload:payload.acmm};\nvar msg2 = {topic:\"tempature\",  payload:payload.t};\nvar msg3 = {topic:\"humidity\",   payload:payload.h};\nvar msg4 = {topic:\"pressure\",   payload:relPressure};\nvar msg5 = {topic:\"impedance\",  payload:payload.imp};\nvar msg6 = {topic:\"impi\",  payload:payload.impi};\nvar msg7 = {topic:\"impc\",  payload:payload.impc};\n\n\nreturn [msg1,msg2,msg3,msg4,msg5,msg6,msg7];\n",
+        "outputs": 7,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 2180,
+        "wires": [
+            [
+                "5295713.523679"
+            ],
+            [
+                "742982d6.9f71fc"
+            ],
+            [
+                "1ef088e2.8164c7"
+            ],
+            [
+                "6c879e0d.50bb"
+            ],
+            [
+                "5b67b040.5747c",
+                "2d055bf7c8f3804f"
+            ],
+            [
+                "deb220d570a97b7f"
+            ],
+            [
+                "e9085ee1797b0421"
+            ]
+        ]
+    },
+    {
+        "id": "742982d6.9f71fc",
+        "type": "ui_gauge",
+        "z": "20388b4d.513684",
+        "name": "gaugeTemperature",
+        "group": "34efbe45.60c2d2",
+        "order": 2,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "-20",
+        "max": "100",
+        "colors": [
+            "#ffb22e",
+            "#ffb22e",
+            "#ffb22e"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 730,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "1ef088e2.8164c7",
+        "type": "ui_gauge",
+        "z": "20388b4d.513684",
+        "name": "gaugeHumidity",
+        "group": "34efbe45.60c2d2",
+        "order": 3,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#0084ff",
+            "#0084ff",
+            "#0084ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 720,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "6c879e0d.50bb",
+        "type": "ui_gauge",
+        "z": "20388b4d.513684",
+        "name": "gaugePressure",
+        "group": "34efbe45.60c2d2",
+        "order": 5,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "rel. Pressure",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "-3000",
+        "max": "3000",
+        "colors": [
+            "#00ffcc",
+            "#00ffcc",
+            "#00ffcc"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 720,
+        "y": 2200,
+        "wires": []
+    },
+    {
+        "id": "3c82e49e.af13bc",
+        "type": "comment",
+        "z": "20388b4d.513684",
+        "name": "######### Status ############",
+        "info": "",
+        "x": 200,
+        "y": 2680,
+        "wires": []
+    },
+    {
+        "id": "cc66c338.fabc8",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 29,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Status Request",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "str",
+        "topic": "",
+        "x": 240,
+        "y": 4380,
+        "wires": [
+            [
+                "8ca7a312.2065"
+            ]
+        ]
+    },
+    {
+        "id": "8ca7a312.2065",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/statusReq\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 4380,
+        "wires": [
+            [
+                "7fc6d797.8c0958"
+            ]
+        ]
+    },
+    {
+        "id": "9833ccca.f4425",
+        "type": "ui_text",
+        "z": "20388b4d.513684",
+        "group": "a2f53da8.9db8d",
+        "order": 30,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "ts",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 650,
+        "y": 2800,
+        "wires": []
+    },
+    {
+        "id": "341374a2.b57c9c",
+        "type": "ui_text",
+        "z": "20388b4d.513684",
+        "group": "a2f53da8.9db8d",
+        "order": 31,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "f.w.",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 650,
+        "y": 2960,
+        "wires": []
+    },
+    {
+        "id": "7d3c1d6c.7962f4",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 42,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Upgrade Firmware",
+        "tooltip": "this is not a toy! dont' touch it",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "otaUpgrade",
+        "topicType": "str",
+        "x": 230,
+        "y": 3120,
+        "wires": [
+            [
+                "14cde70e.032669"
+            ]
+        ]
+    },
+    {
+        "id": "a1a059d1.7c88c8",
+        "type": "exec",
+        "z": "20388b4d.513684",
+        "command": "cd ./smartsensor/build; openssl s_server -WWW -key ca_key.pem -cert ca_cert.pem -port 8070; cd ../..",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "180",
+        "oldrc": false,
+        "name": "UpgradeFirmware",
+        "x": 650,
+        "y": 3200,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "33e60ddf.c067f2",
+        "type": "ui_text",
+        "z": "20388b4d.513684",
+        "group": "a2f53da8.9db8d",
+        "order": 32,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "last rec. msg:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 670,
+        "y": 2840,
+        "wires": []
+    },
+    {
+        "id": "14cde70e.032669",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/otaUpgrade\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 3120,
+        "wires": [
+            [
+                "a1a059d1.7c88c8",
+                "7fc6d797.8c0958"
+            ]
+        ]
+    },
+    {
+        "id": "5644448e.6382cc",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "set clock",
+        "tooltip": "important! sensors may not have RealTimeClock; let them know the time!",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "setClock",
+        "topicType": "str",
+        "x": 220,
+        "y": 4340,
+        "wires": [
+            [
+                "7e608a59.64fe84"
+            ]
+        ]
+    },
+    {
+        "id": "7e608a59.64fe84",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/setTime\";\nmsg.payload = {datetime: Date.now()};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 4340,
+        "wires": [
+            [
+                "b2bf426a.5b995",
+                "7fc6d797.8c0958"
+            ]
+        ]
+    },
+    {
+        "id": "cea03c8c.70e5d",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 420,
+        "y": 3200,
+        "wires": [
+            [
+                "a1a059d1.7c88c8"
+            ]
+        ]
+    },
+    {
+        "id": "e44d31b8.7ff3d",
+        "type": "debug",
+        "z": "20388b4d.513684",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 460,
+        "y": 2760,
+        "wires": []
+    },
+    {
+        "id": "b3680333.56ce9",
+        "type": "change",
+        "z": "20388b4d.513684",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sendInterval",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1120,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bf356fd0.61b85",
+        "type": "change",
+        "z": "20388b4d.513684",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sleepOnStill",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1120,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1cc35222.1fae2e",
+        "type": "sqlite",
+        "z": "20388b4d.513684",
+        "mydb": "b5358a46.a94fc8",
+        "sqlquery": "prepared",
+        "sql": "select * from tblMeasurements as M\ninner join tblTests as T on M.testId=T.id\nwhere T.name==$testName ",
+        "name": "sql",
+        "x": 1130,
+        "y": 1980,
+        "wires": [
+            [
+                "371a0b2a.a1b434"
+            ]
+        ]
+    },
+    {
+        "id": "371a0b2a.a1b434",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "sql2chart",
+        "func": "//var data = [[{\"x\":1537348236000,\"y\":2493},{\"x\":1537348326000,\"y\":2493}]];\n//\nvar ac = [];\nvar te = [];\nvar pr = [];\nvar hu = [];\nvar imp = [];\nvar i, len;\n\nfor (i = 1, len = msg.payload.length; i < len; i++) {\n    let ts = Date.parse(msg.payload[i].timestamp) + 2*60*60;\n    ac.push({\"x\": ts, \"y\":Number(msg.payload[i].acmm/10)});\n    te.push({\"x\": ts, \"y\":Number(msg.payload[i].temperature)});\n    pr.push({\"x\": ts, \"y\":Number(msg.payload[i].pressure)});\n    hu.push({\"x\": ts, \"y\":Number(msg.payload[i].humidity)});\n    imp.push({\"x\": ts, \"y\":Number(msg.payload[i].impedance/10)});\n}\n\n\n//clear the chart ???\n\n\nmsg.action = \"load\"\nmsg.payload = [\n{topic: \"acmm\", data: ac},\n{topic: \"temperature\", data: te},\n{topic: \"pressure\", data: pr},\n{topic: \"humidity\", data: hu},\n{topic: \"impedance\", data: imp}];\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1260,
+        "y": 1980,
+        "wires": [
+            [
+                "3dfb07e2.bf2538"
+            ]
+        ]
+    },
+    {
+        "id": "2ed9e80a.d26fd8",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\n\nvar testName;\nvar espProps;\nespProps = flow.get(\"espProps\");\nif (typeof(espProps) === \"object\" && espProps !== null && espProps.hasOwnProperty(sensorId)){\n    testName = espProps[sensorId].testName;\n}else{\n    testName = flow.get('selectedTestName');\n}\n\n// for sqlite widget\nmsg.params = {\n    $testName: testName }\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 1980,
+        "wires": [
+            [
+                "1cc35222.1fae2e"
+            ]
+        ]
+    },
+    {
+        "id": "ad0f2369.ec8a2",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "34efbe45.60c2d2",
+        "order": 8,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "label": "pre-fetch data",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 860,
+        "y": 1980,
+        "wires": [
+            [
+                "2ed9e80a.d26fd8"
+            ]
+        ]
+    },
+    {
+        "id": "ee9d1c54.8e4ef",
+        "type": "ui_toast",
+        "z": "20388b4d.513684",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "Sensor ACKs: ",
+        "name": "",
+        "x": 920,
+        "y": 2800,
+        "wires": []
+    },
+    {
+        "id": "3d7e1663.d7af5a",
+        "type": "debug",
+        "z": "20388b4d.513684",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1270,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "3bd133d1.28cefc",
+        "type": "ui_numeric",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "send Interval [s]",
+        "tooltip": "results are buffered in sensor, this is how often buffer is sent out",
+        "group": "a2f53da8.9db8d",
+        "order": 22,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "sendInterval",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "30",
+        "step": "1",
+        "x": 880,
+        "y": 380,
+        "wires": [
+            [
+                "b3680333.56ce9"
+            ]
+        ]
+    },
+    {
+        "id": "5cb4bcb4.da7ff4",
+        "type": "ui_numeric",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "sleep on still [min]",
+        "tooltip": "how long to wait before going to deep sleep, when unmoved; set 0 to disable",
+        "group": "a2f53da8.9db8d",
+        "order": 23,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "30",
+        "step": 1,
+        "x": 890,
+        "y": 420,
+        "wires": [
+            [
+                "bf356fd0.61b85"
+            ]
+        ]
+    },
+    {
+        "id": "db0c9178.f74ee",
+        "type": "debug",
+        "z": "20388b4d.513684",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 730,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "b2bf426a.5b995",
+        "type": "debug",
+        "z": "20388b4d.513684",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1270,
+        "y": 3340,
+        "wires": []
+    },
+    {
+        "id": "b661f7bf.edbeb8",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "let t = msg.topic.split(\"/\");\nlet src = t[2];\nif (flow.get(\"selectedEsp\")!=src)\n    return;\n\nlet payload = JSON.parse(msg.payload);\n\n\nlet ts = new Date(payload.ts);\n\nlet msg1 = {payload: ts.toLocaleString()};\nlet msg2 = {payload: payload.lm};\nlet msg3 = {payload: payload.V};\nlet msg4 = {payload: -payload.rssi};\nlet msg5 = {payload: payload.fw};\n\n\nreturn [msg1,msg2,msg3,msg4,msg5];",
+        "outputs": 5,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 2880,
+        "wires": [
+            [
+                "9833ccca.f4425"
+            ],
+            [
+                "33e60ddf.c067f2",
+                "ee9d1c54.8e4ef"
+            ],
+            [
+                "12ce0a80f6430622"
+            ],
+            [
+                "9309f0a4d07bab16"
+            ],
+            [
+                "341374a2.b57c9c"
+            ]
+        ]
+    },
+    {
+        "id": "53b450af.821a2",
+        "type": "mqtt in",
+        "z": "20388b4d.513684",
+        "name": "",
+        "topic": "ws/rpi1/+/diag",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b45051da.e8073",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 160,
+        "y": 2880,
+        "wires": [
+            [
+                "b661f7bf.edbeb8",
+                "e44d31b8.7ff3d"
+            ]
+        ]
+    },
+    {
+        "id": "468e1347.70ff3c",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ws/rpi1/sensorID1/diag",
+        "payload": "{\"ts\":1606493179870,\"lm\":\"someTopic\",\"V\":46090,\"rssi\":67,\"fw\":\"v2.0b-1-g00d1f3a-dirty\"}",
+        "payloadType": "str",
+        "x": 230,
+        "y": 2940,
+        "wires": [
+            [
+                "b661f7bf.edbeb8"
+            ]
+        ]
+    },
+    {
+        "id": "c7b3f3a5.4bc19",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "inject corrupt timestamp",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ws/rpi1/sensorID1/measurement",
+        "payload": "{\"ts\":608057408617,\"acmm\":12,\"t\":23,\"h\":45,\"p\":1015}",
+        "payloadType": "str",
+        "x": 140,
+        "y": 2000,
+        "wires": [
+            [
+                "3a3f3176.cae33e"
+            ]
+        ]
+    },
+    {
+        "id": "3a3f3176.cae33e",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "var t = msg.topic.split(\"/\");\nvar sensorID = t[2];\n\nflow.set(\"selectedEsp\", sensorID);\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 2000,
+        "wires": [
+            [
+                "1450f974.4e4397",
+                "25021d96.6b5862",
+                "4e04a500.ce037c",
+                "9def396a.85a638"
+            ]
+        ]
+    },
+    {
+        "id": "62487740.274dc8",
+        "type": "debug",
+        "z": "20388b4d.513684",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "44c0243a.29dc7c",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "d": true,
+        "name": "sql2chart",
+        "func": "//var data = [[{\"x\":1537348236000,\"y\":2493},{\"x\":1537348326000,\"y\":2493}]];\n//\nvar series =[\"acmm\",\"temperature\",\"pressure\",\"humidity\"];\nvar labels = [\"Labels\"];\nvar ac = [];\nvar te = [];\nvar pr = [];\nvar hu = [];\n\nvar i, len;\n\nfor (i = 1, len = msg.payload.length; i < len; i++) {\n    let ts = Date.parse(msg.payload[i].timestamp) + 2*60*60;\n    ac.push({\"x\": ts, \"y\":Number(msg.payload[i].acmm)});\n    te.push({\"x\": ts, \"y\":Number(msg.payload[i].temperature)});\n    pr.push({\"x\": ts, \"y\":Number(msg.payload[i].pressure-1000)});\n    hu.push({\"x\": ts, \"y\":Number(msg.payload[i].humidity)});\n}\n\nvar data = [ac,te,pr,hu];\n\nmsg.payload = [{series, data, labels}];\n//clear the chart\nnode.send({payload:[]});\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1260,
+        "y": 2040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89c5d55f.116438",
+        "type": "ui_chart",
+        "z": "20388b4d.513684",
+        "d": true,
+        "name": "",
+        "group": "34efbe45.60c2d2",
+        "order": 17,
+        "width": 11,
+        "height": 13,
+        "label": "online chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "100",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "x": 1410,
+        "y": 2040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3dfb07e2.bf2538",
+        "type": "ui_template",
+        "z": "20388b4d.513684",
+        "group": "34efbe45.60c2d2",
+        "name": "Chart.js impl",
+        "order": 13,
+        "width": 22,
+        "height": 15,
+        "format": "<!-- See the read me comment node. Colin Law's original notes follow -->\n\n<!--\nA node-red Dashboard UI template to draw charts using chart.js\nBefore use download the file Chart.bundle.min.js from chartjs.org and \nsave in an appropriate folder (e.g. .node-red/static). \nIn settings.js set httpStatic to the full path of that folder and restart node-red.\nMake sure that the options for 'Pass through messages' and 'Add output messages' \nin this node are cleared.\nFor basic use set the id and size you want in the canvas tag and set chartID to the id\nSetup chartDef as required for your chart (see the chart.js docs)\nIn addition, for each dataset specify in chartDef the message topic that you will use for that channel.\nTo (optionally) provide the chart with a one-off set of data send the node a message with:\nmsg.action = \"load\"\nmsg.payload = [\n{topic: \"mytopic1\", data: [{x: x1,y:y2},{x:x2,y:y2},...]},\n{topic: \"mytopic2\", data: [{x: x1,y:y2},{x:x2,y:y2},...]},\n...]\nWhere mytopic1 and mytopic2 are the the topics specified in the chartDef\n\nTo provide the chart with data incrementally (for a time series for example)\nsend it messages of the form\n{topic: \"mytopic1\", payload: {x:xvalue,y:yvalue}}\nThe chart will be updated as each sample is provided.\nTo limit the growth of the chart set chartMaxPoints and/or chartTimeSpan in the Chart Helper node\nas described at the head of that node.\nIf you find that chart seems to flicker and scroll bars come and go then try \nsetting a size other than auto in the Size specification for this node.\n\nFor Bar charts the x value is the label for the bar and the y value is the bar value\n\nNote that since the chart samples are stored in the browser then the chart will be cleared each\ntime the browser is refreshed (and will be clear on initially opening the view). In order to \nprovided persistency over browser opening and refresh this node may be used in conjunction with\nthe Chart Helper function node.  Details for its use are in the source of that node.\n\nIf your flow includes more that one instance of this script then the line fetching \nChart.bundle.min.js need only be included in one of them\n-->\n\n<style>\n.traceSelector {\n  background-color: #f3f3f6;\n  color: blue;\n}\n.sliders {\n  background-color: #f3f3f6;\n  color: blue;\n}\n</style>\n</head>\n<body>\n\n<div class=\"traceSelector\">\n  <p>\n    <input type=\"checkbox\" name=\"acmm\" id=\"acmm\" ng-click='clickCbx()' checked>\n    <label for=\"acmm\">acmm:</label>\n    <input type=\"checkbox\" name=\"humidity\" id=\"humidity\" ng-click='clickCbx()' checked>\n    <label for=\"humidity\">humidity:</label>\n    <input type=\"checkbox\" name=\"impedance\" id=\"impedance\" ng-click='clickCbx()' checked>\n    <label for=\"impedance\">impedance:</label>\n    <input type=\"checkbox\" name=\"impi\" id=\"impi\" ng-click='clickCbx()' checked>\n    <label for=\"impi\">impi:</label>\n    <input type=\"checkbox\" name=\"impc\" id=\"impc\" ng-click='clickCbx()' checked>\n    <label for=\"impc\">impc:</label>\n    <input type=\"checkbox\" name=\"temperature\" id=\"temperature\" ng-click='clickCbx()' checked>\n    <label for=\"temperature\">temperature:</label>\n    <input type=\"checkbox\" name=\"pressure\" id=\"pressure\" ng-click='clickCbx()' checked>\n    <label for=\"pressure\">pressure:</label>\n  </p>\n</div>\n<div></div>\n<label style=\"width: 293px;\" for=\"maxPoints\">Chart max points (0 for all): {{chartMaxPoints}}</label>\n<md-slider ng-model=\"chartMaxPoints\" id=\"maxPoints\" min=\"0\" max=\"300\">maxpoints</md-slider>\n<div></div>\n\n<script src=\"/Chart.bundle.min.js\"></script>\n<canvas id=\"myChartSimple1\" width=\"300\" height=\"170\"></canvas>\n<script>\n\n(function() {\n    var chartID = \"myChartSimple1\";           // set this to the id you have specified in the canvas tag above\n    // setup the chart definition as defined in the chart.js documentation, in addition setting up the topic\n    // for each channel\n    var chartDef = {\n        type: 'line',\n        data: {\n            datasets: [{\n                topic: \"acmm\",    // used here not by chart.js\n                label: \"acmm/10\",\n                yAxisID: \"fixed_scale\",\n                fill: false,\n                lineTension: 0,\n                borderColor: \"#2d0a3d\",\n                pointRadius: 3,\n                pointHoverRadius: 3,\n                pointBorderColor: \"#2d0a3d\",\n                pointBackgroundColor: \"#2d0a3d\",\n                backgroundColor:  \"#2d0a3d\",\n                borderWidth: 1,\n                showLine: false,\n                data: []  // data is written here later\n            }, {\n                topic: \"temperature\",    // used here not by chart.js\n                label: \"temperature\",\n                yAxisID: \"fixed_scale\",\n                fill: false,\n                lineTension: 0,\n                borderColor: \"#FFB22E\",\n                pointRadius: 3,\n                pointHoverRadius: 3,\n                pointBorderColor: \"#FFB22E\",\n                pointBackgroundColor: \"#FFB22E\",\n                backgroundColor:  \"#FFB22E\",\n                borderWidth: 1,\n                showLine: false,\n                data: []  // data is written here later\n            },{\n                topic: \"pressure\",    // used here not by chart.js\n                label: \"rel. pressure\",\n                yAxisID: \"auto_scale\",\n                fill: false,\n                lineTension: 0,\n                borderColor: \"#00ffcc\",\n                pointRadius: 3,\n                pointHoverRadius: 3,\n                pointBorderColor: \"#00ffcc\",\n                pointBackgroundColor: \"#00ffcc\",\n                backgroundColor:  \"#00ffcc\",\n                borderWidth: 1,\n                showLine: false,\n                data: []  // data is written here later\n            },{\n                topic: \"humidity\",    // used here not by chart.js\n                label: \"humidity\",\n                yAxisID: \"fixed_scale\",\n                fill: false,\n                lineTension: 0,\n                borderColor: \"#0084FF\",\n                pointRadius: 3,\n                pointHoverRadius: 3,\n                pointBorderColor: \"#0084FF\",\n                pointBackgroundColor: \"#0084FF\",\n                backgroundColor:  \"#0084FF\",\n                borderWidth: 1,\n                showLine: false,\n                data: []  // data is written here later\n            },{\n                topic: \"impc\",    // used here not by chart.js\n                label: \"impc/10\",\n                yAxisID: \"fixed_scale\",\n                fill: false,\n                lineTension:70,\n                borderColor: \"#cc4499\",\n                pointRadius: 3,\n                pointHoverRadius: 3,\n                pointBorderColor: \"#cc4499\",\n                pointBackgroundColor: \"#cc4499\",\n                backgroundColor:  \"#cc4499\",\n                borderWidth: 1,\n                showLine: false,\n                data: []  // data is written here later\n            },{\n                topic: \"impi\",    // used here not by chart.js\n                label: \"impi/10\",\n                yAxisID: \"fixed_scale\",\n                fill: false,\n                lineTension:70,\n                borderColor: \"#cc4499\",\n                pointRadius: 3,\n                pointHoverRadius: 3,\n                pointBorderColor: \"#cc4499\",\n                pointBackgroundColor: \"#cc4499\",\n                backgroundColor:  \"#cc4499\",\n                borderWidth: 1,\n                showLine: false,\n                data: []  // data is written here later\n            },{\n                topic: \"impedance\",    // used here not by chart.js\n                label: \"impedance/10\",\n                yAxisID: \"fixed_scale\",\n                fill: false,\n                lineTension:70,\n                borderColor: \"#cc4499\",\n                pointRadius: 3,\n                pointHoverRadius: 3,\n                pointBorderColor: \"#cc4499\",\n                pointBackgroundColor: \"#cc4499\",\n                backgroundColor:  \"#cc4499\",\n                borderWidth: 1,\n                showLine: false,\n                data: []  // data is written here later\n            }]\n        },\n        options: {\n            scales: {\n                xAxes: [{\n                    type: 'time',\n                    position: 'bottom'\n                    }\n                ],\n                yAxes: [\n                    {\n                    id: \"auto_scale\",\n                    position: 'right',\n                }, {\n                    id: \"fixed_scale\",\n                    position: 'left', \n                    ticks: {\n                        min: -20,\n                        max: 150,\n                        stepSize: 10\n                    }\n                }]\n            },\n            animation: {\n                duration: 0\n            }\n        }\n    }\n        \n/***** You shouldn't normally need to change anything below here *****/    \n    var myChart = null;\n    var loaded = false;     // indicates whether we have already had a load action\n    var chartTimeSpan;\n    var chartMaxPoints;\n    var showAcmm = true;\n    var showPressure = true;\n    var showTemperature = true;\n    var showHumidity = true;\n    var showImpedance = true;\n    var showImpi = true;\n    var showImpc = true;\n    \n\n    function doChart(msg, scope) {\n        if (!myChart) {\n            // chart does not exist so load the data and create it\n            var ctx = document.getElementById(chartID);\n            myChart = new Chart(ctx, chartDef);     \n        }\n        // chart already exists, update it\n        var datasets = myChart.data.datasets;\n        \n        // pick up chartTimeSpan and chartMaxPoints if they have been provided\n        if (typeof msg.chartTimeSpan != 'undefined') {\n            chartTimeSpan = msg.chartTimeSpan;\n        }\n        \n        if (typeof msg.chartMaxPoints != 'undefined') {\n            chartMaxPoints = msg.chartMaxPoints;\n            scope.chartMaxPoints = chartMaxPoints;  //pj\n        }else{  //pj\n            if (typeof scope.chartMaxPoints != 'undefined') { //pj\n                chartMaxPoints = scope.chartMaxPoints;  //pj\n            }\n        }   //pj\n        \n        // is this a load or preload action?\n        if (msg.action === \"load\" || msg.action === \"preload\") {\n            // yes, do not allow preload if we have already had a load\n            // so do it if this is a load or we have not previously had a load\n            if (msg.action === \"load\" || !loaded) {\n                // replace existing data for matching topics\n                for (var j = 0; j < msg.payload.length; j++) {\n                    var topic = msg.payload[j].topic;\n                    // find it in the chart\n                    for (var i = 0; i < datasets.length; i++) {\n                        if (datasets[i].topic == topic) {\n                            // if stripping old samples by time is required then ensure the x value is Date\n                            if (chartTimeSpan > 0 ) {\n                                var data = msg.payload[j].data;\n                                for (var k = 0; k < data.length; k++) {\n                                    if (typeof data[k].x === \"string\") {\n                                        data[k].x = new Date(data[k].x);\n                                    }\n                                }\n                            }\n                            if (chartDef.type !== \"bar\") {\n                                datasets[i].data = msg.payload[j].data;\n                            } else {\n                                // bar chart so x values must go to labels and y values to dataset\n                                datasets[i].data = [];\n                                myChart.data.labels = [];\n                                var data = msg.payload[j].data;\n                                for (var k = 0; k < data.length; k++) {\n                                    datasets[i].data.push(data[k].y);\n                                    myChart.data.labels.push(data[k].x);\n                                }\n                            }\n                            break;\n                        }\n                    }\n                }\n            }\n            if (msg.action === \"load\") loaded = true;\n            myChart.update();\n        } else {\n            // does the topic match one of the datasets?\n            for (var i = 0; i < datasets.length; i++) {\n                if (datasets[i].topic == msg.topic) {\n                    // datasets[i].hidden = (msg.hasOwnProperty('hidden') && (msg.hidden == true));\n                    if (msg.topic == \"temperature\"){\n                        datasets[i].hidden = !showTemperature;\n                    }\n                    if (msg.topic == \"acmm\"){\n                        datasets[i].hidden = !showAcmm;\n                    }\n                    if (msg.topic == \"pressure\"){\n                        datasets[i].hidden = !showPressure;\n                    }\n                    if (msg.topic == \"humidity\"){\n                        datasets[i].hidden = !showHumidity;\n                    }\n                    if (msg.topic == \"impedance\"){\n                        datasets[i].hidden = !showImpedance;\n                    }\n                    if (msg.topic == \"impi\"){\n                        datasets[i].hidden = !showImpi;\n                    }\n                    if (msg.topic == \"impc\"){\n                        datasets[i].hidden = !showImpc;\n                    }\n                    // if stripping old samples by time is required then ensure the x value is Date\n                    if (chartTimeSpan > 0 && typeof msg.payload.x === \"string\") {\n                        msg.payload.x = new Date(msg.payload.x);\n                    }\n                    if (chartDef.type !== \"bar\") {\n                        datasets[i].data.push(msg.payload);\n                        if (chartMaxPoints > 0){\n                            while(datasets[i].data.length > chartMaxPoints){\n                                datasets[i].data.shift();\n                            }\n                        }\n                    } else {\n                         // bar chart so x value must go to labels and y value to dataset\n                        datasets[i].data.push(msg.payload.y);\n                        myChart.data.labels.push(msg.payload.x);\n                        if (chartMaxPoints > 0){\n                            while(datasets[i].data.length > chartMaxPoints){\n                                datasets[i].data.shift();\n                                myChart.data.labels.shift();\n                            }\n                        }\n                    }\n                    myChart.update();\n                    break;\n                }\n            }\n        }\n        // strip off samples older than now\n        // charTimeSpan == 0 implies don't do it\n        var shifted = false;\n        if (chartTimeSpan > 0) {\n            var now = new Date();\n            var oldestTimeAllowed = now - chartTimeSpan;\n            for (var i = 0; i < datasets.length; i++) {\n                dataset = datasets[i];\n                while(dataset.data[0] && getTime(dataset.data[0].x) < oldestTimeAllowed) {\n                    dataset.data.shift();\n                    shifted = true;\n                }\n            }\n        }\n        // strip samples off the front if there are now too many\n        // charTimeSpan == 0 implies don't do it\n        if (chartMaxPoints > 0) {\n            for (var i = 0; i < datasets.length; i++) {\n                dataset = datasets[i];\n                while(dataset.data.length > chartMaxPoints) {\n                    dataset.data.shift();\n                    shifted = true;\n                }\n            }\n        }\n        if (shifted) {\n            myChart.update();\n        }\n    };\n\n    // gets the time of an x value, works for strings or Date types\n    function getTime(x) {\n        if (typeof x === \"string\") x = new Date(x);\n        return x.getTime();\n    }\n    \n    // builds the preload message for sending back to the chart helper\n    function preloadMsg() {\n        var preMsg = {action: \"preload\", payload: \"preload\"};\n        // build array of topics in chart\n        var topics = [];\n        for (var i=0; i<chartDef.data.datasets.length; i++) {\n            topics.push(chartDef.data.datasets[i].topic);\n        }\n        preMsg.topics = topics;\n        // has the chart already been created\n        if (myChart) {\n            preMsg.lastXValue = 1;\n        } else {\n            preMsg.lastXValue = 0;\n        }\n        return preMsg;\n    }\n\n    (function(scope) {\n        // this code gets run when the a view is opened on the node in the browser\n        // send a preload message back to node red to ask it send\n        // us a complete set of data. Pass down max points and time span to the helper node for it to use\n        // plus an array of the topics of interest\n        scope.send( preloadMsg() );\n        \n        scope.$watch('msg', function(msg) {\n            if (msg) {\n                doChart(msg, scope);\n            }\n        });\n        scope.clickCbx = function() {\n            let el = document.getElementById(\"acmm\");\n            // scope.send({topic:\"acmmCbxChecked\",payload:el.checked});\n            showAcmm = el.checked;\n            // if (showAcmm == true){\n            //     scope.send({topic:\"acmmCbxChecked\",payload:\"it is true\"});\n            // }else{\n            //     scope.send({topic:\"acmmCbxChecked\",payload:\"it is false\"});\n            // }\n            el = document.getElementById(\"temperature\");\n            // scope.send({topic:\"temperatureCbxChecked\",payload:el.checked});\n            showTemperature = el.checked;\n            el = document.getElementById(\"humidity\");\n            // scope.send({topic:\"humidityCbxChecked\",payload:el.checked});\n            showHumidity = el.checked;\n            el = document.getElementById(\"pressure\");\n            // scope.send({topic:\"pressureCbxChecked\",payload:el.checked});\n            showPressure = el.checked;\n            el = document.getElementById(\"impedance\");\n            // scope.send({topic:\"impedanceCbxChecked\",payload:el.checked});\n            showImpedance = el.checked;\n            el = document.getElementById(\"impc\");\n            // scope.send({topic:\"impcCbxChecked\",payload:el.checked});\n            showImpc = el.checked;\n            el = document.getElementById(\"impi\");\n            // scope.send({topic:\"impiCbxChecked\",payload:el.checked});\n            showImpi = el.checked;\n\n            // scope.chartMaxPoints = 33;\n\n        }\n    })(scope);\n})();\n</script>\n",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1390,
+        "y": 1920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e3f386af.b62878",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "msg.action = \"load\";    // This instructs the chart node to paint the data\n\n// The payload is an array of two {topic, data} objects\nmsg.payload = [\n    {topic: \"acmm\", data: []},\n    {topic: \"temperature\", data: []},\n    {topic: \"pressure\", data: []},\n    {topic: \"humidity\", data: []},\n    {topic: \"impi\", data: []},\n    {topic: \"impc\", data: []},\n    {topic: \"impedance\", data: []}\n                ];\n                \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 1940,
+        "wires": [
+            [
+                "3dfb07e2.bf2538"
+            ]
+        ]
+    },
+    {
+        "id": "c321dc3a.8f42b",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "sensorID2/registerMe",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ws/rpi1/sensorID2/registerMe",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "e3a091e6.414db"
+            ]
+        ]
+    },
+    {
+        "id": "25f4fe0b.277482",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "inject corrupt timestamp",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ws/rpi1/sensorID2/measurement",
+        "payload": "{\"ts\":608057408617,\"acmm\":12,\"t\":23,\"h\":45,\"p\":1015}",
+        "payloadType": "str",
+        "x": 140,
+        "y": 2040,
+        "wires": [
+            [
+                "3a3f3176.cae33e"
+            ]
+        ]
+    },
+    {
+        "id": "91acdcef.616e9",
+        "type": "sqlite",
+        "z": "20388b4d.513684",
+        "mydb": "b5358a46.a94fc8",
+        "sqlquery": "prepared",
+        "sql": "\nselect * from tblSensorParams where sensorID==$sensorID;\n",
+        "name": "select sensor params",
+        "x": 460,
+        "y": 340,
+        "wires": [
+            [
+                "52851142.08d73"
+            ]
+        ]
+    },
+    {
+        "id": "2c4d6130.fde64e",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nvar testName;\nvar testDescription;\nvar espProps;\nespProps = flow.get(\"espProps\");\nif (typeof(espProps) === \"object\" && espProps !== null && espProps.hasOwnProperty(sensorId)){\n    testName = espProps[sensorId].testName;\n    testDescription = espProps[sensorId].testDescription;\n}else{\n    let today = new Date();\n    testName = `${today.getFullYear()}_${today.getMonth()+1}_${today.getDate()}__${today.getHours()}_${today.getMinutes()}_${today.getSeconds()}_${sensorId}`;\n    testDescription = \"description\";\n}\nmsg.payload = testName + '/' + testDescription;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 840,
+        "wires": [
+            [
+                "3f8fce17.dd8882",
+                "8bc7d3f7.98b5d"
+            ]
+        ]
+    },
+    {
+        "id": "abff922c.90e28",
+        "type": "mqtt in",
+        "z": "20388b4d.513684",
+        "name": "",
+        "topic": "ws/rpi1/+/log",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b45051da.e8073",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 190,
+        "y": 3620,
+        "wires": [
+            [
+                "4e639194.53df6",
+                "4d9fa3f6.0d590c"
+            ]
+        ]
+    },
+    {
+        "id": "4e639194.53df6",
+        "type": "join",
+        "z": "20388b4d.513684",
+        "name": "",
+        "mode": "custom",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "8",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 390,
+        "y": 3620,
+        "wires": [
+            [
+                "354a364b.fdcb5a"
+            ]
+        ]
+    },
+    {
+        "id": "30ed8bab.b30804",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 44,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "readLog",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "readLog",
+        "x": 180,
+        "y": 3720,
+        "wires": [
+            [
+                "ea7e9329.f6ee2"
+            ]
+        ]
+    },
+    {
+        "id": "ea7e9329.f6ee2",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/readLog\";\nmsg.payload = \"\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 3720,
+        "wires": [
+            [
+                "d30ba4c0.423df8",
+                "7fc6d797.8c0958"
+            ]
+        ]
+    },
+    {
+        "id": "4d9fa3f6.0d590c",
+        "type": "debug",
+        "z": "20388b4d.513684",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 3680,
+        "wires": []
+    },
+    {
+        "id": "354a364b.fdcb5a",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "// node.send({\n//     topic:msg.topic, \n//     payload: \"\"\n// });\n\n\n//var t = \"\\x1B[0;31mALA Ma Kota\\x1B[0m\";\n//t = t.replace(/\\u001b[^m]*?m/g, \"\\n\");\n\nvar t = msg.payload.replace(/\\u001b[^m]*?m/g, \"\");\nmsg.payload = t;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 3620,
+        "wires": [
+            [
+                "4d9fa3f6.0d590c",
+                "d30ba4c0.423df8"
+            ]
+        ]
+    },
+    {
+        "id": "864b6ffd.b740d",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ojojoj",
+        "payload": "\"\\x1B[0;31mALA Ma Kota\\x1B[0m\"",
+        "payloadType": "str",
+        "x": 350,
+        "y": 3520,
+        "wires": [
+            [
+                "354a364b.fdcb5a"
+            ]
+        ]
+    },
+    {
+        "id": "d30ba4c0.423df8",
+        "type": "ui_template",
+        "z": "20388b4d.513684",
+        "group": "34efbe45.60c2d2",
+        "name": "log",
+        "order": 31,
+        "width": 16,
+        "height": 20,
+        "format": "<style>\n    #mylog {\n        min-height: 300px;\n        pading: 0;\n        white-space: pre;\n    }\n</style>\n\n<div id=\"mylog\" ng-bind-html=\"msg.payload\">\n    \n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 730,
+        "y": 3620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f98f6aaa.bda1a8",
+        "type": "mqtt in",
+        "z": "20388b4d.513684",
+        "name": "",
+        "topic": "ws/rpi1/+/unfinished",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b45051da.e8073",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 210,
+        "y": 3920,
+        "wires": [
+            [
+                "1ee4f488.4f22ab"
+            ]
+        ]
+    },
+    {
+        "id": "1ee4f488.4f22ab",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "...",
+        "func": "var t = msg.topic.split(\"/\");\nvar sensorId = t[2];\n\nvar espProps;\nespProps = flow.get(\"espProps\");\nif (typeof(espProps) === \"object\" && espProps !== null && espProps.hasOwnProperty(sensorId)){\n    if (espProps[sensorId].unfinished){\n        \n        if (espProps[sensorId].hasOwnProperty('lastUnfinished')){\n            if (Date.now() - espProps[sensorId].lastUnfinished < 5000){\n                node.log('too often unfinished');\n                return;\n            }\n        }\n        espProps[sensorId].lastUnfinished = Date.now();    \n        flow.set(\"espProps\", espProps);\n\n        //prepare some msgs and send them\n        //clock\n        msg.topic = \"ws/\"+sensorId+\"/rpi1/setTime\";\n        msg.payload = {datetime: Date.now()};\n        node.send(msg);\n        \n        //job params\n        msg.topic = \"ws/\"+sensorId+\"/rpi1/setAcmm\";\n        msg.payload = {\n                freq: espProps[sensorId].acmmFreq,\n                aggOver: espProps[sensorId].acmmAggOver\n            }\n        node.send(msg);\n        \n        msg.topic = \"ws/\"+sensorId+\"/rpi1/measFreq\";\n        msg.payload = {\n                freq: espProps[sensorId].measFreq\n            }\n        node.send(msg);\n\n        msg.topic = \"ws/\"+sensorId+\"/rpi1/sleepOnStill\",\n        msg.payload = {\n                timeout: espProps[sensorId].sleepOnStill\n            }\n        node.send(msg);\n\n        msg.topic = \"ws/\"+sensorId+\"/rpi1/sendInterval\",\n        msg.payload = {\n                sendInterval: espProps[sensorId].sendInterval\n            }\n        node.send(msg);\n\n        if (espProps[sensorId].hasOwnProperty('lastAcmm')){\n            msg.topic = \"ws/\"+sensorId+\"/rpi1/clearAcmm\",\n            msg.payload = {\n                    initValue: espProps[sensorId].lastAcmm\n                }\n            node.send(msg);\n            node.log('acmm cleared to'+msg.payload.initValue);\n        }\n        if (espProps[sensorId].hasOwnProperty('lastImp')){\n            msg.topic = \"ws/\"+sensorId+\"/rpi1/clearImp\",\n            msg.payload = {\n                    initValue: espProps[sensorId].lastImp\n                }\n            node.send(msg);\n            node.log('imp cleared to'+msg.payload.initValue);\n        }\n        //job request\n        msg.topic = \"ws/\"+sensorId+\"/rpi1/startMeas\";\n        msg.payload = {};\n        node.send(msg);\n        \n        \n    }\n}\n\n\nreturn;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 3920,
+        "wires": [
+            [
+                "7fc6d797.8c0958"
+            ]
+        ]
+    },
+    {
+        "id": "7fc6d797.8c0958",
+        "type": "mqtt out",
+        "z": "20388b4d.513684",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "b45051da.e8073",
+        "x": 1290,
+        "y": 3580,
+        "wires": []
+    },
+    {
+        "id": "8fe70965.7bb878",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "AcmmInit",
+        "group": "a2f53da8.9db8d",
+        "order": 15,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Acmm Init",
+        "tooltip": "re-initialize ACMM filter to a desired value",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 940,
+        "y": 2320,
+        "wires": [
+            [
+                "e10a6ea.e5c609"
+            ]
+        ]
+    },
+    {
+        "id": "9f19d7d5.66bcd8",
+        "type": "ui_numeric",
+        "z": "20388b4d.513684",
+        "name": "AcmmInitValue",
+        "label": "Acmm Init Value",
+        "tooltip": "Acmm re-init value, usually You'd wish 0",
+        "group": "a2f53da8.9db8d",
+        "order": 16,
+        "width": 0,
+        "height": 0,
+        "wrap": true,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "step": "100",
+        "x": 960,
+        "y": 2360,
+        "wires": [
+            [
+                "2db3fd95.81c602"
+            ]
+        ]
+    },
+    {
+        "id": "e10a6ea.e5c609",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "acmmInit",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\n\nvar initValue = 0;\nvar espProps;\nespProps = flow.get(\"espProps\");\nif ((typeof(espProps) === \"object\") && espProps.hasOwnProperty(sensorId)) {\n    initValue = espProps[sensorId].acmmInitValue;\n}\n\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/clearAcmm\";\nmsg.payload = {\n        initValue: initValue\n    }\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 2320,
+        "wires": [
+            [
+                "f775f11.96ff01",
+                "e44d31b8.7ff3d"
+            ]
+        ]
+    },
+    {
+        "id": "f775f11.96ff01",
+        "type": "mqtt out",
+        "z": "20388b4d.513684",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "b45051da.e8073",
+        "x": 1250,
+        "y": 2320,
+        "wires": []
+    },
+    {
+        "id": "2db3fd95.81c602",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "setAcmmInitValue",
+        "func": "\nvar payload = JSON.parse(msg.payload);\nvar sensorId = flow.get(\"selectedEsp\");\nvar espProps;\n\nespProps = flow.get(\"espProps\");\nif (typeof(espProps) !== \"object\"){\n    espProps = {};\n}\nif (!espProps.hasOwnProperty(sensorId))\n    espProps[sensorId] = {};\nespProps[sensorId].acmmInitValue = payload;\n\nflow.set(\"espProps\",espProps);\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 2360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b67b040.5747c",
+        "type": "ui_gauge",
+        "z": "20388b4d.513684",
+        "name": "gaugeImp",
+        "group": "34efbe45.60c2d2",
+        "order": 6,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Imp",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "1500",
+        "colors": [
+            "#cc4499",
+            "#cc4499",
+            "#cc4499"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 700,
+        "y": 2240,
+        "wires": []
+    },
+    {
+        "id": "cc6447d499aea6d5",
+        "type": "ui_ui_control",
+        "z": "20388b4d.513684",
+        "name": "",
+        "events": "all",
+        "x": 1190,
+        "y": 1820,
+        "wires": [
+            [
+                "3dfb07e2.bf2538"
+            ]
+        ]
+    },
+    {
+        "id": "8886db270a8cba51",
+        "type": "ui_template",
+        "z": "20388b4d.513684",
+        "group": "a2f53da8.9db8d",
+        "name": "Grafana Link",
+        "order": 10,
+        "width": 2,
+        "height": 1,
+        "format": "<div>\n<a href=\"http://localhost:3000\" target=\"_blank\" rel=\"noopener noreferrer\">Grafana</a>\n<!--<a href=\"http://localhost:3000\">Grafana</a>-->\n</div>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 690,
+        "y": 1580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1b6c682b2c6f7b06",
+        "type": "link out",
+        "z": "20388b4d.513684",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "ac5314881ba3a052"
+        ],
+        "x": 435,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "73656ff64b5dc2d0",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "fcnClean",
+        "func": "try {\n    msg.payload = msg.payload.toString();\n}\ncatch(error) {\n    msg.topic = \"unable to convert payload to string\";\n    return [null,msg];\n}\n\nmsg.payload = msg.payload.replace(/[^0-9a-zA-Z{}:\\-\\+\\.\\'\\\"\\,]/g,'');\n\ntry {\n    let pl = JSON.parse(msg.payload);\n}    \ncatch(error){\n    msg.topic = \"unable to convert payload to object even after regexp\";\n    return [null,msg];\n}\n    \n    \nreturn [msg,null];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 1880,
+        "wires": [
+            [
+                "9def396a.85a638",
+                "4e04a500.ce037c",
+                "25021d96.6b5862",
+                "1450f974.4e4397",
+                "1a091792.bd0208",
+                "827a1db148bba893",
+                "6729bf41.bfef2"
+            ],
+            [
+                "314313f0.a41bbc"
+            ]
+        ]
+    },
+    {
+        "id": "9309f0a4d07bab16",
+        "type": "ui_gauge",
+        "z": "20388b4d.513684",
+        "name": "gaugeRssi",
+        "group": "a2f53da8.9db8d",
+        "order": 35,
+        "width": 2,
+        "height": 2,
+        "gtype": "gage",
+        "title": "rssi",
+        "label": "dBi",
+        "format": "{{value}}",
+        "min": "-100",
+        "max": "0",
+        "colors": [
+            "#ff2c00",
+            "#ffe400",
+            "#00ff10"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 670,
+        "y": 2920,
+        "wires": []
+    },
+    {
+        "id": "12ce0a80f6430622",
+        "type": "ui_gauge",
+        "z": "20388b4d.513684",
+        "name": "gaugeBatt",
+        "group": "a2f53da8.9db8d",
+        "order": 33,
+        "width": 2,
+        "height": 2,
+        "gtype": "gage",
+        "title": "battery",
+        "label": "V",
+        "format": "{{value}}",
+        "min": "3.4",
+        "max": "4.3",
+        "colors": [
+            "#ff2c00",
+            "#ffe400",
+            "#00ff10"
+        ],
+        "seg1": "3.6",
+        "seg2": "3.75",
+        "className": "",
+        "x": 670,
+        "y": 2880,
+        "wires": []
+    },
+    {
+        "id": "827a1db148bba893",
+        "type": "link out",
+        "z": "20388b4d.513684",
+        "name": "heatout",
+        "mode": "link",
+        "links": [
+            "6a2d3fee570e24e8"
+        ],
+        "x": 455,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "b0e0127db2c1eb86",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 4000,
+        "wires": [
+            [
+                "1ee4f488.4f22ab"
+            ]
+        ]
+    },
+    {
+        "id": "2d055bf7c8f3804f",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "d": true,
+        "name": "",
+        "func": "const delay = 2;\n\nlet sensorId = flow.get(\"selectedEsp\");\nlet sendInterval = 0;\nvar espProps;\nespProps = flow.get(\"espProps\");\nif (typeof(espProps) === \"object\" && espProps !== null && espProps.hasOwnProperty(sensorId)){\n    sendInterval = espProps[sensorId].sendInterval;\n}\n\nlet dueTime = context.get('dueTime');\nif (dueTime == undefined)\n    dueTime = 0;\n    \nmsg = {};\n    \n\nif (msg.topic==\"looptick\"){\n    dueTime -= delay;\n    msg.delay = delay*1;\n}else{//this one comes not from my delay node\n    dueTime = sendInterval;\n    msg.reset = 1;\n}\n\ncontext.set('dueTime', dueTime);\nmsg.payload = dueTime;\nmsg.topic = \"looptick\";\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 2200,
+        "wires": [
+            [
+                "e5e67a1b78a3b957",
+                "a3134adcf84d67ea"
+            ]
+        ]
+    },
+    {
+        "id": "e5e67a1b78a3b957",
+        "type": "ui_gauge",
+        "z": "20388b4d.513684",
+        "name": "gaugeMsgAge",
+        "group": "a2f53da8.9db8d",
+        "order": 34,
+        "width": 2,
+        "height": 2,
+        "gtype": "gage",
+        "title": "msgAge",
+        "label": "s",
+        "format": "{{value}}",
+        "min": "-10",
+        "max": "10",
+        "colors": [
+            "#ff0000",
+            "#e4f500",
+            "#11ff00"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1280,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "a3134adcf84d67ea",
+        "type": "delay",
+        "z": "20388b4d.513684",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1280,
+        "y": 2200,
+        "wires": [
+            [
+                "2d055bf7c8f3804f",
+                "8cca2327ac9aa539"
+            ]
+        ]
+    },
+    {
+        "id": "8cca2327ac9aa539",
+        "type": "debug",
+        "z": "20388b4d.513684",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1450,
+        "y": 2200,
+        "wires": []
+    },
+    {
+        "id": "a018d1a4b551800c",
+        "type": "ui_switch",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "enable TP",
+        "tooltip": "",
+        "group": "a2f53da8.9db8d",
+        "order": 11,
+        "width": 7,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "enableTP",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 230,
+        "y": 4180,
+        "wires": [
+            [
+                "1940a363e168984e"
+            ]
+        ]
+    },
+    {
+        "id": "1940a363e168984e",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/tp\";\nmsg.payload = {\n    value: msg.payload\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 4180,
+        "wires": [
+            [
+                "7fc6d797.8c0958"
+            ]
+        ]
+    },
+    {
+        "id": "aa4358170264601e",
+        "type": "ui_switch",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "enable PH",
+        "tooltip": "",
+        "group": "a2f53da8.9db8d",
+        "order": 14,
+        "width": 7,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "PH",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 230,
+        "y": 4220,
+        "wires": [
+            [
+                "32669e37d8639992"
+            ]
+        ]
+    },
+    {
+        "id": "32669e37d8639992",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/phase\";\nmsg.payload = {\n    value: msg.payload\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 4220,
+        "wires": [
+            [
+                "7fc6d797.8c0958"
+            ]
+        ]
+    },
+    {
+        "id": "85f485ad46a79cc3",
+        "type": "ui_dropdown",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "interlock",
+        "tooltip": "",
+        "place": "interlock",
+        "group": "a2f53da8.9db8d",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "off",
+                "value": "off",
+                "type": "str"
+            },
+            {
+                "label": "gnd",
+                "value": "gnd",
+                "type": "str"
+            },
+            {
+                "label": "hiz",
+                "value": "hiz",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 220,
+        "y": 4260,
+        "wires": [
+            [
+                "ee938337ef318bb1"
+            ]
+        ]
+    },
+    {
+        "id": "ee938337ef318bb1",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/interlock\";\nmsg.payload = {\n    value: msg.payload\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 4260,
+        "wires": [
+            [
+                "7fc6d797.8c0958"
+            ]
+        ]
+    },
+    {
+        "id": "4d5cd4e3cbe0529e",
+        "type": "ui_switch",
+        "z": "20388b4d.513684",
+        "name": "",
+        "label": "enable PM",
+        "tooltip": "",
+        "group": "a2f53da8.9db8d",
+        "order": 13,
+        "width": 7,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "pm",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 230,
+        "y": 4140,
+        "wires": [
+            [
+                "ee883324ad03f2a2"
+            ]
+        ]
+    },
+    {
+        "id": "ee883324ad03f2a2",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/pm\";\nmsg.payload = {\n    value: msg.payload\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 4140,
+        "wires": [
+            [
+                "7fc6d797.8c0958"
+            ]
+        ]
+    },
+    {
+        "id": "dce35c862cc1d39c",
+        "type": "ui_button",
+        "z": "20388b4d.513684",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 28,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "sleep now",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "sleep",
+        "topicType": "str",
+        "x": 220,
+        "y": 4300,
+        "wires": [
+            [
+                "c7153ac9bc4bb1f9"
+            ]
+        ]
+    },
+    {
+        "id": "c7153ac9bc4bb1f9",
+        "type": "function",
+        "z": "20388b4d.513684",
+        "name": "",
+        "func": "var sensorId = flow.get(\"selectedEsp\");\nmsg.topic = \"ws/\"+sensorId+\"/rpi1/sleepNow\";\nmsg.payload = {};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 4300,
+        "wires": [
+            [
+                "7fc6d797.8c0958"
+            ]
+        ]
+    },
+    {
+        "id": "b51d75bae02d200b",
+        "type": "inject",
+        "z": "20388b4d.513684",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "30",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 230,
+        "y": 4520,
+        "wires": [
+            [
+                "2f0edc2af84f742a"
+            ]
+        ]
+    },
+    {
+        "id": "2f0edc2af84f742a",
+        "type": "exec",
+        "z": "20388b4d.513684",
+        "command": "/data/tree -H '.' -L 1 --noreport --charset utf-8 -P \"*.csv\" -o /data/csv/index.html  /data/csv/",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "tree > index.html",
+        "x": 420,
+        "y": 4520,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "deb220d570a97b7f",
+        "type": "ui_gauge",
+        "z": "20388b4d.513684",
+        "name": "gaugeImpI",
+        "group": "34efbe45.60c2d2",
+        "order": 6,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "ImpI",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "-1000",
+        "max": "1000",
+        "colors": [
+            "#cc4499",
+            "#cc4499",
+            "#cc4499"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 710,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "e9085ee1797b0421",
+        "type": "ui_gauge",
+        "z": "20388b4d.513684",
+        "name": "gaugeImpC",
+        "group": "34efbe45.60c2d2",
+        "order": 6,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "ImpC",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "-1000",
+        "max": "1000",
+        "colors": [
+            "#cc4499",
+            "#cc4499",
+            "#cc4499"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 710,
+        "y": 2320,
+        "wires": []
+    },
+    {
+        "id": "f117c5f084a95034",
+        "type": "ui_template",
+        "z": "20388b4d.513684",
+        "group": "a2f53da8.9db8d",
+        "name": "iir_params",
+        "order": 27,
+        "width": 0,
+        "height": 0,
+        "format": "<!DOCTYPE html>\n<html>\n<style>\n.filterParsA {\n /*width: 100%;*/\n font-weight: normal;\n background-color: #e0c0e0;\n}\n.filterParsB {\n /*width: 100%;*/\n font-weight: normal;\n background-color: #e0e0c0;\n}\n.filterParsC {\n /*width: 100%;*/\n font-weight: normal;\n background-color: #e0c0c0;\n}\n\n</style>\n<body>\n<p id=\"msg\"> {{msg.payload}} </p>\n<a href=\"https://www.earlevel.com/main/2021/09/02/biquad-calculator-v3/\" target=\"_blank\"><b>get/copy IIR bi-quad params</b></a>\n<div class=\"filterParsA\">\n    <label for=\"par_a1\">a1:</label>\n    <input type=\"text\" id=\"par_a1\" name=\"par_a1\">\n</div>\n<div class=\"filterParsA\">\n    <label for=\"par_a2\">a2:</label>\n    <input type=\"text\" id=\"par_a2\" name=\"par_a2\">\n</div>\n<div class=\"filterParsB\">\n    <label for=\"par_b0\">b0:</label>\n    <input type=\"text\" id=\"par_b0\" name=\"par_b0\">\n</div>\n<div class=\"filterParsB\">\n    <label for=\"par_b1\">b1:</label>\n    <input type=\"text\" id=\"par_b1\" name=\"par_b1\">\n</div>\n<div class=\"filterParsB\">\n    <label for=\"par_b2\">b2:</label>\n    <input type=\"text\" id=\"par_b2\" name=\"par_b2\">\n</div>\n<div class=\"filterParsC\">\n    <label for=\"par_ca\">ca:</label>\n    <input type=\"text\" id=\"par_ca\" name=\"par_ca\">\n</div>\n<div class=\"filterParsC\">\n    <label for=\"par_ck\">ck:</label>\n    <input type=\"text\" id=\"par_ck\" name=\"par_ck\">\n</div>\n<br>\n<!--<input type=\"button\" id=\"btnOk\" value=\"Send\" name=\"btnOk\" ng-click=\"clickOk()\"><br><br>-->\n<md-button ng-click=\"clickOk()\" id=\"btnOk\">Confirm filter params</md-button>\n<!--<md-button ng-click=\"send({payload: 'Hello World'})\" id=\"btnHello\">Send hello</md-button>-->\n<script>\n// The self-executing anonymous function is a special function which is invoked right after it is defined. There is no need to call this function anywhere in the script. This type of function has no name and hence it is called an anonymous function.\n// Syntax is like this: ((){})();\n// semicolon if for this: https://stackoverflow.com/questions/46529352/why-do-i-have-to-put-a-semicolon-before-a-self-executing-anonymous-function\n\n    ;(function(scope) {\n        // $watch fires each time the node is triggered in the flow\n        scope.$watch('msg', function(msg, oldmsg) {\n                var pars = msg.payload.split('\"').join('').split(\" \");\n                document.getElementById(\"par_a1\").value = pars[0] || 0;\n                document.getElementById(\"par_a2\").value = pars[1] || 0;\n                document.getElementById(\"par_b0\").value = pars[2] || 0;\n                document.getElementById(\"par_b1\").value = pars[3] || 0;\n                document.getElementById(\"par_b2\").value = pars[4] || 0;\n                document.getElementById(\"par_ca\").value = pars[5] || 0;\n                document.getElementById(\"par_ck\").value = pars[6] || 0;\n                // scope.send({topic:\"aaa\", payload:\"asadad\"});\n            });\n            \n        scope.clickOk = function() {\n            // document.getElementById(\"par_a1\").value = 1;\n            // msg.payload = \"kurwa puste\";\n            // document.getElementById(\"par_a1\").value = 2;\n            // msg.topic = \"iir\";\n            // document.getElementById(\"par_a1\").value = 3;\n            // scope.send(this.msg);\n            // document.getElementById(\"par_a1\").value = 4;\n            var a1 = document.getElementById(\"par_a1\").value || 0;\n            var a2 = document.getElementById(\"par_a2\").value || 0;\n            var b0 = document.getElementById(\"par_b0\").value || 0;\n            var b1 = document.getElementById(\"par_b1\").value || 0;\n            var b2 = document.getElementById(\"par_b2\").value || 0;\n            var ca = document.getElementById(\"par_ca\").value || 0;\n            var ck = document.getElementById(\"par_ck\").value || 0;\n            msg.payload = a1+\" \"+a2+\" \"+b0+\" \"+b1+\" \"+b2+\" \"+ca+\" \"+ck;\n            msg.topic = \"iir\";\n            scope.send(msg);\n        };\n    })(scope);\n</script>\n\n</body>",
+        "storeOutMessages": false,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 870,
+        "y": 460,
+        "wires": [
+            [
+                "c71e76e1fabad71e",
+                "3d7e1663.d7af5a"
+            ]
+        ]
+    },
+    {
+        "id": "c71e76e1fabad71e",
+        "type": "change",
+        "z": "20388b4d.513684",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "iir",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b6200146.fc9f1",
+        "type": "influxdb out",
+        "z": "7d036575.d8fbdc",
+        "influxdb": "6823957822053fee",
+        "name": "",
+        "measurement": "test",
+        "precision": "ms",
+        "retentionPolicy": "",
+        "database": "",
+        "retentionPolicyV18Flux": "",
+        "org": "",
+        "bucket": "",
+        "x": 580,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "6dd01690.1e0258",
+        "type": "function",
+        "z": "7d036575.d8fbdc",
+        "name": "",
+        "func": "msg.payload = {\n    temperature : Math.random()*10+20,\n    pressure : Math.random()*100+1000,\n    humidity : Math.random()*100,\n    acmm : Math.random()*255,\n    battery : Math.random()*100,\n    state : 'fine',\n    time : Date.now()\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 100,
+        "wires": [
+            [
+                "b6200146.fc9f1",
+                "aace44ec.12a3d8"
+            ]
+        ]
+    },
+    {
+        "id": "b2c084d2.af3d68",
+        "type": "inject",
+        "z": "7d036575.d8fbdc",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 100,
+        "wires": [
+            [
+                "6dd01690.1e0258"
+            ]
+        ]
+    },
+    {
+        "id": "aace44ec.12a3d8",
+        "type": "debug",
+        "z": "7d036575.d8fbdc",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 530,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "28d70662.8abdda",
+        "type": "link in",
+        "z": "7d036575.d8fbdc",
+        "name": "measurementsIn",
+        "links": [
+            "b9e7dc64.15bae"
+        ],
+        "x": 155,
+        "y": 180,
+        "wires": [
+            [
+                "aace44ec.12a3d8",
+                "b6200146.fc9f1"
+            ]
+        ]
+    },
+    {
+        "id": "2051dca3f6cd134d",
+        "type": "exec",
+        "z": "3c53f8715736575f",
+        "command": "sudo cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "cpuinfo_cur_freq",
+        "x": 470,
+        "y": 220,
+        "wires": [
+            [
+                "56cd9e39d67ee313"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "ee1cce2adb1a7971",
+        "type": "ui_gauge",
+        "z": "3c53f8715736575f",
+        "name": "gaugeCPU",
+        "group": "a2f53da8.9db8d",
+        "order": 38,
+        "width": 2,
+        "height": 2,
+        "gtype": "gage",
+        "title": "R-CPU",
+        "label": "MHz",
+        "format": "{{value}}",
+        "min": "300",
+        "max": "1500",
+        "colors": [
+            "#00ff1e",
+            "#c9b824",
+            "#ff3900"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 850,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "abbc8fa0ec23372d",
+        "type": "inject",
+        "z": "3c53f8715736575f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "2051dca3f6cd134d"
+            ]
+        ]
+    },
+    {
+        "id": "56cd9e39d67ee313",
+        "type": "function",
+        "z": "3c53f8715736575f",
+        "name": "",
+        "func": "let cpu_load = msg.payload / 1000;\nif (cpu_load != flow.get('cpu_load')){\n    flow.set('cpu_load', cpu_load);\n    msg.payload = cpu_load;\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 200,
+        "wires": [
+            [
+                "ee1cce2adb1a7971"
+            ]
+        ]
+    },
+    {
+        "id": "948d15ed.a58878",
+        "type": "function",
+        "z": "9451765d69dda348",
+        "name": "heatGenMatrix",
+        "func": "if (!(msg.payload.hasOwnProperty('ph') && msg.payload.hasOwnProperty('phf'))){\n    return;\n}\n\nconst freqs = 11;\nconst bins = 30;\n// const timebin = 0.5*60*1000;\n\nlet heat = context.get('heat');\nif (!heat || heat.length != freqs*bins){\n    heat = [];\n    for (i=0; i<freqs*bins; i++){\n        heat[i]=0;\n    }\n}\n\n// let ts = context.get('ts') || 0;\n\n// if (Date.now() - ts > timebin){\n//     context.set('ts', Date.now());\n//     for (i=0; i<freqs; i++){\n//         heat.pop();\n//         heat.unshift(0);\n//     }\n// }    \n\nif (msg.payload.shift == 1){\n    for (i=0; i<freqs; i++){\n        heat.pop();\n        heat.unshift(0);\n    }\n}    \n\nheat[msg.payload.phf] = msg.payload.ph;\ncontext.set('heat', heat);\n\nmsg.payload = heat;\nmsg.rows = freqs;\nmsg.columns = bins;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 360,
+        "wires": [
+            [
+                "9de588c1b8ac89ca"
+            ]
+        ]
+    },
+    {
+        "id": "cac56ba6.c46e18",
+        "type": "inject",
+        "z": "9451765d69dda348",
+        "name": "Show heatmap",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 460,
+        "wires": [
+            [
+                "4a0baf2501f5f98d"
+            ]
+        ]
+    },
+    {
+        "id": "4a0baf2501f5f98d",
+        "type": "function",
+        "z": "9451765d69dda348",
+        "name": "simHeatData",
+        "func": "msg.payload = {};\nmsg.payload.ph = Math.floor(Math.random()*1000);\n\nlet phf = context.get('phf') || 10000;\n\nif (phf >=20000)\n    phf = 10000\nelse\n    phf = phf+1000;\n    \nmsg.payload.phf = phf;\n\ncontext.set(\"phf\", phf);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 460,
+        "wires": [
+            [
+                "557ba195a94f4a38",
+                "9c844ce6a1043355"
+            ]
+        ]
+    },
+    {
+        "id": "9c844ce6a1043355",
+        "type": "debug",
+        "z": "9451765d69dda348",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "9de588c1b8ac89ca",
+        "type": "ui_heat_map",
+        "z": "9451765d69dda348",
+        "group": "2e442781.0c5608",
+        "order": 1,
+        "width": 30,
+        "height": 10,
+        "name": "",
+        "rows": "20",
+        "columns": "10",
+        "minMax": false,
+        "minimumValue": 0,
+        "maximumValue": "1050",
+        "backgroundType": "none",
+        "backgroundColor": "#ffffff",
+        "image": "never",
+        "radius": 40,
+        "opacity": 0.6,
+        "blur": 0.85,
+        "showValues": false,
+        "gridType": "vals",
+        "valuesDecimals": 0,
+        "showLegend": false,
+        "legendType": "none",
+        "legendDecimals": 0,
+        "legendCount": 2,
+        "x": 1000,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a2d3fee570e24e8",
+        "type": "link in",
+        "z": "9451765d69dda348",
+        "name": "heatin",
+        "links": [
+            "827a1db148bba893"
+        ],
+        "x": 145,
+        "y": 360,
+        "wires": [
+            [
+                "9c844ce6a1043355",
+                "16b2c0b576fb4559"
+            ]
+        ]
+    },
+    {
+        "id": "557ba195a94f4a38",
+        "type": "function",
+        "z": "9451765d69dda348",
+        "name": "heatMapFreqs",
+        "func": "freqs = context.get('freqs') || {};\n\nphf = parseInt(msg.payload.phf); //e.g. 13000\nif (isNaN(phf))\n    return;\n// if (freqs.hasOwnProperty(phf))\nfreqs[phf] = msg.payload.ph;   //e.g. freqs['13000'] = ph\n    \nconst keys = Object.keys(freqs).sort(function(a,b){return a-b;});    //e.g. 13000, 14000, ...., 23000\n\nfor (let i = 0; i < keys.length; i++) {\n  if (keys[i] == phf){\n    phf = i;\n    break;\n  }\n}\ncontext.set('freqs', freqs);\n\nlastPhf = context.get('lastPhf');\n\nif ((phf==0) && (lastPhf!=0) && (typeof(lastPhf)!=\"undefined\"))\n    msg.payload.shift = 1;\nelse\n    msg.payload.shift = 0;\n    \nmsg.payload.phf = phf;\n\ncontext.set('lastPhf', phf);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 360,
+        "wires": [
+            [
+                "9c844ce6a1043355",
+                "948d15ed.a58878"
+            ]
+        ]
+    },
+    {
+        "id": "16b2c0b576fb4559",
+        "type": "function",
+        "z": "9451765d69dda348",
+        "name": "",
+        "func": "msg.payload = JSON.parse(msg.payload);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 360,
+        "wires": [
+            [
+                "557ba195a94f4a38"
+            ]
+        ]
+    },
+    {
+        "id": "d5d6d790.df5a78",
+        "type": "function",
+        "z": "c3eacee5.bca3e",
+        "name": "Set csv path to read",
+        "func": "//restrict to c:\\temp\\\n// var basePath = \"~/files/\";\n// var filename = msg.req.params.fn;\n\n\n// if(filename.includes(\"..\\\\\")){\n//     msg.payload = \"Illegal file path\";\n//     msg.statusCode = 405;//not allowed\n//     return [null, msg];//fire output 2\n// } else if(filename.includes(\"../\")){\n//     msg.payload = \"Illegal file path\";\n//     msg.statusCode = 405;//not allowed\n//     return [null, msg];//fire output 2\n// } \n// //TODO: add more checks\n\n// msg.filename = basePath + filename;\n// return [msg, null];//fire output 1\nif (!global.get(\"csvFileName\")){\n    msg.payload = \"Illegal file path or file does not exist\";\n    msg.statusCode = 405;//not allowed\n    return [null, msg];//fire output 2\n}\nlet filename = global.get(\"csvFileName\");\n// msg.req.params.fn = filename;\n// msg.req.url = \"files/abcd\";\n// msg.req.originalUrl = \"files/abcd\";\n// msg.req._parsedOriginalUrl.pathname = \"files/abcd\";\n// msg.req._parsedOriginalUrl.path = \"files/abcd\";\n// msg.req._parsedOriginalUrl.href = \"files/abcd\";\n// msg.req._parsedOriginalUrl._raw = \"files/abcd\";\n\n// msg.req._parsedUrl.pathname = \"files/abcd\";\n// msg.req._parsedUrl.path = \"files/abcd\";\n// msg.req._parsedUrl.href = \"files/abcd\";\n// msg.req._parsedUrl._raw = \"files/abcd\";\n\nmsg.filename = filename;\nreturn [msg, null];//fire output 1\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 60,
+        "wires": [
+            [
+                "6f601f2e.0af29",
+                "8c770d5b.cf209"
+            ],
+            [
+                "1fd2e09e.55f0ff"
+            ]
+        ]
+    },
+    {
+        "id": "2c0b9d05.3f3062",
+        "type": "http response",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1570,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "6f601f2e.0af29",
+        "type": "file in",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "filename": "",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1235,
+        "y": 60,
+        "wires": [
+            [
+                "2c0b9d05.3f3062",
+                "8c770d5b.cf209"
+            ]
+        ]
+    },
+    {
+        "id": "3e0836fb.8922ba",
+        "type": "catch",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 865,
+        "y": 160,
+        "wires": [
+            [
+                "1fd2e09e.55f0ff"
+            ]
+        ]
+    },
+    {
+        "id": "1fd2e09e.55f0ff",
+        "type": "function",
+        "z": "c3eacee5.bca3e",
+        "name": "Set 404",
+        "func": "msg.payload = msg.error;\nmsg.statusCode = 404;//resource not found\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1245,
+        "y": 160,
+        "wires": [
+            [
+                "2c0b9d05.3f3062"
+            ]
+        ]
+    },
+    {
+        "id": "8c770d5b.cf209",
+        "type": "debug",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1830,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b24b2244.2ac1c",
+        "type": "comment",
+        "z": "c3eacee5.bca3e",
+        "name": "here we listen, i.e. catch request from notification box",
+        "info": "",
+        "x": 690,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "9fae1343.8498c",
+        "type": "http in",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "url": "ui/data/csv/:fn",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 730,
+        "y": 60,
+        "wires": [
+            [
+                "d5d6d790.df5a78",
+                "8c770d5b.cf209"
+            ]
+        ]
+    },
+    {
+        "id": "cdb935c0.ea6ae8",
+        "type": "inject",
+        "z": "c3eacee5.bca3e",
+        "name": "test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 800,
+        "y": 400,
+        "wires": [
+            [
+                "310b6a3.0c61796"
+            ]
+        ]
+    },
+    {
+        "id": "310b6a3.0c61796",
+        "type": "function",
+        "z": "c3eacee5.bca3e",
+        "name": "testf",
+        "func": "global.set(\"csvFileName\", \"/data/csv/somefile1.csv\");\n\n",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e9c4544e.f19c98",
+        "type": "ui_button",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "group": "a2f53da8.9db8d",
+        "order": 8,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "download",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "",
+        "x": 840,
+        "y": 540,
+        "wires": [
+            [
+                "8e3aeff7.bcafd"
+            ]
+        ]
+    },
+    {
+        "id": "5d053b70.465464",
+        "type": "function",
+        "z": "c3eacee5.bca3e",
+        "name": "Format Payload for notification node",
+        "func": "msg.payload = '<!DOCTYPE html><html><head><title>Redirect url to node-red forum</title></head><body>'+msg.notification_to_user+'<script>var url= \"'+msg.url+'\"; window.location = url; </script></body></html>';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1390,
+        "y": 540,
+        "wires": [
+            [
+                "289a9b39.8ec234"
+            ]
+        ]
+    },
+    {
+        "id": "289a9b39.8ec234",
+        "type": "ui_toast",
+        "z": "c3eacee5.bca3e",
+        "position": "top right",
+        "displayTime": "1",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": true,
+        "topic": "",
+        "name": "",
+        "x": 1660,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "8e3aeff7.bcafd",
+        "type": "function",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "func": "//url must start without '/'', it is relative to current url \n\nmsg.filename = global.get(\"csvFileName\");\nmsg.filename = msg.filename.split('/').pop();\n\nmsg.url = \"data/csv/\" + msg.filename;\nmsg.notification_to_user = \"redirecting...\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 540,
+        "wires": [
+            [
+                "8e2e4e51.8ea58",
+                "8c770d5b.cf209"
+            ]
+        ]
+    },
+    {
+        "id": "8e2e4e51.8ea58",
+        "type": "switch",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "property": "filename",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1150,
+        "y": 540,
+        "wires": [
+            [
+                "5d053b70.465464"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8c7191e1f795baf4",
+        "type": "comment",
+        "z": "c3eacee5.bca3e",
+        "name": "this box pops out only to current session user, so it will not redirect all users!!!",
+        "info": "",
+        "x": 1670,
+        "y": 600,
+        "wires": []
+    }
+]

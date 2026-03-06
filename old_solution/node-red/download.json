@@ -1,0 +1,318 @@
+[
+    {
+        "id": "c3eacee5.bca3e",
+        "type": "tab",
+        "label": "Download",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d5d6d790.df5a78",
+        "type": "function",
+        "z": "c3eacee5.bca3e",
+        "name": "Set csv path to read",
+        "func": "//restrict to c:\\temp\\\n// var basePath = \"~/files/\";\n// var filename = msg.req.params.fn;\n\n\n// if(filename.includes(\"..\\\\\")){\n//     msg.payload = \"Illegal file path\";\n//     msg.statusCode = 405;//not allowed\n//     return [null, msg];//fire output 2\n// } else if(filename.includes(\"../\")){\n//     msg.payload = \"Illegal file path\";\n//     msg.statusCode = 405;//not allowed\n//     return [null, msg];//fire output 2\n// } \n// //TODO: add more checks\n\n// msg.filename = basePath + filename;\n// return [msg, null];//fire output 1\nif (!global.get(\"csvFileName\")){\n    msg.payload = \"Illegal file path or file does not exist\";\n    msg.statusCode = 405;//not allowed\n    return [null, msg];//fire output 2\n}\nlet filename = global.get(\"csvFileName\");\n// msg.req.params.fn = filename;\n// msg.req.url = \"files/abcd\";\n// msg.req.originalUrl = \"files/abcd\";\n// msg.req._parsedOriginalUrl.pathname = \"files/abcd\";\n// msg.req._parsedOriginalUrl.path = \"files/abcd\";\n// msg.req._parsedOriginalUrl.href = \"files/abcd\";\n// msg.req._parsedOriginalUrl._raw = \"files/abcd\";\n\n// msg.req._parsedUrl.pathname = \"files/abcd\";\n// msg.req._parsedUrl.path = \"files/abcd\";\n// msg.req._parsedUrl.href = \"files/abcd\";\n// msg.req._parsedUrl._raw = \"files/abcd\";\n\nmsg.filename = filename;\nreturn [msg, null];//fire output 1\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 60,
+        "wires": [
+            [
+                "6f601f2e.0af29",
+                "8c770d5b.cf209"
+            ],
+            [
+                "1fd2e09e.55f0ff"
+            ]
+        ]
+    },
+    {
+        "id": "2c0b9d05.3f3062",
+        "type": "http response",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1570,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "6f601f2e.0af29",
+        "type": "file in",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "filename": "",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1235,
+        "y": 60,
+        "wires": [
+            [
+                "2c0b9d05.3f3062",
+                "8c770d5b.cf209"
+            ]
+        ]
+    },
+    {
+        "id": "3e0836fb.8922ba",
+        "type": "catch",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 865,
+        "y": 160,
+        "wires": [
+            [
+                "1fd2e09e.55f0ff"
+            ]
+        ]
+    },
+    {
+        "id": "1fd2e09e.55f0ff",
+        "type": "function",
+        "z": "c3eacee5.bca3e",
+        "name": "Set 404",
+        "func": "msg.payload = msg.error;\nmsg.statusCode = 404;//resource not found\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1245,
+        "y": 160,
+        "wires": [
+            [
+                "2c0b9d05.3f3062"
+            ]
+        ]
+    },
+    {
+        "id": "8c770d5b.cf209",
+        "type": "debug",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1830,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b24b2244.2ac1c",
+        "type": "comment",
+        "z": "c3eacee5.bca3e",
+        "name": "here we listen, i.e. catch request from notification box",
+        "info": "",
+        "x": 690,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "9fae1343.8498c",
+        "type": "http in",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "url": "ui/data/csv/:fn",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 730,
+        "y": 60,
+        "wires": [
+            [
+                "d5d6d790.df5a78",
+                "8c770d5b.cf209"
+            ]
+        ]
+    },
+    {
+        "id": "cdb935c0.ea6ae8",
+        "type": "inject",
+        "z": "c3eacee5.bca3e",
+        "name": "test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 800,
+        "y": 400,
+        "wires": [
+            [
+                "310b6a3.0c61796"
+            ]
+        ]
+    },
+    {
+        "id": "310b6a3.0c61796",
+        "type": "function",
+        "z": "c3eacee5.bca3e",
+        "name": "testf",
+        "func": "global.set(\"csvFileName\", \"/data/csv/somefile1.csv\");\n\n",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e9c4544e.f19c98",
+        "type": "ui_button",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "group": "6971f953.ace0c8",
+        "order": 8,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "download",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "",
+        "x": 840,
+        "y": 540,
+        "wires": [
+            [
+                "8e3aeff7.bcafd"
+            ]
+        ]
+    },
+    {
+        "id": "5d053b70.465464",
+        "type": "function",
+        "z": "c3eacee5.bca3e",
+        "name": "Format Payload for notification node",
+        "func": "msg.payload = '<!DOCTYPE html><html><head><title>Redirect url to node-red forum</title></head><body>'+msg.notification_to_user+'<script>var url= \"'+msg.url+'\"; window.location = url; </script></body></html>';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1390,
+        "y": 540,
+        "wires": [
+            [
+                "289a9b39.8ec234"
+            ]
+        ]
+    },
+    {
+        "id": "289a9b39.8ec234",
+        "type": "ui_toast",
+        "z": "c3eacee5.bca3e",
+        "position": "top right",
+        "displayTime": "1",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": true,
+        "topic": "",
+        "name": "",
+        "x": 1660,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "8e3aeff7.bcafd",
+        "type": "function",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "func": "//url must start without '/'', it is relative to current url \n\nmsg.filename = global.get(\"csvFileName\");\nmsg.filename = msg.filename.split('/').pop();\n\nmsg.url = \"data/csv/\" + msg.filename;\nmsg.notification_to_user = \"redirecting...\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 540,
+        "wires": [
+            [
+                "8e2e4e51.8ea58",
+                "8c770d5b.cf209"
+            ]
+        ]
+    },
+    {
+        "id": "8e2e4e51.8ea58",
+        "type": "switch",
+        "z": "c3eacee5.bca3e",
+        "name": "",
+        "property": "filename",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1150,
+        "y": 540,
+        "wires": [
+            [
+                "5d053b70.465464"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8c7191e1f795baf4",
+        "type": "comment",
+        "z": "c3eacee5.bca3e",
+        "name": "this box pops out only to current session user, so it will not redirect all users!!!",
+        "info": "",
+        "x": 1670,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "6971f953.ace0c8",
+        "type": "ui_group",
+        "name": "Sensor Settings",
+        "tab": "e0e21613.bfdea8",
+        "order": 1,
+        "disp": true,
+        "width": "7",
+        "collapse": false
+    },
+    {
+        "id": "e0e21613.bfdea8",
+        "type": "ui_tab",
+        "name": "SmartSensor Online",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
