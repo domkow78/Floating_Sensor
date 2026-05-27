@@ -1,123 +1,123 @@
 # Floating Sensor
 
-Zdalny czujnik środowiskowy przeznaczony do pracy w bębnie suszarki przemysłowej lub stacjonarnie w dowolnej lokalizacji.
+A remote environmental sensor designed to operate inside an industrial dryer drum or stationary at any location.
 
-## 📋 Założenia projektu
+## 📋 Project Overview
 
-### Opis ogólny
-**Floating Sensor** to autonomiczny układ elektroniczny wyposażony w zestaw czujników środowiskowych i ruchowych, komunikujący się bezprzewodowo z urządzeniem nadrzędnym (Raspberry Pi) poprzez protokół MQTT.
+### General Description
+**Floating Sensor** is an autonomous electronic device equipped with a set of environmental and motion sensors, communicating wirelessly with a host device (Raspberry Pi) via the MQTT protocol.
 
-### Tryby pracy
-- **Mobilny** – wewnątrz bębna suszarki przemysłowej (rotujący)
-- **Stacjonarny** – zamontowany w dowolnym miejscu
+### Operating Modes
+- **Mobile** – inside an industrial dryer drum (rotating)
+- **Stationary** – mounted at any fixed location
 
-## 🔧 Architektura systemu
+## 🔧 System Architecture
 
 ```
 ┌─────────────────────┐         WiFi/MQTT        ┌─────────────────────┐
 │   Floating Sensor   │ ◄─────────────────────► │    Raspberry Pi     │
-│       (ESP32)       │                          │   (Hub centralny)   │
+│       (ESP32)       │                          │   (Central Hub)     │
 └─────────────────────┘                          └─────────────────────┘
                                                            │
                                                            ▼
                                                  ┌─────────────────────┐
-                                                 │   Baza danych       │
+                                                 │     Database        │
                                                  │ (InfluxDB/PostgreSQL)│
                                                  └─────────────────────┘
                                                            │
                                                            ▼
                                                  ┌─────────────────────┐
-                                                 │   Wizualizacja      │
+                                                 │   Visualization     │
                                                  │ (Grafana/Streamlit) │
                                                  └─────────────────────┘
 ```
 
 ## 🎛️ Hardware - Floating Sensor
 
-### Mikrokontroler
-- **ESP32** – główny układ sterujący z wbudowanym WiFi
+### Microcontroller
+- **ESP32** – main controller with built-in WiFi
 
-### Czujniki środowiskowe
-| Czujnik | Parametr | Uwagi |
-|---------|----------|-------|
-| **BME280** | Temperatura, Ciśnienie, Wilgotność względna | I2C, adres 0x76/0x77 |
-| **SHT3x** | Temperatura, Wilgotność | Alternatywny czujnik |
+### Environmental Sensors
+| Sensor | Parameter | Notes |
+|--------|-----------|-------|
+| **BME280** | Temperature, Pressure, Relative Humidity | I2C, address 0x76/0x77 |
+| **SHT3x** | Temperature, Humidity | Alternative sensor |
 
-### Czujniki ruchu
-| Czujnik | Funkcja |
-|---------|---------|
-| **Żyroskop** | Pomiar prędkości kątowej (obroty bębna) |
-| **Akcelerometr** | Pomiar przyspieszenia liniowego, detekcja ruchu |
+### Motion Sensors
+| Sensor | Function |
+|--------|----------|
+| **Gyroscope** | Angular velocity measurement (drum rotation) |
+| **Accelerometer** | Linear acceleration measurement, motion detection |
 
-### Zasilanie
-- Akumulator Li-Ion z układem ładowania MCP73831
-- Układ ochrony baterii DW01A
-- Stabilizator LDO ADP3338 (3.3V)
-- Pomiar napięcia baterii przez dzielnik rezystorowy
+### Power Supply
+- Li-Ion battery with MCP73831 charging circuit
+- DW01A battery protection circuit
+- ADP3338 LDO regulator (3.3V)
+- Battery voltage measurement via resistor divider
 
-### Historia wersji HW
-- **V9.0** – Aktualna wersja, dwustronna PCB
-- **V8.x** – Nowy czujnik ruchu VBS030600, ochrona ESD (SRV05)
-- **V7.x** – Ochrona wejść IC, poprawa stabilności programowania
-- **V6.x** – Nowy dzielnik napięcia baterii, ochrona DW01A
+### HW Version History
+- **V9.0** – Current version, double-sided PCB
+- **V8.x** – New motion sensor VBS030600, ESD protection (SRV05)
+- **V7.x** – IC input protection, improved programming stability
+- **V6.x** – New battery voltage divider, DW01A protection
 
-## 📡 Komunikacja
+## 📡 Communication
 
-### Protokół
-- **MQTT** – lekki protokół publish/subscribe
-- **WiFi** – łączność bezprzewodowa z hub-em
+### Protocol
+- **MQTT** – lightweight publish/subscribe protocol
+- **WiFi** – wireless connectivity to the hub
 
-### Struktura topików MQTT
+### MQTT Topic Structure
 ```
 ws/<target>/<source>/<smallTopic>
 ```
-Przykład: `ws/rpi1/sensorID1/measurements`
+Example: `ws/rpi1/sensorID1/measurements`
 
 ## 🖥️ Backend - Raspberry Pi
 
-### Komponenty
-| Komponent | Funkcja |
-|-----------|---------|
-| **MQTT Broker** | Mosquitto – odbieranie danych z czujników |
-| **Baza danych** | InfluxDB (time-series) lub PostgreSQL |
-| **Wizualizacja** | Grafana / Streamlit |
-| **Monitoring** | Prometheus (opcjonalnie) |
-| **Automatyzacja** | Node-RED (opcjonalnie) |
+### Components
+| Component | Function |
+|-----------|----------|
+| **MQTT Broker** | Mosquitto – receiving data from sensors |
+| **Database** | InfluxDB (time-series) or PostgreSQL |
+| **Visualization** | Grafana / Streamlit |
+| **Monitoring** | Prometheus (optional) |
+| **Automation** | Node-RED (optional) |
 
-### Przepływ danych
-1. Floating Sensor publikuje pomiary przez MQTT
-2. Raspberry Pi (broker MQTT) odbiera dane
-3. Dane zapisywane do InfluxDB/PostgreSQL
-4. Grafana/Streamlit wizualizuje dane w czasie rzeczywistym
+### Data Flow
+1. Floating Sensor publishes measurements via MQTT
+2. Raspberry Pi (MQTT broker) receives data
+3. Data is stored in InfluxDB/PostgreSQL
+4. Grafana/Streamlit visualizes data in real time
 
-## 📁 Struktura projektu
+## 📁 Project Structure
 
 ```
 Floating_Sensor/
-├── old_solution/           # Firmware ESP32 (ESP-IDF)
-│   ├── main/               # Kod główny aplikacji
-│   ├── components/         # Biblioteki (BME280, SHT3x, ESP-DSP)
-│   ├── hardware/           # Dokumentacja sprzętowa
-│   ├── deploySmartSensor/  # Skrypty wdrożeniowe
-│   ├── grafana/            # Dashboardy Grafana
-│   └── node-red/           # Przepływy Node-RED
-├── new_solution/           # Nowa wersja (w rozwoju)
-├── doc/                    # Dokumentacja
-└── src/                    # Źródła dodatkowe
+├── old_solution/           # ESP32 Firmware (ESP-IDF)
+│   ├── main/               # Main application code
+│   ├── components/         # Libraries (BME280, SHT3x, ESP-DSP)
+│   ├── hardware/           # Hardware documentation
+│   ├── deploySmartSensor/  # Deployment scripts
+│   ├── grafana/            # Grafana dashboards
+│   └── node-red/           # Node-RED flows
+├── new_solution/           # New version (in development)
+├── doc/                    # Documentation
+└── src/                    # Additional sources
 ```
 
-## 🚀 Technologie
+## 🚀 Technologies
 
-| Warstwa | Technologia |
-|---------|-------------|
+| Layer | Technology |
+|-------|------------|
 | Firmware | C/C++, ESP-IDF v4.4 |
-| Komunikacja | WiFi, MQTT |
-| Baza danych | InfluxDB / PostgreSQL |
-| Wizualizacja | Grafana / Streamlit |
-| Monitoring | Prometheus (opcja) |
-| Automatyzacja | Node-RED |
-| Hardware | ESP32, BME280, Żyroskop, Akcelerometr |
+| Communication | WiFi, MQTT |
+| Database | InfluxDB / PostgreSQL |
+| Visualization | Grafana / Streamlit |
+| Monitoring | Prometheus (optional) |
+| Automation | Node-RED |
+| Hardware | ESP32, BME280, Gyroscope, Accelerometer |
 
-## 📜 Licencja
+## 📜 License
 
-Kod w repozytorium jest w domenie publicznej (lub na licencji CC0).
+Code in this repository is in the public domain (or licensed under CC0).
