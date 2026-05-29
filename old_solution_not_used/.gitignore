@@ -1,7 +1,0 @@
-*.zip
-/build/*
-!/build/ca_cert.pem
-!/build/ca_key.pem
-!/build/SmartSensorESP.bin
-!/build/lis.bin
-/build/
