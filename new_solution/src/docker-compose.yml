@@ -1,0 +1,59 @@
+services:
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    restart: unless-stopped
+    networks:
+      - sensor_net
+
+  influxdb:
+    image: influxdb:2.7
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: adminpassword
+      DOCKER_INFLUXDB_INIT_ORG: floating_sensor
+      DOCKER_INFLUXDB_INIT_BUCKET: measurements
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: my-super-secret-token
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+    restart: unless-stopped
+    networks:
+      - sensor_net
+
+  app:
+    build: .
+    container_name: floating_sensor_app
+    ports:
+      - "8501:8501"
+    environment:
+      INFLUXDB_TOKEN: my-super-secret-token
+      MQTT_BROKER: mosquitto
+      INFLUXDB_URL: http://influxdb:8086
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+    depends_on:
+      - mosquitto
+      - influxdb
+    restart: unless-stopped
+    networks:
+      - sensor_net
+
+volumes:
+  influxdb_data:
+  mosquitto_data:
+  mosquitto_log:
+
+networks:
+  sensor_net:
+    driver: bridge
