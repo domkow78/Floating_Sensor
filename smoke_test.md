@@ -6,6 +6,61 @@ Ten dokument opisuje szybki test sprawdzający, czy podstawowy przepływ aplikac
 3. wiadomość MQTT dociera do aplikacji,
 4. dane trafiają do InfluxDB.
 
+## Przygotowanie — Raspberry Pi
+
+### 0.1) Zainstaluj Docker i Docker Compose
+
+Łącz się po SSH na Raspberry Pi:
+
+```bash
+ssh pi@<IP_RASPBERRY>
+```
+
+Zainstaluj Docker:
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+Dodaj użytkownika `pi` do grupy `docker` (bez `sudo` przy uruchamianiu):
+
+```bash
+sudo usermod -aG docker pi
+```
+
+Zrestartuj, aby zmiana weszła w życie:
+
+```bash
+sudo reboot
+```
+
+Sprawdź instalację:
+
+```bash
+docker --version
+docker compose --version
+```
+
+### 0.2) Sklonuj repo
+
+Na Raspberry Pi przejdź do wybranego katalogu (np. `~/projects/`):
+
+```bash
+mkdir -p ~/projects
+cd ~/projects
+git clone https://github.com/<OWNER>/Floating_Sensor.git
+cd Floating_Sensor
+```
+
+Albo jeśli masz repo lokalnie, skopiuj je na Raspberry (z laptopa):
+
+```powershell
+scp -r "c:\Programs\WorkDirDev\## Git Hub\Floating_Sensor" pi@<IP_RASPBERRY>:~/projects/
+```
+
+---
+
 ## 1) Uruchom stack
 
 Przejdź do katalogu:
@@ -14,9 +69,21 @@ Przejdź do katalogu:
 cd "c:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution\src"
 ```
 
+Albo na Raspberry Pi (jeśli sklonowałeś tam repo):
+
+```bash
+cd ~/projects/Floating_Sensor/new_solution/src
+```
+
 Uruchom kontenery:
 
 ```powershell
+docker compose up -d --build
+```
+
+Albo na Raspberry Pi:
+
+```bash
 docker compose up -d --build
 ```
 
@@ -28,6 +95,12 @@ docker compose up -d --build
 ## 2) Sprawdź, czy kontenery działają
 
 ```powershell
+docker compose ps
+```
+
+Albo na Raspberry Pi:
+
+```bash
 docker compose ps
 ```
 
