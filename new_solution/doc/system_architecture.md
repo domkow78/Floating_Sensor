@@ -55,12 +55,23 @@ Zastosowania:
 Funkcje:
 - Nabijanie LiIon/LiPo akumulatorów
 - Maksymalny prąd ładowania: 3 A
-- Konwersja USB-C → zasilanie logiczne
+- Wejście VBUS z USB-C na pin VBUS układu BQ25616J
+- Generowanie linii VSYS (zasilanie pośrednie)
 - Monitoring napięcia akumulatora
 - Ochrona przed przełądowaniem i rozładowaniem
 
 Interfejs: I2C (adres domyślny 0x6B)
 Pobór mocy: ~15 mA (standby)
+```
+
+#### **Stabilizator 3.3V: TLV75733**
+```
+Funkcje:
+- Stabilizacja napięcia 3.3V dla logiki i czujników
+- Wejście z linii VSYS
+
+Wejście: VSYS
+Wyjście: 3.3V (ESP32-S3, BME688, LSM6DSV)
 ```
 
 #### **Źródło Energii: LiIon 3.7V**
@@ -69,7 +80,8 @@ Typ: LiIon Lithium-Ion (1S1P)
 Napięcie nominalne: 3.7V
 Zakres: 3.0V (rozładowany) - 4.2V (naładowany)
 Funkcje:
-- Bezpośrednie zasilanie ESP32-S3 (przez BQ25616J)
+- Zasilanie BQ25616J (VBAT) i szyny VSYS
+- 3.3V generowane przez TLV75733 z VSYS
 - Monitoring napięcia dla danych diagnostycznych
 - Typowy czas pracy: 24-48h (w zależności od konfiguracji)
 ```
@@ -78,6 +90,7 @@ Funkcje:
 ```
 Funkcje:
 - Ładowanie akumulatora
+- Linia VBUS (5V) podłączona do wejścia VBUS układu BQ25616J
 - Serial/Debug: UART0 (RX/TX)
 - ESP32-S3 posiada wbudowany USB-JTAG kontroler
 - Flashing firmware OTA
@@ -118,7 +131,7 @@ ESP32-S3 SPI Pins (Standard VSPI):
 ### **Schemat Zasilania**
 
 ```
-           USB-C
+   USB-C (VBUS)
              │
              ▼
       ┌─────────────┐
@@ -126,11 +139,23 @@ ESP32-S3 SPI Pins (Standard VSPI):
       │ (Charger)   │
       └──────┬──────┘
              │
-             ├─────────┬─────────┬─────────┐
-             │         │         │         │
-        ┌────▼──┐     ▼     ▼      ▼      ▼
-        │LiIon  │   3.3V  3.3V  3.3V  3.3V
-        │3.7V   │(ESP32)(BME688)(LSM6DSV)(inne)
+   ┌───────┴───────┐
+   │   VSYS        │
+   └───────┬───────┘
+      │
+      ┌────▼────┐
+      │TLV75733 │
+      │  (LDO)  │
+      └────┬────┘
+      │ 3.3V
+      ├─────────┬─────────┬─────────┐
+      │         │         │         │
+          ▼         ▼         ▼         ▼
+       (ESP32)   (BME688)   (LSM6DSV) (inne)
+        
+   ┌────────┐
+   │LiIon   │
+   │3.7V    │
         └────────┘
 ```
 
@@ -146,6 +171,7 @@ ESP32-S3 SPI Pins (Standard VSPI):
 │  │ • BME688: T, H, P, VOC         ││
 │  │ • LSM6DSV: Acc, Gyro           ││
 │  │ • BQ25616J: Zarząd. energią    ││
+│  │ • TLV75733: Regulator 3.3V     ││
 │  └─────────────────────────────────┘│
 │  └─────────────────────────────────┐│
 │  │ Zasilanie                       ││
@@ -604,6 +630,7 @@ Ze spadkami WiFi, sleep w nocy: ~24-48 godzin
 | **Czujnik Temp/Wilg/Ciś** | BME688 | 1 | SPI, 0x76 |
 | **Czujnik Ruchu** | LSM6DSV | 1 | SPI, 6-DOF IMU |
 | **Kontroler Ładowania** | BQ25616J | 1 | I2C, 0x6B |
+| **Regulator 3.3V** | TLV75733 | 1 | Zasilany z VSYS |
 | **Akumulator** | LiIon 3.7V 2000mAh | 1 | 1S1P |
 | **Złącze USB** | USB Type-C | 1 | Power + Serial |
 | **Rezonator** | 32 MHz | 2 | Dla WiFi/BT |
