@@ -1,6 +1,15 @@
-paho-mqtt>=2.0.0
-influxdb-client>=1.36.0
-pyyaml>=6.0
-streamlit>=1.35.0
-pandas>=2.0.0
-plotly>=5.18.0
+# Core runtime dependencies for the MVP
+# Keep this intentionally minimal for the initial implementation.
+
+# MQTT client support
+paho-mqtt>=2.1.0
+
+# InfluxDB client
+influxdb-client>=1.46.0
+
+# API framework for the future REST service
+fastapi>=0.110.0
+uvicorn>=0.29.0
+
+# Testing
+pytest>=8.0.0
