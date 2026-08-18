@@ -1,170 +1,207 @@
 # Floating Sensor
 
-A remote environmental sensor designed to operate inside an industrial dryer drum or stationary at any location.
+Floating Sensor is an IoT platform for environmental and motion monitoring based on an ESP32-based sensor node and a modular backend stack.
 
-## 📋 Project Overview
+The current project direction follows the architecture defined in the documentation set under [new_solution/doc](new_solution/doc): a clean MVP implementation, with the previous code kept only as a reference prototype in [new_solution/src_ref](new_solution/src_ref).
 
-### General Description
-**Floating Sensor** is an autonomous electronic device equipped with a set of environmental and motion sensors, communicating wirelessly with a host device (Raspberry Pi) via the MQTT protocol.
+---
 
-### Operating Modes
-- **Mobile** – inside an industrial dryer drum (rotating)
-- **Stationary** – mounted at any fixed location
+## Project goal
 
-## 🔧 System Architecture
+The project aims to build a complete data flow:
 
-```
-┌─────────────────────┐         WiFi/MQTT        ┌─────────────────────┐
-│   Floating Sensor   │ ◄─────────────────────► │    Raspberry Pi     │
-│       (ESP32)       │                          │   (Central Hub)     │
-└─────────────────────┘                          └─────────────────────┘
-                                                           │
-                                                           ▼
-                                                 ┌─────────────────────┐
-                                                 │     Database        │
-                                                 │ (InfluxDB/PostgreSQL)│
-                                                 └─────────────────────┘
-                                                           │
-                                                           ▼
-                                                 ┌─────────────────────┐
-                                                 │   Visualization     │
-                                                 │ (Grafana/Streamlit) │
-                                                 └─────────────────────┘
-```
+Floating Sensor -> MQTT -> Mosquitto -> IoT Core -> InfluxDB -> REST API -> NiceGUI
 
-## 🎛️ Hardware - Floating Sensor
+The system is designed to be modular, testable, and ready for iterative MVP delivery.
 
-### Microcontroller
-- **ESP32** – main controller with built-in WiFi
+---
 
-### Environmental Sensors
-| Sensor | Parameter | Notes |
-|--------|-----------|-------|
-| **BME280** | Temperature, Pressure, Relative Humidity | I2C, address 0x76/0x77 |
-| **SHT3x** | Temperature, Humidity | Alternative sensor |
+## Current architecture
 
-### Motion Sensors
-| Sensor | Function |
-|--------|----------|
-| **Gyroscope** | Angular velocity measurement (drum rotation) |
-| **Accelerometer** | Linear acceleration measurement, motion detection |
+### 1. Device layer
 
-### Power Supply
-- Li-Ion battery with MCP73831 charging circuit
-- DW01A battery protection circuit
-- ADP3338 LDO regulator (3.3V)
-- Battery voltage measurement via resistor divider
+- Floating Sensor device based on ESP32
+- sensor acquisition via I2C
+- WiFi connectivity
+- MQTT publishing of telemetry, status and diagnostics
 
-### HW Version History
-- **V9.0** – Current version, double-sided PCB
-- **V8.x** – New motion sensor VBS030600, ESD protection (SRV05)
-- **V7.x** – IC input protection, improved programming stability
-- **V6.x** – New battery voltage divider, DW01A protection
+### 2. Message transport
 
-## 📡 Communication
+- Mosquitto as the MQTT broker
+- topic convention:
 
-### Protocol
-- **MQTT** – lightweight publish/subscribe protocol
-- **WiFi** – wireless connectivity to the hub
+  floatingsensor/<device_id>/<topic>
 
-### MQTT Topic Structure
-```
-ws/<target>/<source>/<smallTopic>
-```
-Example: `ws/rpi1/sensorID1/measurements`
+- supported MVP topics:
+  - status
+  - telemetry
+  - diagnostics
 
-## 🖥️ Backend - Raspberry Pi
+### 3. IoT Core
 
-### Components
-| Component | Function |
-|-----------|----------|
-| **MQTT Broker** | Mosquitto – receiving data from sensors |
-| **Database** | InfluxDB (time-series) or PostgreSQL |
-| **Visualization** | Grafana / Streamlit |
-| **Monitoring** | Prometheus (optional) |
-| **Automation** | Node-RED (optional) |
+The central backend is structured as a modular Python application in [new_solution/src](new_solution/src). The main responsibilities are:
 
-### Data Flow
-1. Floating Sensor publishes measurements via MQTT
-2. Raspberry Pi (MQTT broker) receives data
-3. Data is stored in InfluxDB/PostgreSQL
-4. Grafana/Streamlit visualizes data in real time
+- MQTT gateway
+- data processing and validation
+- storage service
+- device registry
+- REST API layer
 
-## 📁 Project Structure (current repository)
+### 4. Storage
 
-```
+- InfluxDB for time-series measurement history
+- single source of truth for measurement data
+- access only through the backend storage service
+
+### 5. Presentation layer
+
+- NiceGUI as the web UI layer
+- data access only via REST API
+- no direct communication with MQTT or InfluxDB
+
+---
+
+## Repository structure
+
+```text
 Floating_Sensor/
 ├── README.md
-├── doc/                               # Additional documentation
+├── .gitignore
+├── deployment.md
+├── smoke_test.md
 ├── new_solution/
-│   ├── pcb/                           # New hardware PCB files (diagram + gerber)
-│   └── src/                           # New Python-based hub/backend stack
-│       ├── commands/                  # MQTT command API sent to sensors
-│       ├── mosquitto/                 # Mosquitto broker configuration
-│       ├── mqtt/                      # MQTT topic helpers + MQTT client wrapper
-│       ├── parser/                    # Schema-based payload parser
-│       ├── registry/                  # Thread-safe runtime sensor registry
-│       ├── storage/                   # InfluxDB write/query layer
-│       ├── config.yaml                # Main runtime schema/config
-│       ├── docker-compose.yml         # Compose stack: app + mosquitto + influxdb
-│       ├── Dockerfile                 # App image definition
-│       └── requirements.txt           # Python dependencies
-└── old_solution_not_used/             # Legacy ESP-IDF firmware + deployment artifacts
+│   ├── doc/                         # architecture and implementation docs
+│   │   ├── 01_...
+│   │   ├── ...
+│   │   └── 13_...
+│   ├── src/                         # new clean implementation target
+│   │   ├── app/
+│   │   ├── config/
+│   │   ├── mqtt/
+│   │   ├── processing/
+│   │   ├── storage/
+│   │   ├── tests/
+│   │   ├── requirements.txt
+│   │   └── ...
+│   ├── src_ref/                    # legacy/prototype reference, frozen
+│   ├── pcb/
+│   └── ...
+├── old_solution_not_used/
+└── old_solution/
 ```
 
-## 🔍 Analysis of `new_solution/src` (May 2026)
+Important rule:
 
-### Implemented modules
+- [new_solution/src_ref](new_solution/src_ref) is a reference prototype only
+- [new_solution/src](new_solution/src) is the active target for new implementation
 
-- **MQTT communication layer**
-    - Topic builder/parser with convention `ws/<target>/<source>/<smallTopic>`
-    - MQTT wrapper with reconnect loop, handler registration, publish API
-- **Command layer (`Commander`)**
-    - Sensor lifecycle commands (`registerCall`, `startMeas`, `stopMeas`, `statusReq`, `sleepNow`)
-    - Runtime configuration commands (`measFreq`, `sendInterval`, `setAcmm`, `pm`, `phase`, clears)
-- **Payload parsing**
-    - Schema-driven field casting and required-field validation from `config.yaml`
-    - Forward-compatible passthrough of unknown fields
-- **Sensor runtime registry**
-    - In-memory, thread-safe state for active sensors, last measurement and diagnostics
-- **Storage layer**
-    - InfluxDB v2 write path for measurement and diagnostic payloads
-    - Generic Flux query method
-- **Container stack**
-    - Mosquitto + InfluxDB + app service in Docker Compose
+---
 
-### Configuration currently defined
+## Current implementation status
 
-- MQTT endpoint, client identity and reconnect behavior
-- InfluxDB org/buckets/token source (env var)
-- Sensor activity timeout
-- Message schema for:
-    - `measurement`: `ts`, `t`, `h`, `p`, `acmm`, `imp`, `impi`, `impc`, `ph`, `phf`
-    - `diag`: `ts`, `V`, `rssi`, `fw`, `lm`
+The new implementation is in early MVP stage. The active source tree contains a minimal working structure for:
 
-### Gaps identified
+- configuration
+- MQTT client
+- processing logic
+- storage abstraction
+- smoke tests
 
-- `main.py` now provides a minimal backend entrypoint, but there is still no dedicated UI application file.
-- `streamlit` is listed in dependencies and `8501` is exposed, but no UI entry file is present yet.
-- `docker-compose.yml` contains example credentials/tokens in plain text (development only; should be moved to env/secrets for production).
+The project is deliberately being built iteratively, following the roadmap from the architecture docs.
 
-## ✅ Current Status
+---
 
-`new_solution` now has a minimal runnable backend entrypoint (`main.py`) that connects MQTT, parsing, sensor registry and InfluxDB persistence. A dedicated UI layer is still missing.
+## Active source tree
 
-## 🚀 Technologies
+Current source layout in [new_solution/src](new_solution/src):
+
+```text
+src/
+├── app/
+│   └── main.py
+├── config/
+│   └── settings.py
+├── mqtt/
+│   └── client.py
+├── processing/
+│   └── engine.py
+├── storage/
+│   └── influx_client.py
+├── tests/
+│   └── test_smoke.py
+├── requirements.txt
+└── .venv/                       # local virtual environment, excluded from Git
+```
+
+This structure is intentionally minimal and designed to grow with the MVP requirements.
+
+---
+
+## Technology stack
 
 | Layer | Technology |
-|-------|------------|
-| Firmware (legacy) | C/C++, ESP-IDF v4.4 |
-| New backend/hub | Python 3.11 |
-| Communication | WiFi, MQTT (paho-mqtt) |
-| Storage | InfluxDB 2.x (influxdb-client) |
-| Containerization | Docker, Docker Compose |
-| Visualization (planned/in progress) | Streamlit, Grafana |
-| Automation/flows (legacy assets) | Node-RED |
-| Hardware | ESP32, BME280/SHT3x, motion sensors |
+|------|------------|
+| Hardware | ESP32, environmental sensors, motion sensors |
+| Messaging | MQTT, Mosquitto |
+| Core backend | Python |
+| Data processing | custom processing layer |
+| Time-series storage | InfluxDB |
+| API | FastAPI |
+| UI | NiceGUI |
+| Runtime | Docker / Docker Compose |
+| Testing | pytest |
 
-## 📜 License
+---
 
-Code in this repository is in the public domain (or licensed under CC0).
+## Documentation
+
+The architecture and project decisions are stored in [new_solution/doc](new_solution/doc), including:
+
+- architecture overview
+- MQTT contract
+- IoT Core design
+- REST API draft
+- InfluxDB model
+- NiceGUI design
+- Docker deployment model
+- migration strategy and MVP contracts
+
+This documentation is treated as the source of truth for the implementation direction.
+
+---
+
+## Development workflow
+
+1. Build a small, testable implementation step.
+2. Validate behavior with pytest.
+3. Update documentation when interfaces or contracts change.
+4. Keep the prototype reference separate from the clean implementation.
+
+---
+
+## Roadmap
+
+Planned MVP flow:
+
+1. firmware and MQTT publishing
+2. IoT Core MQTT gateway
+3. processing and validation
+4. storage in InfluxDB
+5. REST API endpoints
+6. NiceGUI dashboard
+7. Docker Compose integration
+8. end-to-end smoke test
+
+---
+
+## Notes
+
+- The old implementation remains available in [new_solution/src_ref](new_solution/src_ref) only as a reference.
+- The active implementation target is [new_solution/src](new_solution/src).
+- The system is being developed iteratively, not by copying the legacy structure 1:1.
+
+---
+
+## License
+
+Project documentation and code are maintained in the repository as the working project state. The exact licensing model should be confirmed before public distribution.

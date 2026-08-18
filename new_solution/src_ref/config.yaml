@@ -1,0 +1,36 @@
+mqtt:
+  broker: "mosquitto"          # Docker service name (or IP for external broker)
+  port: 1883
+  hub_id: "rpi1"
+  client_id: "floating_sensor_hub"
+  keepalive: 60
+  reconnect_delay: 5           # seconds between reconnect attempts
+
+influxdb:
+  url: "http://influxdb:8086"  # Docker service name
+  token: "${INFLUXDB_TOKEN}"   # injected via environment variable
+  org: "floating_sensor"
+  bucket_measurements: "measurements"
+  bucket_diag: "diagnostics"
+
+sensor:
+  timeout: 120                 # seconds before sensor marked inactive
+
+payload_schema:
+  measurement:
+    - { key: "ts",   type: int,   unit: "ms",  required: true,  description: "Timestamp" }
+    - { key: "t",    type: float, unit: "°C",  required: false, description: "Temperature" }
+    - { key: "h",    type: float, unit: "%",   required: false, description: "Humidity" }
+    - { key: "p",    type: int,   unit: "Pa",  required: false, description: "Pressure" }
+    - { key: "acmm", type: int,   unit: "-",   required: false, description: "Moisture accumulator" }
+    - { key: "imp",  type: int,   unit: "-",   required: false, description: "Raw impedance" }
+    - { key: "impi", type: int,   unit: "-",   required: false, description: "IIR1 filtered impedance" }
+    - { key: "impc", type: int,   unit: "-",   required: false, description: "IIR2 filtered impedance" }
+    - { key: "ph",   type: int,   unit: "-",   required: false, description: "Phase value" }
+    - { key: "phf",  type: int,   unit: "Hz",  required: false, description: "Phase frequency" }
+  diag:
+    - { key: "ts",   type: int,   unit: "ms",  required: true,  description: "Timestamp" }
+    - { key: "V",    type: float, unit: "V",   required: false, description: "Battery voltage" }
+    - { key: "rssi", type: int,   unit: "dBm", required: false, description: "WiFi RSSI" }
+    - { key: "fw",   type: str,   unit: "-",   required: false, description: "Firmware version" }
+    - { key: "lm",   type: str,   unit: "-",   required: false, description: "Last command received" }

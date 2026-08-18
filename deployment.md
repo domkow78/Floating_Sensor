@@ -1,206 +1,111 @@
-# Deployment — Floating Sensor
+# Deployment
 
-Ten dokument opisuje uruchamianie nowego backendu z katalogu `new_solution/src`:
-- w kontenerach (Docker Compose),
-- lokalnie w trybie developerskim.
+Ten dokument jest przeznaczony do szybkiego uruchamiania lokalnego środowiska deweloperskiego dla nowego MVP.
 
-> Status projektu (May 2026): minimalny backend entrypoint `main.py` jest już dostępny i uruchamia warstwę MQTT, parser payloadów, rejestr sensorów oraz zapis do InfluxDB. Dedykowany interfejs UI nadal pozostaje do dodania.
+Aktualny stan projektu jest zgodny z nową architekturą opisanej w dokumentacji:
+
+- [new_solution/doc/10_Docker_Deployment_Architecture.md](new_solution/doc/10_Docker_Deployment_Architecture.md)
+- [new_solution/doc/11_Struktura_Repozytorium.md](new_solution/doc/11_Struktura_Repozytorium.md)
+- [new_solution/doc/12_Plan_Implementacji.md](new_solution/doc/12_Plan_Implementacji.md)
+- [new_solution/doc/13_Migracja_i_Kontrakty_MVP_v0.1.md](new_solution/doc/13_Migracja_i_Kontrakty_MVP_v0.1.md)
+
+> Wartość historyczna: ten plik jest zbiorem starych instrukcji uruchamiania. Aktualna architektura jest rozwijana w katalogu [new_solution/src](new_solution/src), a poprzedni kod został przeniesiony do [new_solution/src_ref](new_solution/src_ref) jako materiał referencyjny.
 
 ---
 
-## 1) Wymagania
+## Cel dokumentu
 
-### Wersja kontenerowa
-- Docker Desktop / Docker Engine
-- Docker Compose v2
+- uruchamiać lokalnie środowisko testowe MVP,
+- wspierać iteracyjny rozwój bez zależności od starego prototypu,
+- nie zastępować formalnej dokumentacji architektonicznej.
 
-### Wersja developerska
+---
+
+## Obecna struktura projektu
+
+```text
+new_solution/
+├── src/         # aktywna implementacja MVP
+├── src_ref/     # stary prototyp referencyjny
+├── doc/         # dokumentacja źródłowa
+├── pcb/
+└── ...
+```
+
+---
+
+## Wymagania lokalne
+
 - Python 3.11+
+- venv
 - `pip`
-- (opcjonalnie) `venv`
-- Dostęp do broker MQTT i InfluxDB (lokalnie lub w kontenerach)
+- opcjonalnie: Docker do uruchamiania Mosquitto / InfluxDB
 
 ---
 
-## 2) Struktura i pliki konfiguracyjne
+## Uruchomienie środowiska Python
 
-Lokalizacja rozwiązania:
-- `new_solution/src`
-
-Kluczowe pliki:
-- `new_solution/src/docker-compose.yml`
-- `new_solution/src/Dockerfile`
-- `new_solution/src/config.yaml`
-- `new_solution/src/requirements.txt`
-- `new_solution/src/mosquitto/mosquitto.conf`
-
----
-
-## 3) Uruchamianie w kontenerze (Docker Compose)
-
-Przejdź do katalogu:
+Przejdź do katalogu źródłowego:
 
 ```powershell
-cd "c:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution\src"
+cd "C:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution\src"
 ```
 
-### 3.1 Start stacka
-
-```powershell
-docker compose up -d --build
-```
-
-Uruchamiane usługi:
-- `mosquitto` — broker MQTT (`1883`)
-- `influxdb` — baza time-series (`8086`)
-- `app` — aplikacja Python (port `8501`)
-
-### 3.2 Weryfikacja
-
-```powershell
-docker compose ps
-```
-
-```powershell
-docker compose logs -f app
-```
-
-```powershell
-docker compose logs -f mosquitto
-```
-
-```powershell
-docker compose logs -f influxdb
-```
-
-### 3.3 Zatrzymanie
-
-```powershell
-docker compose down
-```
-
-Aby usunąć także wolumeny danych:
-
-```powershell
-docker compose down -v
-```
-
----
-
-## 4) Konfiguracja środowiska (zalecane)
-
-Aktualnie przykładowe hasła/tokeny są wpisane w `docker-compose.yml`. W środowisku docelowym:
-
-1. Przenieś sekrety do pliku `.env` (lub Docker Secrets).
-2. Nie commituj tokenów produkcyjnych do repozytorium.
-3. Ustaw minimum:
-   - `INFLUXDB_TOKEN`
-   - `DOCKER_INFLUXDB_INIT_PASSWORD`
-
-Przykładowy `.env`:
-
-```env
-INFLUXDB_TOKEN=replace-me
-INFLUXDB_INIT_PASSWORD=replace-me
-```
-
-Następnie użyj ich w `docker-compose.yml` przez `${...}`.
-
----
-
-## 5) Uruchamianie w wersji developerskiej (lokalnie)
-
-Przejdź do katalogu:
-
-```powershell
-cd "c:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution\src"
-```
-
-### 5.1 Utworzenie i aktywacja venv
+Utwórz i aktywuj venv:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 5.2 Instalacja zależności
+Zainstaluj zależności:
 
 ```powershell
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt --index-url https://pypi.org/simple
 ```
 
-### 5.3 Zmienne środowiskowe (PowerShell)
+Uruchom smoke test:
 
 ```powershell
-$env:MQTT_BROKER="localhost"
-$env:INFLUXDB_URL="http://localhost:8086"
-$env:INFLUXDB_TOKEN="replace-me"
-```
-
-### 5.4 Start usług zależnych (opcjonalnie z Dockera)
-
-Jeśli nie masz lokalnie MQTT/InfluxDB, uruchom same zależności:
-
-```powershell
-docker compose up -d mosquitto influxdb
-```
-
-### 5.5 Start aplikacji
-
-Aktualnie dostępny backend uruchomisz poleceniem:
-
-```powershell
-python main.py
-```
-
-W przyszłości wariant UI może być uruchamiany np. jako:
-
-```powershell
-streamlit run app.py
-```
-
-> Uwaga: obecnie wspierany jest backendowy entrypoint `main.py`. `app.py` to jedynie przyszły wariant dla UI.
-
----
-
-## 6) Test połączenia MQTT (manualny)
-
-Publikacja testowa do konwencji topiców:
-
-```powershell
-docker exec -it mosquitto mosquitto_pub -h localhost -t "ws/rpi1/sensor1/diag" -m '{"ts":1717000000000,"V":3.91,"rssi":-61,"fw":"0.9.0"}'
-```
-
-Nasłuch:
-
-```powershell
-docker exec -it mosquitto mosquitto_sub -h localhost -t "ws/#" -v
+python -m pytest tests/test_smoke.py -q
 ```
 
 ---
 
-## 7) Najczęstsze problemy
+## Uruchomienie aplikacji
 
-1. **`app` nie startuje**
-   - Sprawdź logi: `docker compose logs -f app`
-   - Zweryfikuj, czy obraz zawiera aktualny plik `main.py`.
+W tej chwili aktywny kod jest zbudowany w iteracyjny sposób, a podstawowy punkt wejścia znajduje się w:
 
-2. **Brak połączenia z InfluxDB**
-   - Sprawdź token i URL (`INFLUXDB_URL`, `INFLUXDB_TOKEN`).
-   - Sprawdź zdrowie usługi: `docker compose ps`.
+- [new_solution/src/app/main.py](new_solution/src/app/main.py)
 
-3. **Brak połączenia MQTT**
-   - Zweryfikuj broker i port (`MQTT_BROKER`, `1883`).
-   - Sprawdź logi `mosquitto`.
+Uruchomienie:
 
-4. **Porty zajęte (`1883`, `8086`, `8501`)**
-   - Zmień mapowanie portów w `docker-compose.yml`.
+```powershell
+python app/main.py
+```
+
+Dalsze moduły, takie jak MQTT, processing i storage, dodawane są w miarę rozwoju etapu MVP.
 
 ---
 
-## 8) Rekomendowane kolejne kroki
+## Wersja z Docker
 
-1. Dodać dedykowany interfejs UI (`app.py` / Streamlit).
-2. Ujednolicić sposób uruchamiania backend + UI.
-3. Przenieść sekrety do `.env` / secrets managera.
-4. Dodać healthchecki usług i prosty smoke test po starcie.
+Dla pełnego środowiska testowego można użyć konfiguracji opisanej w dokumentacji wdrożeniowej Docker: [new_solution/doc/10_Docker_Deployment_Architecture.md](new_solution/doc/10_Docker_Deployment_Architecture.md).
+
+W aktualnym etapie główny nacisk kładzie się na działające, testowalne etapy w Pythonie, a nie na pełne wdrożenie kontenerowe.
+
+---
+
+## Relewantne zasady
+
+- nie rozwijać prototypu w miejscu aktywnej implementacji,
+- nie mieszać legacy z nowym kodem,
+- trzymać dokumentację i kod w zgodności z architekturą MVP,
+- dodawać katalogi dopiero wtedy, gdy pojawia się realna potrzeba.
+
+---
+
+## Podsumowanie
+
+Ten plik nie jest już głównym źródłem wiedzy o wdrożeniu projektu. Dokumentacja w [new_solution/doc](new_solution/doc) oraz aktywny kod w [new_solution/src](new_solution/src) są aktualnym źródłem prawdy.
