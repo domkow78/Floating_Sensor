@@ -8,6 +8,7 @@ Aktualny stan projektu jest zgodny z nową architekturą opisanej w dokumentacji
 - [new_solution/doc/11_Struktura_Repozytorium.md](new_solution/doc/11_Struktura_Repozytorium.md)
 - [new_solution/doc/12_Plan_Implementacji.md](new_solution/doc/12_Plan_Implementacji.md)
 - [new_solution/doc/13_Migracja_i_Kontrakty_MVP_v0.1.md](new_solution/doc/13_Migracja_i_Kontrakty_MVP_v0.1.md)
+- [new_solution/doc/14_Tracker_Postepu_Wdrozenia_MVP.md](new_solution/doc/14_Tracker_Postepu_Wdrozenia_MVP.md)
 
 > Wartość historyczna: ten plik jest zbiorem starych instrukcji uruchamiania. Aktualna architektura jest rozwijana w katalogu [new_solution/src](new_solution/src), a poprzedni kod został przeniesiony do [new_solution/src_ref](new_solution/src_ref) jako materiał referencyjny.
 
@@ -78,11 +79,71 @@ python -m pytest tests/test_smoke.py -q
 W tej chwili aktywny kod jest zbudowany w iteracyjny sposób, a podstawowy punkt wejścia znajduje się w:
 
 - [new_solution/src/app/main.py](new_solution/src/app/main.py)
+- [new_solution/src/api/main.py](new_solution/src/api/main.py)
 
 Uruchomienie:
 
 ```powershell
 python app/main.py
+```
+
+Uruchomienie REST API (ASGI/uvicorn):
+
+```powershell
+python -m uvicorn api.main:app --host 0.0.0.0 --port 8000
+```
+
+Szybki smoke-check endpointu status (w osobnym terminalu):
+
+```powershell
+cd "C:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution"
+.\scripts\check_api.ps1
+```
+
+Opcjonalnie z niestandardowym adresem:
+
+```powershell
+.\scripts\check_api.ps1 -BaseUrl "http://localhost:8000"
+```
+
+Szybki smoke-check endpointu telemetry/latest:
+
+```powershell
+cd "C:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution"
+.\scripts\check_api_latest.ps1 -DeviceId "FS-001"
+```
+
+Szybki smoke-check endpointu telemetry/history:
+
+```powershell
+cd "C:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution"
+.\scripts\check_api_history.ps1 -DeviceId "FS-001"
+```
+
+Wariant strict (wymaga co najmniej 1 punktu w historii):
+
+```powershell
+.\scripts\check_api_history.ps1 -DeviceId "FS-001" -RequirePoints
+```
+
+Jeśli telemetry jeszcze nie dotarła do rejestru (oczekiwany 404 na świeżym starcie API), możesz uruchomić wariant łagodny:
+
+```powershell
+.\scripts\check_api_latest.ps1 -DeviceId "FS-001" -AllowNotFound
+```
+
+Jeśli chcesz przejść strict check bez `-AllowNotFound`, najpierw zasiej telemetry do procesu API:
+
+```powershell
+cd "C:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution"
+.\scripts\seed_api_telemetry.ps1 -DeviceId "FS-001"
+.\scripts\check_api_latest.ps1 -DeviceId "FS-001"
+```
+
+Dev endpoint używany przez seed script:
+
+```text
+POST /api/v1/dev/ingest
 ```
 
 Dalsze moduły, takie jak MQTT, processing i storage, dodawane są w miarę rozwoju etapu MVP.

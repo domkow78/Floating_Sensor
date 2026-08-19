@@ -1,0 +1,170 @@
+# Rozdzial 14 - Tracker postepu wdrozenia MVP
+**IoT Platform Architecture Specification v1.0**
+**Status:** Working tracker
+
+---
+
+# 14.1 Cel dokumentu
+
+Ten dokument sluzy do biezacego monitorowania postepu wdrozenia MVP.
+
+Zawiera:
+- status etapow z Rozdzialu 12,
+- checklisty rzeczy domknietych i otwartych,
+- ostatnia walidacje uruchomieniowa,
+- kroki nastepne.
+
+---
+
+# 14.2 Status globalny (na dzis)
+
+| Etap | Nazwa | Status |
+|------|-------|--------|
+| Etap 1 | Repozytorium | DONE |
+| Etap 2 | Firmware | TODO |
+| Etap 3 | MQTT | PARTIAL |
+| Etap 4 | IoT Core | PARTIAL |
+| Etap 5 | InfluxDB | PARTIAL |
+| Etap 6 | REST API | PARTIAL |
+| Etap 7 | NiceGUI | TODO |
+| Etap 8 | Docker | TODO |
+| Etap 9 | Testy integracyjne | TODO |
+
+Legenda:
+- DONE: etap domkniety
+- PARTIAL: etap rozpoczecy i czesciowo wdrozony
+- TODO: etap jeszcze nierozpoczety / bez domkniecia
+
+---
+
+# 14.3 Etap 1 - Repozytorium (DONE)
+
+## Domkniete
+- [x] Rozdzielenie aktywnego kodu i prototypu referencyjnego (`src` vs `src_ref`).
+- [x] Podstawowa struktura katalogow aktywnej implementacji.
+- [x] Lokalny venv dla aktywnego komponentu Python.
+- [x] Ignorowanie `.venv` w Git.
+
+## Do monitorowania
+- [ ] Ujednolicenie struktury pod finalny monorepo target (po MVP).
+
+---
+
+# 14.4 Etap 3 - MQTT (PARTIAL)
+
+## Domkniete
+- [x] Konwencja topic `floatingsensor/<device_id>/<topic>` w kodzie.
+- [x] Dozwolone topici MVP: `status`, `telemetry`, `diagnostics`.
+- [x] Publikacja telemetry przez klienta MQTT.
+- [x] Testy kontraktu topicow i publikacji.
+
+## Otwarte
+- [ ] Pelny runtime reconnect i retry policy pod realny broker.
+- [ ] Pelne status + diagnostics flow z urzadzenia.
+- [ ] LWT w rzeczywistym scenariuszu runtime.
+
+---
+
+# 14.5 Etap 4 - IoT Core (PARTIAL)
+
+## Domkniete
+- [x] Processing Engine z walidacja i normalizacja payload.
+- [x] Wspolny model `TelemetryRecord`.
+- [x] Storage mapping do modelu zapisu Influx.
+- [x] Device Registry (last seen + ostatnia telemetry).
+- [x] App pipeline spinajacy processing -> mqtt -> storage -> registry.
+
+## Otwarte
+- [ ] Produkcyjny podzial na pelne moduły i interfejsy wewnetrzne.
+- [ ] Runtime telemetry ingestion z rzeczywistego source stream.
+- [ ] Rozszerzenie registry o status/offline timeout.
+
+---
+
+# 14.6 Etap 5 - InfluxDB (PARTIAL)
+
+## Domkniete
+- [x] Definicja bucket/measurement/tag-field na poziomie kodu.
+- [x] Zapis rekordu telemetry (contract-first).
+- [x] Podstawowe API historii po stronie storage.
+
+## Otwarte
+- [ ] Rzeczywiste zapytania historyczne do InfluxDB (zamiast aktualnego stub zachowania).
+- [ ] Testy integracyjne z realna instancja InfluxDB.
+- [ ] Weryfikacja zakresu czasu i limitow na danych rzeczywistych.
+
+---
+
+# 14.7 Etap 6 - REST API (PARTIAL)
+
+## Domkniete
+- [x] Endpointy read-only:
+  - [x] `GET /api/v1/status`
+  - [x] `GET /api/v1/device`
+  - [x] `GET /api/v1/telemetry/latest`
+  - [x] `GET /api/v1/telemetry/history`
+- [x] Walidacja query (`from`, `to`, `limit`) i model bledow `INVALID_QUERY`.
+- [x] Rozdzielenie API na `routes`, `services`, `errors`.
+- [x] ASGI entrypoint pod `uvicorn`.
+- [x] Dev seed endpoint `POST /api/v1/dev/ingest` do lokalnych smoke-checkow.
+
+## Otwarte
+- [ ] Finalne wydzielenie schemas/models odpowiedzi pod produkcyjne API.
+- [ ] Pelna walidacja wejscia request body dla endpointow write (poza MVP read-only).
+- [ ] Ujednolicenie policy kodow HTTP i globalnego handlera bledow.
+
+---
+
+# 14.8 Etapy 7-9 (TODO)
+
+## Etap 7 - NiceGUI
+- [ ] Struktura aplikacji frontendowej.
+- [ ] Dashboard.
+- [ ] Historia.
+- [ ] Status.
+- [ ] Informacje.
+
+## Etap 8 - Docker
+- [ ] Compose spinajacy uslugi docelowe.
+- [ ] Konfiguracja `.env` i porzadek sekretow.
+- [ ] Weryfikacja uruchomienia jednym poleceniem.
+
+## Etap 9 - Testy integracyjne
+- [ ] End-to-end: Sensor -> MQTT -> IoT Core -> InfluxDB -> REST -> UI.
+- [ ] Smoke test calosci po starcie stacka.
+- [ ] Kryteria stabilnosci i regresji.
+
+---
+
+# 14.9 Ostatnia walidacja techniczna
+
+## Wynik testow
+- `python -m pytest tests/test_smoke.py -q`
+- Wynik: PASS (22 testy)
+
+## Runtime smoke-checki
+- [x] `check_api.ps1` (status)
+- [x] `check_api_latest.ps1` (latest)
+- [x] `check_api_history.ps1` (history)
+- [x] `seed_api_telemetry.ps1` (zasiew telemetry do procesu API)
+
+---
+
+# 14.10 Najblizsze kroki (kolejnosc)
+
+1. Zamienic history behavior w storage z aktualnego stub na real query do InfluxDB.
+2. Dodac testy integracyjne REST + InfluxDB na realnej instancji.
+3. Rozpoczac Etap 7 (NiceGUI) na stabilnym kontrakcie REST.
+4. Przygotowac Etap 8 (Docker) jako reproducible `up -> seed -> smoke`.
+
+---
+
+# 14.11 Jak aktualizowac ten tracker
+
+Po kazdym zamknietym kroku:
+1. Zmien status etapu w tabeli 14.2.
+2. Oznacz checkboxy `Domkniete` / `Otwarte`.
+3. Zaktualizuj sekcje 14.9 o najnowsza walidacje.
+4. Zmien sekcje 14.10 na kolejne realne kroki.
+
+Ten plik ma byc jedynym operacyjnym widokiem postepu wdrozenia MVP.
