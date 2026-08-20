@@ -26,7 +26,7 @@ Zawiera:
 | Etap 4 | IoT Core | PARTIAL |
 | Etap 5 | InfluxDB | DONE |
 | Etap 6 | REST API | PARTIAL |
-| Etap 7 | NiceGUI | TODO |
+| Etap 7 | NiceGUI | PARTIAL |
 | Etap 8 | Docker | TODO |
 | Etap 9 | Testy integracyjne | TODO |
 
@@ -118,12 +118,12 @@ Legenda:
 
 # 14.8 Etapy 7-9 (TODO)
 
-## Etap 7 - NiceGUI
-- [ ] Struktura aplikacji frontendowej.
-- [ ] Dashboard.
-- [ ] Historia.
-- [ ] Status.
-- [ ] Informacje.
+## Etap 7 - NiceGUI (PARTIAL)
+- [x] Strona Dashboard (odczyt telemetry z REST API).
+- [x] Strona Simulator (publikacja MQTT jak ESP32).
+- [ ] Historia pomiarow.
+- [ ] Status systemu.
+- [ ] Informacje o urzadzeniu.
 
 ## Etap 8 - Docker
 - [ ] Compose spinajacy uslugi docelowe.
@@ -153,7 +153,7 @@ Legenda:
 
 # 14.10 Najblizsze kroki (kolejnosc)
 
-1. Rozpoczac Etap 7 (NiceGUI) na stabilnym kontrakcie REST.
+1. Rozbudowac NiceGUI o zakladki Historia, Status, Informacje.
 2. Przygotowac Etap 8 (Docker) jako reproducible `up -> smoke`.
 3. Domkniecie Etapu 4 IoT Core (status/diagnostics, offline timeout).
 
