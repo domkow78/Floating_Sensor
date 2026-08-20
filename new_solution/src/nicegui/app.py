@@ -1,7 +1,10 @@
 """NiceGUI MVP application — Dashboard + ESP32 Simulator."""
 
 import datetime
-import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import requests
 from nicegui import ui
