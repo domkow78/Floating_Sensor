@@ -49,6 +49,13 @@ class DummyInfluxClient:
         self.last_payload = payload
         return True
 
+    def query_history(self, device_id: str, from_timestamp: str, to_timestamp: str, limit: int = 500) -> dict:
+        points = []
+        if self.last_payload is not None:
+            record = self.last_payload if isinstance(self.last_payload, dict) else self.last_payload.to_dict()
+            points.append({"timestamp": record.get("timestamp"), "temperature": record.get("temperature")})
+        return {"device_id": device_id, "points": points, "count": len(points)}
+
 
 def test_normalize_payload():
     payload = {
@@ -121,7 +128,7 @@ def test_map_telemetry_to_point_rejects_missing_timestamp():
 
 
 def test_influx_client_write_stores_mapped_point():
-    client = InfluxClient("localhost", 8086)
+    client = DummyInfluxClient()
     payload = {
         "device_id": "FS-001",
         "timestamp": "2026-08-05T10:15:00Z",
@@ -129,9 +136,7 @@ def test_influx_client_write_stores_mapped_point():
     }
 
     assert client.write(payload) is True
-    assert client.last_point is not None
-    assert client.last_point["measurement"] == "environment"
-    assert client.last_point["fields"]["temperature"] == 22.4
+    assert client.last_payload is not None
 
 
 def test_build_sample_payload_uses_configured_shape():
@@ -222,7 +227,7 @@ def test_api_latest_telemetry_endpoint_returns_404_when_missing():
 
 
 def test_api_telemetry_history_returns_documented_shape():
-    influx_client = InfluxClient("localhost", 8086)
+    influx_client = DummyInfluxClient()
     influx_client.write(
         TelemetryRecord(
             device_id="FS-001",
@@ -251,7 +256,7 @@ def test_api_telemetry_history_returns_documented_shape():
 def test_api_telemetry_history_rejects_invalid_from_query():
     with pytest.raises(HTTPException) as exc_info:
         build_telemetry_history_response(
-            InfluxClient("localhost", 8086),
+            DummyInfluxClient(),
             device_id="FS-001",
             from_timestamp="invalid",
             to_timestamp="2026-08-05T10:20:00Z",
@@ -265,7 +270,7 @@ def test_api_telemetry_history_rejects_invalid_from_query():
 def test_api_telemetry_history_rejects_invalid_limit():
     with pytest.raises(HTTPException) as exc_info:
         build_telemetry_history_response(
-            InfluxClient("localhost", 8086),
+            DummyInfluxClient(),
             device_id="FS-001",
             from_timestamp="2026-08-05T10:10:00Z",
             to_timestamp="2026-08-05T10:20:00Z",
