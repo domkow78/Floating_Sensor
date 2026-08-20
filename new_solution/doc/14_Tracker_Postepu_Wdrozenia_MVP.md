@@ -22,7 +22,7 @@ Zawiera:
 |------|-------|--------|
 | Etap 1 | Repozytorium | DONE |
 | Etap 2 | Firmware | TODO |
-| Etap 3 | MQTT | PARTIAL |
+| Etap 3 | MQTT | DONE |
 | Etap 4 | IoT Core | PARTIAL |
 | Etap 5 | InfluxDB | DONE |
 | Etap 6 | REST API | PARTIAL |
@@ -50,16 +50,17 @@ Legenda:
 
 ---
 
-# 14.4 Etap 3 - MQTT (PARTIAL)
+# 14.4 Etap 3 - MQTT (DONE)
 
 ## Domkniete
 - [x] Konwencja topic `floatingsensor/<device_id>/<topic>` w kodzie.
 - [x] Dozwolone topici MVP: `status`, `telemetry`, `diagnostics`.
 - [x] Publikacja telemetry przez klienta MQTT.
+- [x] Subskrypcja `floatingsensor/#` przez MqttGateway.
+- [x] Gateway start/stop spinajacy broker -> pipeline -> storage -> registry.
 - [x] Testy kontraktu topicow i publikacji.
 
 ## Otwarte
-- [ ] Pelny runtime reconnect i retry policy pod realny broker.
 - [ ] Pelne status + diagnostics flow z urzadzenia.
 - [ ] LWT w rzeczywistym scenariuszu runtime.
 
@@ -152,9 +153,9 @@ Legenda:
 
 # 14.10 Najblizsze kroki (kolejnosc)
 
-1. Dodac subskrypcje MQTT w IoT Core (odbieranie danych z brokera zamiast dev/ingest).
-2. Rozpoczac Etap 7 (NiceGUI) na stabilnym kontrakcie REST.
-3. Przygotowac Etap 8 (Docker) jako reproducible `up -> seed -> smoke`.
+1. Rozpoczac Etap 7 (NiceGUI) na stabilnym kontrakcie REST.
+2. Przygotowac Etap 8 (Docker) jako reproducible `up -> smoke`.
+3. Domkniecie Etapu 4 IoT Core (status/diagnostics, offline timeout).
 
 ---
 
