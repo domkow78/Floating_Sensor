@@ -64,3 +64,18 @@ class MqttClient:
     def publish_diagnostics(self, payload: dict) -> bool:
         topic = build_topic(payload.get("device_id", ""), "diagnostics")
         return self.publish(topic, payload)
+
+    def subscribe(self, topic: str, callback) -> bool:
+        if self._mqtt_client is None:
+            return False
+        self._mqtt_client.subscribe(topic, qos=1)
+        self._mqtt_client.message_callback_add(topic, callback)
+        return True
+
+    def start_loop(self) -> None:
+        if self._mqtt_client is not None:
+            self._mqtt_client.loop_start()
+
+    def stop_loop(self) -> None:
+        if self._mqtt_client is not None:
+            self._mqtt_client.loop_stop()

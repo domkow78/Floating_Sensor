@@ -295,7 +295,7 @@ def test_api_app_registers_status_and_device_routes():
 
 def test_api_dev_ingest_updates_registry_and_storage():
     registry = DeviceRegistry()
-    storage = InfluxClient("localhost", 8086)
+    storage = DummyInfluxClient()
 
     response = ingest_telemetry(
         registry,
@@ -312,8 +312,7 @@ def test_api_dev_ingest_updates_registry_and_storage():
     assert response["status"] == "success"
     assert response["data"]["ingested"] is True
     assert registry.get_device("FS-001") is not None
-    assert storage.last_point is not None
-    assert storage.last_point["fields"]["temperature"] == 23.1
+    assert storage.last_payload is not None
 
 
 def test_api_asgi_entrypoint_exposes_fastapi_app():

@@ -16,10 +16,11 @@ from storage.influx_client import InfluxClient
 def create_app(
     device_registry: DeviceRegistry | None = None,
     influx_client: InfluxClient | None = None,
+    lifespan=None,
 ) -> FastAPI:
-    app = FastAPI(title="Floating Sensor IoT Core API", version="0.1.0")
+    app = FastAPI(title="Floating Sensor IoT Core API", version="0.1.0", lifespan=lifespan)
     registry = device_registry or DeviceRegistry()
-    storage = influx_client or InfluxClient("localhost", 8086)
+    storage = influx_client or InfluxClient()
 
     register_v1_routes(app, registry, storage)
 

@@ -24,7 +24,7 @@ Zawiera:
 | Etap 2 | Firmware | TODO |
 | Etap 3 | MQTT | PARTIAL |
 | Etap 4 | IoT Core | PARTIAL |
-| Etap 5 | InfluxDB | PARTIAL |
+| Etap 5 | InfluxDB | DONE |
 | Etap 6 | REST API | PARTIAL |
 | Etap 7 | NiceGUI | TODO |
 | Etap 8 | Docker | TODO |
@@ -81,17 +81,17 @@ Legenda:
 
 ---
 
-# 14.6 Etap 5 - InfluxDB (PARTIAL)
+# 14.6 Etap 5 - InfluxDB (DONE)
 
 ## Domkniete
 - [x] Definicja bucket/measurement/tag-field na poziomie kodu.
-- [x] Zapis rekordu telemetry (contract-first).
-- [x] Podstawowe API historii po stronie storage.
+- [x] Zapis rekordu telemetry przez influxdb-client.
+- [x] Realne zapytania historyczne Flux.
+- [x] Testy integracyjne z realna instancja InfluxDB na RPi.
+- [x] Weryfikacja zakresu czasu i limitow na danych rzeczywistych.
 
 ## Otwarte
-- [ ] Rzeczywiste zapytania historyczne do InfluxDB (zamiast aktualnego stub zachowania).
-- [ ] Testy integracyjne z realna instancja InfluxDB.
-- [ ] Weryfikacja zakresu czasu i limitow na danych rzeczywistych.
+- [ ] Brak.
 
 ---
 
@@ -139,8 +139,8 @@ Legenda:
 # 14.9 Ostatnia walidacja techniczna
 
 ## Wynik testow
-- `python -m pytest tests/test_smoke.py -q`
-- Wynik: PASS (22 testy)
+- `python -m pytest tests/test_smoke.py -q` — PASS (22 testy, RPi)
+- `python -m pytest tests/test_integration.py -q` — PASS (realny InfluxDB na RPi)
 
 ## Runtime smoke-checki
 - [x] `check_api.ps1` (status)
@@ -152,10 +152,9 @@ Legenda:
 
 # 14.10 Najblizsze kroki (kolejnosc)
 
-1. Zamienic history behavior w storage z aktualnego stub na real query do InfluxDB.
-2. Dodac testy integracyjne REST + InfluxDB na realnej instancji.
-3. Rozpoczac Etap 7 (NiceGUI) na stabilnym kontrakcie REST.
-4. Przygotowac Etap 8 (Docker) jako reproducible `up -> seed -> smoke`.
+1. Dodac subskrypcje MQTT w IoT Core (odbieranie danych z brokera zamiast dev/ingest).
+2. Rozpoczac Etap 7 (NiceGUI) na stabilnym kontrakcie REST.
+3. Przygotowac Etap 8 (Docker) jako reproducible `up -> seed -> smoke`.
 
 ---
 
