@@ -27,7 +27,7 @@ Zawiera:
 | Etap 5 | InfluxDB | DONE |
 | Etap 6 | REST API | PARTIAL |
 | Etap 7 | NiceGUI | PARTIAL |
-| Etap 8 | Docker | TODO |
+| Etap 8 | Docker | DONE |
 | Etap 9 | Testy integracyjne | TODO |
 
 Legenda:
@@ -148,13 +148,14 @@ Legenda:
 - [x] `check_api_latest.ps1` (latest)
 - [x] `check_api_history.ps1` (history)
 - [x] `seed_api_telemetry.ps1` (zasiew telemetry do procesu API)
+- [x] Caly stack uruchomiony w Docker Compose na RPi 4
 
 ---
 
 # 14.10 Najblizsze kroki (kolejnosc)
 
 1. Rozbudowac NiceGUI o zakladki Historia, Status, Informacje.
-2. Przygotowac Etap 8 (Docker) jako reproducible `up -> smoke`.
+2. Testy integracyjne pelnego przepływu (Etap 9).
 3. Domkniecie Etapu 4 IoT Core (status/diagnostics, offline timeout).
 
 ---
