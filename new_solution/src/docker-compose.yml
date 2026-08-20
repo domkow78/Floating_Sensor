@@ -30,6 +30,42 @@ services:
     networks:
       - iot-network
 
+  iot-core:
+    build: .
+    container_name: fs_iot_core
+    command: python -m uvicorn api.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    environment:
+      MQTT_BROKER_HOST: mosquitto
+      INFLUX_HOST: influxdb
+      INFLUX_URL: http://influxdb:8086
+      INFLUX_TOKEN: fs-dev-token
+      INFLUX_ORG: floating_sensor
+      INFLUX_BUCKET: floating_sensor
+    depends_on:
+      - mosquitto
+      - influxdb
+    restart: unless-stopped
+    networks:
+      - iot-network
+
+  nicegui:
+    build: .
+    container_name: fs_nicegui
+    command: python nicegui/app.py
+    ports:
+      - "8080:8080"
+    environment:
+      MQTT_BROKER_HOST: mosquitto
+      API_BASE: http://iot-core:8000/api/v1
+    depends_on:
+      - mosquitto
+      - iot-core
+    restart: unless-stopped
+    networks:
+      - iot-network
+
 volumes:
   mosquitto_data:
   influxdb_data:

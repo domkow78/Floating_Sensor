@@ -9,11 +9,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import requests
 from nicegui import ui
 
-from config.settings import MQTT_BROKER_HOST, MQTT_BROKER_PORT
+from config.settings import API_BASE, DEVICE_ID, MQTT_BROKER_HOST, MQTT_BROKER_PORT
 from mqtt.client import MqttClient
-
-API_BASE = "http://localhost:8000/api/v1"
-DEVICE_ID = "FS-001"
 
 _mqtt = MqttClient(host=MQTT_BROKER_HOST, port=MQTT_BROKER_PORT, client_id="nicegui-simulator")
 _mqtt.connect()
