@@ -57,11 +57,11 @@ def dashboard():
     ui.label("Floating Sensor — Dashboard").classes("text-2xl font-bold mb-4")
     ui.link("Simulator →", "/simulator").classes("text-blue-500 mb-4")
 
-    tabs = ui.tabs().classes("w-full")
-    dashboard_tab = ui.tab("Dashboard")
-    history_tab = ui.tab("Historia")
-    status_tab = ui.tab("Status")
-    info_tab = ui.tab("Informacje")
+    with ui.tabs().classes("w-full") as tabs:
+        dashboard_tab = ui.tab("Dashboard")
+        history_tab = ui.tab("Historia")
+        status_tab = ui.tab("Status")
+        info_tab = ui.tab("Informacje")
 
     with ui.tab_panels(tabs, value=dashboard_tab).classes("w-full"):
         with ui.tab_panel(dashboard_tab):
@@ -128,6 +128,8 @@ def dashboard():
         if data and data.get("status") == "success":
             rows = []
             for item in data.get("data", []):
+                if not isinstance(item, dict):
+                    continue
                 rows.append(
                     {
                         "timestamp": _format_last_seen(item.get("timestamp")),
