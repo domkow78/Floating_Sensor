@@ -66,6 +66,15 @@ def _utc_z(dt: datetime.datetime) -> str:
     return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def _fmt_number(value, digits: int = 2) -> str:
+    if value is None:
+        return "—"
+    try:
+        return f"{float(value):.{digits}f}"
+    except (TypeError, ValueError):
+        return str(value)
+
+
 def _render_simulator_controls() -> None:
     ui.label("Advanced simulator: sinusoidal telemetry profiles").classes("text-lg font-semibold mb-2")
     ui.label("Set ranges and period for each field, then start streaming.").classes("text-sm")
@@ -294,10 +303,14 @@ def dashboard():
             history_status_label = ui.label("History: —")
             history_table = ui.table(
                 columns=[
-                    {"name": "timestamp", "label": "Timestamp (Europe/Warsaw)", "field": "timestamp", "align": "left"},
-                    {"name": "temperature", "label": "Temp [C]", "field": "temperature", "align": "right"},
-                    {"name": "humidity", "label": "Hum [%]", "field": "humidity", "align": "right"},
-                    {"name": "pressure", "label": "Pressure [hPa]", "field": "pressure", "align": "right"},
+                    {"name": "timestamp", "label": "Timestamp (Europe/Warsaw)", "field": "timestamp", "align": "left", "style": "min-width: 220px"},
+                    {"name": "temperature", "label": "Temp [C]", "field": "temperature", "align": "right", "style": "min-width: 95px"},
+                    {"name": "humidity", "label": "Hum [%]", "field": "humidity", "align": "right", "style": "min-width: 95px"},
+                    {"name": "pressure", "label": "Pressure [hPa]", "field": "pressure", "align": "right", "style": "min-width: 120px"},
+                    {"name": "gas_resistance", "label": "Gas", "field": "gas_resistance", "align": "right", "style": "min-width: 110px"},
+                    {"name": "accel_x", "label": "Accel X", "field": "accel_x", "align": "right", "style": "min-width: 90px"},
+                    {"name": "accel_y", "label": "Accel Y", "field": "accel_y", "align": "right", "style": "min-width: 90px"},
+                    {"name": "accel_z", "label": "Accel Z", "field": "accel_z", "align": "right", "style": "min-width: 90px"},
                 ],
                 rows=[],
                 row_key="timestamp",
@@ -385,9 +398,13 @@ def dashboard():
                 rows.append(
                     {
                         "timestamp": _format_last_seen(item.get("timestamp")),
-                        "temperature": item.get("temperature", "—"),
-                        "humidity": item.get("humidity", "—"),
-                        "pressure": item.get("pressure", "—"),
+                        "temperature": _fmt_number(item.get("temperature"), 2),
+                        "humidity": _fmt_number(item.get("humidity"), 2),
+                        "pressure": _fmt_number(item.get("pressure"), 2),
+                        "gas_resistance": _fmt_number(item.get("gas_resistance"), 2),
+                        "accel_x": _fmt_number(item.get("accel_x"), 3),
+                        "accel_y": _fmt_number(item.get("accel_y"), 3),
+                        "accel_z": _fmt_number(item.get("accel_z"), 3),
                     }
                 )
             history_table.rows = rows
