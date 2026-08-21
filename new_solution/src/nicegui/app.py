@@ -44,9 +44,14 @@ def _format_last_seen(ts: str | None) -> str:
     if not ts:
         return "—"
     try:
-        dt_utc = datetime.datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ").replace(
-            tzinfo=datetime.timezone.utc
-        )
+        # Accept both strict Z format and ISO timestamps with fractional seconds.
+        if ts.endswith("Z"):
+            dt_utc = datetime.datetime.fromisoformat(ts.replace("Z", "+00:00"))
+        else:
+            dt_utc = datetime.datetime.fromisoformat(ts)
+
+        if dt_utc.tzinfo is None:
+            dt_utc = dt_utc.replace(tzinfo=datetime.timezone.utc)
         dt_local = dt_utc.astimezone(ZoneInfo("Europe/Warsaw"))
         return dt_local.strftime("%Y-%m-%d %H:%M:%S %Z")
     except Exception:
@@ -251,7 +256,7 @@ def dashboard():
             with ui.column().classes("gap-2"):
                 dash_status_input = ui.input("Status", value="—").classes("w-80 dashboard-field")
                 dash_device_id_input = ui.input("Device ID", value=DEVICE_ID).classes("w-80 dashboard-field")
-                dash_timestamp_input = ui.input("Timestamp", value="—").classes("w-80 dashboard-field")
+                dash_timestamp_input = ui.input("Timestamp (Europe/Warsaw)", value="—").classes("w-80 dashboard-field")
                 dash_temperature_input = ui.input("Temperature [C]", value="—").classes("w-80 dashboard-field")
                 dash_humidity_input = ui.input("Humidity [%]", value="—").classes("w-80 dashboard-field")
                 dash_pressure_input = ui.input("Pressure [hPa]", value="—").classes("w-80 dashboard-field")
@@ -280,6 +285,7 @@ def dashboard():
 
         with ui.tab_panel(history_tab):
             ui.label("Telemetry history").classes("text-lg font-semibold mb-2")
+            ui.label("Displayed time zone: Europe/Warsaw").classes("text-sm text-gray-600 mb-1")
             with ui.row().classes("items-center gap-2"):
                 hours_input = ui.number("Range (h)", value=6, min=1, max=168, step=1)
                 limit_input = ui.number("Limit", value=100, min=1, max=5000, step=1)
@@ -287,7 +293,7 @@ def dashboard():
             history_status_label = ui.label("History: —")
             history_table = ui.table(
                 columns=[
-                    {"name": "timestamp", "label": "Timestamp", "field": "timestamp", "align": "left"},
+                    {"name": "timestamp", "label": "Timestamp (Europe/Warsaw)", "field": "timestamp", "align": "left"},
                     {"name": "temperature", "label": "Temp [C]", "field": "temperature", "align": "right"},
                     {"name": "humidity", "label": "Hum [%]", "field": "humidity", "align": "right"},
                     {"name": "pressure", "label": "Pressure [hPa]", "field": "pressure", "align": "right"},
