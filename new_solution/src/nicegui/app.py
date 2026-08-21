@@ -363,8 +363,16 @@ def dashboard():
             f"/telemetry/history?device_id={DEVICE_ID}&from={from_ts}&to={to_ts}&limit={limit}"
         )
         if data and data.get("status") == "success":
+            payload = data.get("data", [])
+            if isinstance(payload, dict):
+                raw_points = payload.get("points", [])
+            elif isinstance(payload, list):
+                raw_points = payload
+            else:
+                raw_points = []
+
             rows = []
-            for item in data.get("data", []):
+            for item in raw_points:
                 if not isinstance(item, dict):
                     continue
                 rows.append(
