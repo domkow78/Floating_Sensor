@@ -42,7 +42,11 @@ class MqttGateway:
             record = normalize_payload(payload)
             self._registry.update_telemetry(record)
             self._storage.write(record)
-            logger.info("Ingested telemetry for %s", record.device_id)
+            logger.info(
+                "Ingested telemetry and persisted to InfluxDB for %s at %s",
+                record.device_id,
+                record.timestamp,
+            )
         except PayloadValidationError as exc:
             logger.warning("Payload validation failed on %s: %s", topic, exc)
         except Exception as exc:

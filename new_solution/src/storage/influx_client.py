@@ -1,12 +1,16 @@
 """Storage client and record mapping for MVP InfluxDB writes."""
 
 from datetime import datetime
+import logging
 
 from influxdb_client import InfluxDBClient as _InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 
 from config.settings import INFLUX_BUCKET, INFLUX_ORG, INFLUX_TOKEN, INFLUX_URL
 from processing.models import TelemetryRecord
+
+
+logger = logging.getLogger(__name__)
 
 
 MEASUREMENT_NAME = "environment"
@@ -79,6 +83,13 @@ class InfluxClient:
         for k, v in point["fields"].items():
             p = p.field(k, float(v))
         self._write_api.write(bucket=self.bucket, org=self.org, record=p)
+        logger.info(
+            "InfluxDB write OK: bucket=%s measurement=%s device_id=%s timestamp=%s",
+            self.bucket,
+            point["measurement"],
+            point["tags"].get("device_id", "unknown"),
+            point["time"],
+        )
         return True
 
     def query_history(
