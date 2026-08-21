@@ -108,6 +108,7 @@ from(bucket: "{self.bucket}")
   |> filter(fn: (r) => r._measurement == "{MEASUREMENT_NAME}")
   |> filter(fn: (r) => r.device_id == "{device_id}")
   |> pivot(rowKey: ["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> sort(columns: ["_time"], desc: true)
   |> limit(n: {limit})
 '''
         tables = self._query_api.query(flux, org=self.org)

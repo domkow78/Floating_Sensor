@@ -286,9 +286,10 @@ def dashboard():
         with ui.tab_panel(history_tab):
             ui.label("Telemetry history").classes("text-lg font-semibold mb-2")
             ui.label("Displayed time zone: Europe/Warsaw").classes("text-sm text-gray-600 mb-1")
+            ui.label("Range defines how many hours back from now are queried. Limit defines max returned records.").classes("text-sm text-gray-600 mb-2")
             with ui.row().classes("items-center gap-2"):
-                hours_input = ui.number("Range (h)", value=6, min=1, max=168, step=1)
-                limit_input = ui.number("Limit", value=100, min=1, max=5000, step=1)
+                hours_input = ui.number("Range back from now [h]", value=6, min=1, max=168, step=1).classes("w-56")
+                limit_input = ui.number("Max records (limit)", value=100, min=1, max=5000, step=1).classes("w-64")
                 history_refresh_button = ui.button("Refresh history")
             history_status_label = ui.label("History: —")
             history_table = ui.table(
