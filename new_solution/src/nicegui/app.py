@@ -3,6 +3,7 @@
 import datetime
 import sys
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -28,6 +29,19 @@ def _get(path: str) -> dict | None:
         return None
 
 
+def _format_last_seen(ts: str | None) -> str:
+    if not ts:
+        return "—"
+    try:
+        dt_utc = datetime.datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ").replace(
+            tzinfo=datetime.timezone.utc
+        )
+        dt_local = dt_utc.astimezone(ZoneInfo("Europe/Warsaw"))
+        return dt_local.strftime("%Y-%m-%d %H:%M:%S %Z")
+    except Exception:
+        return ts
+
+
 # ── Dashboard page ─────────────────────────────────────────────────────────────
 
 @ui.page("/")
@@ -48,7 +62,7 @@ def dashboard():
             temp_label.set_text(f"Temperature: {d.get('temperature', '—')} °C")
             hum_label.set_text(f"Humidity: {d.get('humidity', '—')} %")
             pres_label.set_text(f"Pressure: {d.get('pressure', '—')} hPa")
-            ts_label.set_text(f"Last seen: {d.get('timestamp', '—')}")
+            ts_label.set_text(f"Last seen: {_format_last_seen(d.get('timestamp'))}")
             status_label.set_text("Status: online")
         else:
             status_label.set_text("Status: no data")
