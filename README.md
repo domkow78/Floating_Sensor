@@ -59,6 +59,12 @@ The central backend is structured as a modular Python application in [new_soluti
 - data access only via REST API
 - no direct communication with MQTT or InfluxDB
 
+Current UI scope includes:
+- Dashboard tab with latest telemetry preview
+- History tab (Influx-backed, newest records first)
+- Status and Info tabs
+- Advanced Simulator tab for synthetic telemetry generation
+
 ---
 
 ## Repository structure
@@ -107,7 +113,56 @@ The new implementation is in early MVP stage. The active source tree contains a 
 - storage abstraction
 - smoke tests
 
+Operationally verified behavior:
+- telemetry from NiceGUI simulator is published to MQTT topic `floatingsensor/<device_id>/telemetry`
+- IoT Core ingests payloads and persists records to InfluxDB
+- API history endpoint reads telemetry from InfluxDB
+- NiceGUI History tab displays API history records (including accel and gas fields)
+
 The project is deliberately being built iteratively, following the roadmap from the architecture docs.
+
+---
+
+## Run local UI
+
+From [new_solution/src](new_solution/src):
+
+1. Create and activate virtual environment.
+2. Install dependencies from `requirements.txt`.
+3. Run NiceGUI:
+
+  `python .\nicegui\app.py`
+
+Notes:
+- UI can run in UI-only mode when MQTT is unavailable (simulator generation still works, publish is skipped).
+- For end-to-end flow, MQTT broker, IoT Core API, and InfluxDB must be running.
+
+---
+
+## Time handling
+
+- Stored telemetry timestamps are UTC (ISO with `Z`).
+- If device payload does not include `timestamp`, backend generates UTC timestamp.
+- UI displays localized time in `Europe/Warsaw` for Dashboard and History.
+
+---
+
+## History tab semantics
+
+- `Range back from now [h]` defines query window size backward from current UTC time.
+- `Max records (limit)` defines the maximum number of returned records.
+- Results are ordered newest-first.
+
+---
+
+## Verify InfluxDB writes
+
+IoT Core logs include explicit write confirmation:
+
+- `InfluxDB write OK: bucket=... measurement=... device_id=... timestamp=...`
+- `Ingested telemetry and persisted to InfluxDB for ... at ...`
+
+These logs can be used as runtime confirmation that telemetry is persisted.
 
 ---
 
