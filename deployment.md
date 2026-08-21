@@ -1,172 +1,246 @@
 # Deployment
 
-Ten dokument jest przeznaczony do szybkiego uruchamiania lokalnego środowiska deweloperskiego dla nowego MVP.
+Ten dokument opisuje aktualny sposób uruchamiania lokalnego środowiska MVP dla projektu Floating Sensor.
 
-Aktualny stan projektu jest zgodny z nową architekturą opisanej w dokumentacji:
+Status bieżący:
 
-- [new_solution/doc/10_Docker_Deployment_Architecture.md](new_solution/doc/10_Docker_Deployment_Architecture.md)
-- [new_solution/doc/11_Struktura_Repozytorium.md](new_solution/doc/11_Struktura_Repozytorium.md)
-- [new_solution/doc/12_Plan_Implementacji.md](new_solution/doc/12_Plan_Implementacji.md)
-- [new_solution/doc/13_Migracja_i_Kontrakty_MVP_v0.1.md](new_solution/doc/13_Migracja_i_Kontrakty_MVP_v0.1.md)
-- [new_solution/doc/14_Tracker_Postepu_Wdrozenia_MVP.md](new_solution/doc/14_Tracker_Postepu_Wdrozenia_MVP.md)
-
-> Wartość historyczna: ten plik jest zbiorem starych instrukcji uruchamiania. Aktualna architektura jest rozwijana w katalogu [new_solution/src](new_solution/src), a poprzedni kod został przeniesiony do [new_solution/src_ref](new_solution/src_ref) jako materiał referencyjny.
+- aktywna implementacja znajduje się w katalogu [new_solution/src](new_solution/src),
+- dokumentacja architektoniczna jest w [new_solution/doc](new_solution/doc),
+- stary prototyp pozostaje w [new_solution/src_ref](new_solution/src_ref) tylko jako materiał referencyjny.
 
 ---
 
-## Cel dokumentu
+## 1. Cel dokumentu
 
-- uruchamiać lokalnie środowisko testowe MVP,
-- wspierać iteracyjny rozwój bez zależności od starego prototypu,
-- nie zastępować formalnej dokumentacji architektonicznej.
+- uruchamiać lokalne środowisko developerskie,
+- wspierać testowanie MVP bez zależności od starego prototypu,
+- utrzymywać zgodność między dokumentacją, konfiguracją i kodem.
 
 ---
 
-## Obecna struktura projektu
+## 2. Obecna struktura projektu
 
 ```text
-new_solution/
-├── src/         # aktywna implementacja MVP
-├── src_ref/     # stary prototyp referencyjny
-├── doc/         # dokumentacja źródłowa
-├── pcb/
+Floating_Sensor/
+├── README.md
+├── deployment.md
+├── new_solution/
+│   ├── doc/
+│   ├── pcb/
+│   ├── scripts/
+│   ├── src/
+│   └── src_ref/
+├── old_solution/
+├── old_solution_not_used/
 └── ...
+```
+
+Aktualny katalog roboczy:
+
+```text
+new_solution/src/
+├── api/
+├── app/
+├── config/
+├── docker-compose.yml
+├── Dockerfile
+├── mosquitto/
+├── mqtt/
+├── nicegui/
+├── processing/
+├── registry/
+├── requirements.txt
+├── storage/
+├── tests/
+└── .venv/
 ```
 
 ---
 
-## Wymagania lokalne
+## 3. Wymagania lokalne
 
 - Python 3.11+
+- pip
 - venv
-- `pip`
-- opcjonalnie: Docker do uruchamiania Mosquitto / InfluxDB
+- Docker Desktop / Docker Engine z Docker Compose
+- opcjonalnie: PowerShell do uruchamiania skryptów smoke test
 
 ---
 
-## Uruchomienie środowiska Python
+## 4. Szybki start: Python + Docker
 
-Przejdź do katalogu źródłowego:
+### 4.1 Przejdź do katalogu źródłowego
 
 ```powershell
 cd "C:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution\src"
 ```
 
-Utwórz i aktywuj venv:
+### 4.2 Utwórz środowisko wirtualne
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-Zainstaluj zależności:
+### 4.3 Zainstaluj zależności
 
 ```powershell
 python -m pip install --upgrade pip
-python -m pip install -r requirements.txt --index-url https://pypi.org/simple
+python -m pip install -r requirements.txt
 ```
 
-Uruchom smoke test:
+### 4.4 Uruchom podstawowe usługi infrastruktury
+
+W katalogu [new_solution/src](new_solution/src) znajduje się plik docker-compose.yml przygotowany do uruchamiania brokerów i bazy czasu:
 
 ```powershell
-python -m pytest tests/test_smoke.py -q
+docker compose up -d mosquitto influxdb
+```
+
+Możliwe jest też uruchomienie całego środowiska w jednym poleceniu:
+
+```powershell
+docker compose up --build -d
 ```
 
 ---
 
-## Uruchomienie aplikacji
+## 5. Uruchamianie aplikacji backendu
 
-W tej chwili aktywny kod jest zbudowany w iteracyjny sposób, a podstawowy punkt wejścia znajduje się w:
-
-- [new_solution/src/app/main.py](new_solution/src/app/main.py)
-- [new_solution/src/api/main.py](new_solution/src/api/main.py)
-
-Uruchomienie:
-
-```powershell
-python app/main.py
-```
-
-Uruchomienie REST API (ASGI/uvicorn):
+### 5.1 REST API
 
 ```powershell
 python -m uvicorn api.main:app --host 0.0.0.0 --port 8000
 ```
 
-Szybki smoke-check endpointu status (w osobnym terminalu):
+Aplikacja korzysta z wejścia ASGI z pliku [new_solution/src/api/main.py](new_solution/src/api/main.py).
+
+### 5.2 Punkt wejścia IoT Core
+
+```powershell
+python app/main.py
+```
+
+To uruchamia prosty pipeline MVP, który przetwarza przykładowy payload, publikuje dane do MQTT i zapisuje je do InfluxDB.
+
+### 5.3 NiceGUI
+
+```powershell
+python nicegui/app.py
+```
+
+UI jest dostępne pod adresem:
+
+```text
+http://localhost:8080
+```
+
+---
+
+## 6. Domyślne porty i usługi
+
+| Usługa | Port | Opis |
+|--------|------|------|
+| MQTT broker (Mosquitto) | 1883 | transport telemetryki |
+| InfluxDB | 8086 | magazyn danych szeregów czasowych |
+| REST API | 8000 | endpointy MVP |
+| NiceGUI | 8080 | panel użytkownika |
+
+Konfiguracja jest definiowana przez zmienne środowiskowe w pliku [new_solution/src/config/settings.py](new_solution/src/config/settings.py) oraz w docker-compose.yml.
+
+---
+
+## 7. Konfiguracja środowiska
+
+Najważniejsze zmienne w [new_solution/src/config/settings.py](new_solution/src/config/settings.py):
+
+- `MQTT_BROKER_HOST`
+- `MQTT_BROKER_PORT`
+- `INFLUX_HOST`
+- `INFLUX_PORT`
+- `INFLUX_URL`
+- `INFLUX_TOKEN`
+- `INFLUX_ORG`
+- `INFLUX_BUCKET`
+- `DEVICE_ID`
+- `API_BASE`
+
+Domyślne wartości są ustawione tak, aby działać lokalnie w środowisku developerskim.
+
+---
+
+## 8. Smoke test i walidacja API
+
+Po uruchomieniu API można wykonać testy szybkie z katalogu [new_solution/scripts](new_solution/scripts):
 
 ```powershell
 cd "C:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution"
 .\scripts\check_api.ps1
 ```
 
-Opcjonalnie z niestandardowym adresem:
+Dodatkowe testy:
 
 ```powershell
-.\scripts\check_api.ps1 -BaseUrl "http://localhost:8000"
-```
-
-Szybki smoke-check endpointu telemetry/latest:
-
-```powershell
-cd "C:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution"
 .\scripts\check_api_latest.ps1 -DeviceId "FS-001"
-```
-
-Szybki smoke-check endpointu telemetry/history:
-
-```powershell
-cd "C:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution"
 .\scripts\check_api_history.ps1 -DeviceId "FS-001"
 ```
 
-Wariant strict (wymaga co najmniej 1 punktu w historii):
+Wariant z wymuszeniem danych historycznych:
 
 ```powershell
 .\scripts\check_api_history.ps1 -DeviceId "FS-001" -RequirePoints
 ```
 
-Jeśli telemetry jeszcze nie dotarła do rejestru (oczekiwany 404 na świeżym starcie API), możesz uruchomić wariant łagodny:
+Jeżeli dane nie zostały jeszcze zasiane, można uruchomić seed:
 
 ```powershell
-.\scripts\check_api_latest.ps1 -DeviceId "FS-001" -AllowNotFound
-```
-
-Jeśli chcesz przejść strict check bez `-AllowNotFound`, najpierw zasiej telemetry do procesu API:
-
-```powershell
-cd "C:\Programs\WorkDirDev\## Git Hub\Floating_Sensor\new_solution"
 .\scripts\seed_api_telemetry.ps1 -DeviceId "FS-001"
-.\scripts\check_api_latest.ps1 -DeviceId "FS-001"
 ```
 
-Dev endpoint używany przez seed script:
+Dodatkowo w repozytorium dostępne są testy pytest:
 
-```text
-POST /api/v1/dev/ingest
+```powershell
+python -m pytest -q
 ```
 
-Dalsze moduły, takie jak MQTT, processing i storage, dodawane są w miarę rozwoju etapu MVP.
+---
+
+## 9. Docker Compose
+
+Aktualny plik [new_solution/src/docker-compose.yml](new_solution/src/docker-compose.yml) definiuje usługi:
+
+- `mosquitto`
+- `influxdb`
+- `iot-core`
+- `nicegui`
+
+Zasada działania:
+
+- podłączone usługi komunikują się przez sieć Docker `iot-network`,
+- usługi są uruchamiane na podanych portach lokalnych,
+- aplikacja powinna być odporna na chwilową niedostępność komponentów podczas startu.
 
 ---
 
-## Wersja z Docker
+## 10. Uwagi operacyjne
 
-Dla pełnego środowiska testowego można użyć konfiguracji opisanej w dokumentacji wdrożeniowej Docker: [new_solution/doc/10_Docker_Deployment_Architecture.md](new_solution/doc/10_Docker_Deployment_Architecture.md).
-
-W aktualnym etapie główny nacisk kładzie się na działające, testowalne etapy w Pythonie, a nie na pełne wdrożenie kontenerowe.
-
----
-
-## Relewantne zasady
-
-- nie rozwijać prototypu w miejscu aktywnej implementacji,
-- nie mieszać legacy z nowym kodem,
-- trzymać dokumentację i kod w zgodności z architekturą MVP,
-- dodawać katalogi dopiero wtedy, gdy pojawia się realna potrzeba.
+- [new_solution/src](new_solution/src) jest aktywnym kierunkiem rozwoju MVP,
+- [new_solution/src_ref](new_solution/src_ref) jest zbiorem referencyjnym i nie należy rozwijać w nim nowych zmian,
+- dokumentacja w [new_solution/doc](new_solution/doc) jest źródłem prawdy dla architektury,
+- w razie zmiany kontraktu danych lub struktury usług aktualizować zarówno kod, jak i dokumentację.
 
 ---
 
-## Podsumowanie
+## 11. Zalecany przepływ pracy
 
-Ten plik nie jest już głównym źródłem wiedzy o wdrożeniu projektu. Dokumentacja w [new_solution/doc](new_solution/doc) oraz aktywny kod w [new_solution/src](new_solution/src) są aktualnym źródłem prawdy.
+1. uruchom infrastrukturalne usługi w Dockerze,
+2. zainstaluj zależności Pythona,
+3. uruchom backend i UI,
+4. wykonywać smoke testy po każdej zmianie kontraktu lub konfiguracji,
+5. nie wprowadzaj zmian bez aktualizacji dokumentacji.
+
+---
+
+## 12. Podsumowanie
+
+To wdrożenie ma charakter lokalnego środowiska deweloperskiego dla MVP. Jest zgodne z aktualną architekturą repozytorium i służy do iteracyjnego rozwoju systemu: od MQTT, przez IoT Core, po InfluxDB, REST API i NiceGUI.
