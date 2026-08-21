@@ -322,7 +322,6 @@ def dashboard():
     refresh_state = {
         "busy": False,
         "last_click": 0.0,
-        "last_non_dashboard_refresh": 0.0,
     }
 
     async def refresh_dashboard() -> None:
@@ -454,21 +453,16 @@ def dashboard():
         await run_refresh("all", refresh_all)
 
     async def on_timer_refresh() -> None:
-        active_tab = tabs.value
-        now = time.monotonic()
+        await run_refresh("active tab", refresh_active_tab)
 
-        if active_tab == dashboard_tab:
-            await run_refresh("dashboard", refresh_dashboard)
-            return
-
-        if now - refresh_state["last_non_dashboard_refresh"] >= 10.0:
-            refresh_state["last_non_dashboard_refresh"] = now
-            await run_refresh("active tab", refresh_active_tab)
+    async def on_dashboard_timer_refresh() -> None:
+        await run_refresh("dashboard", refresh_dashboard)
 
     history_refresh_button.on_click(on_history_refresh)
     ui.button("Refresh all", on_click=on_refresh_all).classes("mt-4")
 
-    ui.timer(1.0, on_timer_refresh)
+    ui.timer(1.0, on_dashboard_timer_refresh)
+    ui.timer(10.0, on_timer_refresh)
 
 
 # ── Simulator page ─────────────────────────────────────────────────────────────
