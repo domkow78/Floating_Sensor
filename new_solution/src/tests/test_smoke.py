@@ -69,13 +69,28 @@ def test_normalize_payload():
     result = normalize_payload(payload)
 
     assert result.device_id == "FS-001"
+    assert result.timestamp == "2026-08-05T10:15:00Z"
     assert result.temperature == 22.4
     assert result.pressure == 1008.4
 
 
-def test_normalize_payload_rejects_missing_required_field():
+def test_normalize_payload_fills_missing_timestamp_with_backend_utc():
     payload = {
         "device_id": "FS-001",
+        "temperature": 22.4,
+    }
+
+    result = normalize_payload(payload)
+
+    assert result.device_id == "FS-001"
+    assert isinstance(result.timestamp, str)
+    assert result.timestamp.endswith("Z")
+    assert result.temperature == 22.4
+
+
+def test_normalize_payload_rejects_missing_device_id():
+    payload = {
+        "timestamp": "2026-08-05T10:15:00Z",
         "temperature": 22.4,
     }
 
