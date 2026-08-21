@@ -214,7 +214,29 @@ def _render_simulator_controls() -> None:
 
 @ui.page("/")
 def dashboard():
-    ui.label("Floating Sensor — Dashboard").classes("text-2xl font-bold mb-4")
+    ui.add_css('''
+    .dashboard-field .q-field__control:before,
+    .dashboard-field .q-field__control:after {
+        border-bottom: none !important;
+    }
+    .dashboard-field .q-field__bottom {
+        display: none !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+    }
+    .dashboard-field .q-field__control {
+        border-radius: 12px !important;
+        background: #e9eef5 !important;
+        border: 1px solid #9aa8bc !important;
+        box-shadow: 0 6px 14px rgba(25, 35, 52, 0.18) !important;
+    }
+    .dashboard-field .q-field__native,
+    .dashboard-field .q-field__label {
+        color: #1f2a3a !important;
+    }
+    ''')
+
+    ui.label("IoT Environment - Dashboard").classes("text-2xl font-bold mb-4")
 
     with ui.tabs().classes("w-full") as tabs:
         dashboard_tab = ui.tab("Dashboard")
@@ -225,11 +247,36 @@ def dashboard():
 
     with ui.tab_panels(tabs, value=dashboard_tab).classes("w-full"):
         with ui.tab_panel(dashboard_tab):
-            status_label = ui.label("Status: —")
-            temp_label = ui.label("Temperature: —")
-            hum_label = ui.label("Humidity: —")
-            pres_label = ui.label("Pressure: —")
-            ts_label = ui.label("Last seen: —")
+            ui.label("Dashboard").classes("text-lg font-semibold mb-2")
+            with ui.column().classes("gap-2"):
+                dash_status_input = ui.input("Status", value="—").classes("w-80 dashboard-field")
+                dash_device_id_input = ui.input("Device ID", value=DEVICE_ID).classes("w-80 dashboard-field")
+                dash_timestamp_input = ui.input("Timestamp", value="—").classes("w-80 dashboard-field")
+                dash_temperature_input = ui.input("Temperature [C]", value="—").classes("w-80 dashboard-field")
+                dash_humidity_input = ui.input("Humidity [%]", value="—").classes("w-80 dashboard-field")
+                dash_pressure_input = ui.input("Pressure [hPa]", value="—").classes("w-80 dashboard-field")
+                dash_gas_input = ui.input("Gas resistance", value="—").classes("w-80 dashboard-field")
+                dash_accel_x_input = ui.input("Accel X", value="—").classes("w-80 dashboard-field")
+                dash_accel_y_input = ui.input("Accel Y", value="—").classes("w-80 dashboard-field")
+                dash_accel_z_input = ui.input("Accel Z", value="—").classes("w-80 dashboard-field")
+                dash_firmware_input = ui.input("Firmware", value="—").classes("w-80 dashboard-field")
+                dash_location_input = ui.input("Location", value="—").classes("w-80 dashboard-field")
+
+            for field in (
+                dash_status_input,
+                dash_device_id_input,
+                dash_timestamp_input,
+                dash_temperature_input,
+                dash_humidity_input,
+                dash_pressure_input,
+                dash_gas_input,
+                dash_accel_x_input,
+                dash_accel_y_input,
+                dash_accel_z_input,
+                dash_firmware_input,
+                dash_location_input,
+            ):
+                field.props("readonly filled dense")
 
         with ui.tab_panel(history_tab):
             ui.label("Telemetry history").classes("text-lg font-semibold mb-2")
@@ -275,19 +322,37 @@ def dashboard():
     refresh_state = {
         "busy": False,
         "last_click": 0.0,
+        "last_non_dashboard_refresh": 0.0,
     }
 
     async def refresh_dashboard() -> None:
         data = await _get_async(f"/telemetry/latest?device_id={DEVICE_ID}")
         if data and data.get("status") == "success":
             d = data["data"]
-            temp_label.set_text(f"Temperature: {d.get('temperature', '—')} °C")
-            hum_label.set_text(f"Humidity: {d.get('humidity', '—')} %")
-            pres_label.set_text(f"Pressure: {d.get('pressure', '—')} hPa")
-            ts_label.set_text(f"Last seen: {_format_last_seen(d.get('timestamp'))}")
-            status_label.set_text("Status: online")
+            dash_status_input.set_value("online")
+            dash_device_id_input.set_value(str(d.get("device_id", DEVICE_ID)))
+            dash_timestamp_input.set_value(_format_last_seen(d.get("timestamp")))
+            dash_temperature_input.set_value(str(d.get("temperature", "—")))
+            dash_humidity_input.set_value(str(d.get("humidity", "—")))
+            dash_pressure_input.set_value(str(d.get("pressure", "—")))
+            dash_gas_input.set_value(str(d.get("gas_resistance", "—")))
+            dash_accel_x_input.set_value(str(d.get("accel_x", "—")))
+            dash_accel_y_input.set_value(str(d.get("accel_y", "—")))
+            dash_accel_z_input.set_value(str(d.get("accel_z", "—")))
+            dash_firmware_input.set_value(str(d.get("firmware", "—")))
+            dash_location_input.set_value(str(d.get("location", "—")))
         else:
-            status_label.set_text("Status: no data")
+            dash_status_input.set_value("no data")
+            dash_timestamp_input.set_value("—")
+            dash_temperature_input.set_value("—")
+            dash_humidity_input.set_value("—")
+            dash_pressure_input.set_value("—")
+            dash_gas_input.set_value("—")
+            dash_accel_x_input.set_value("—")
+            dash_accel_y_input.set_value("—")
+            dash_accel_z_input.set_value("—")
+            dash_firmware_input.set_value("—")
+            dash_location_input.set_value("—")
 
     async def refresh_history() -> None:
         hours = int(hours_input.value or 6)
@@ -389,12 +454,21 @@ def dashboard():
         await run_refresh("all", refresh_all)
 
     async def on_timer_refresh() -> None:
-        await run_refresh("active tab", refresh_active_tab)
+        active_tab = tabs.value
+        now = time.monotonic()
+
+        if active_tab == dashboard_tab:
+            await run_refresh("dashboard", refresh_dashboard)
+            return
+
+        if now - refresh_state["last_non_dashboard_refresh"] >= 10.0:
+            refresh_state["last_non_dashboard_refresh"] = now
+            await run_refresh("active tab", refresh_active_tab)
 
     history_refresh_button.on_click(on_history_refresh)
     ui.button("Refresh all", on_click=on_refresh_all).classes("mt-4")
 
-    ui.timer(10.0, on_timer_refresh)
+    ui.timer(1.0, on_timer_refresh)
 
 
 # ── Simulator page ─────────────────────────────────────────────────────────────
@@ -406,4 +480,4 @@ def simulator():
     _render_simulator_controls()
 
 
-ui.run(host="0.0.0.0", port=8080, title="Floating Sensor")
+ui.run(host="0.0.0.0", port=8080, title="IoT Environment - Dashboard")
