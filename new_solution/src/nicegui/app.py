@@ -428,7 +428,7 @@ def dashboard():
         if active_tab == status_tab or active_tab == info_tab:
             await refresh_status()
 
-    async def run_refresh(action: str, refresh_coro) -> None:
+    async def run_refresh(action: str, refresh_coro, show_loading: bool = False) -> None:
         now = time.monotonic()
         if refresh_state["busy"]:
             return
@@ -437,20 +437,22 @@ def dashboard():
 
         refresh_state["busy"] = True
         refresh_state["last_click"] = now
-        loading_spinner.visible = True
-        loading_label.set_text(f"Loading: {action}...")
+        if show_loading:
+            loading_spinner.visible = True
+            loading_label.set_text(f"Loading: {action}...")
         try:
             await refresh_coro()
         finally:
-            loading_spinner.visible = False
-            loading_label.set_text("")
+            if show_loading:
+                loading_spinner.visible = False
+                loading_label.set_text("")
             refresh_state["busy"] = False
 
     async def on_history_refresh() -> None:
-        await run_refresh("history", refresh_history)
+        await run_refresh("history", refresh_history, show_loading=True)
 
     async def on_refresh_all() -> None:
-        await run_refresh("all", refresh_all)
+        await run_refresh("all", refresh_all, show_loading=True)
 
     async def on_timer_refresh() -> None:
         await run_refresh("active tab", refresh_active_tab)
