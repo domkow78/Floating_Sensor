@@ -13,9 +13,14 @@ from nicegui import ui
 from config.settings import API_BASE, DEVICE_ID, MQTT_BROKER_HOST, MQTT_BROKER_PORT
 from mqtt.client import MqttClient
 
-_mqtt = MqttClient(host=MQTT_BROKER_HOST, port=MQTT_BROKER_PORT, client_id="nicegui-simulator")
-_mqtt.connect()
-_mqtt.start_loop()
+_mqtt = None
+try:
+    _mqtt = MqttClient(host=MQTT_BROKER_HOST, port=MQTT_BROKER_PORT, client_id="nicegui-simulator")
+    _mqtt.connect()
+    _mqtt.start_loop()
+except Exception:
+    # UI-only mode: allow rendering without live MQTT infrastructure.
+    _mqtt = None
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -193,6 +198,9 @@ def simulator():
     result_label = ui.label("")
 
     def send():
+        if _mqtt is None:
+            result_label.set_text("MQTT unavailable (UI-only mode)")
+            return
         payload = {
             "device_id": DEVICE_ID,
             "timestamp": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
